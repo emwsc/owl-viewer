@@ -23,3 +23,8 @@ yarn-debug.log*
 yarn-error.log*
 
 /src/twitch_api
+
+firebase.json
+.firebaserc
+
+/.firebase

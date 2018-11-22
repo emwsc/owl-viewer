@@ -1,6 +1,6 @@
 import React from 'react';
 import { TeamLogo } from '../theme/teamStyle'
-import { GameCard, GameCard__Teams, GameCard__Team, GameCard__Info, GameCard__VS, GameCard__TeamTitle } from '../theme/gameStyle'
+import { GameCard, GameCard__Teams, GameCard__Team, GameCard__Info, GameCard__VS, GameCard__TeamTitle, GameCard__SeachVODButton } from '../theme/gameStyle'
 import { useState, useEffect } from 'react';
 import { searchGameOnTwitch, DEFAULT_SEARCH_TEXT, VIDEOS_NOT_FOUND, VIDEOS_FOUND } from '../utils/dataUtils';
 
@@ -37,12 +37,12 @@ const Game = React.memo(function Game({ game, updateSearchWindow }) {
             <GameCard__Info>{game.startDate.toLocaleDateString()}</GameCard__Info>
             <GameCard__Info>{game.bracket.stage.title}</GameCard__Info>
             <div>
-                Show results
-                <input onClick={onResultsVisivilityClick} type="checkbox" />
+                <label htmlFor="show-results">Show results</label>
+                <input id="show-results" onClick={onResultsVisivilityClick} type="checkbox" />
             </div>
-            <div onClick={onOpenGameClick}>
+            <GameCard__SeachVODButton primaryColor={game.competitors[0].primaryColor} onClick={onOpenGameClick}>
                 Search for VOD on twitch
-            </div>
+            </GameCard__SeachVODButton>
         </GameCard>
     )
 })
