@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { TeamSection, TeamTitle, TeamLogo } from '../theme/teamStyle'
+import { TeamSection, TeamTitle, TeamLogo } from './styling'
 
 const Team = React.memo(function Team({ competitor, handleTeamSelect, selectedTeamId }) {
 
@@ -9,8 +9,8 @@ const Team = React.memo(function Team({ competitor, handleTeamSelect, selectedTe
     }
 
     return (
-        <TeamSection whiteBackground onClick={onTeamSectionClick} borderColor={competitor.secondaryColor}>
-            <TeamLogo hasMargin logoUrl={competitor.logo} />
+        <TeamSection onClick={onTeamSectionClick} borderColor={competitor.secondaryColor}>
+            <TeamLogo logoUrl={competitor.logo} />
             <TeamTitle isSelected={selectedTeamId === competitor.id} primaryColor={competitor.primaryColor}>{competitor.name}</TeamTitle>
         </TeamSection>
     )

@@ -1,6 +1,6 @@
 import React from 'react';
-import Team from './Team'
-import { FilterTitle } from '../theme/globalStyle'
+import Team from '../Team/index'
+import { FilterTitle } from '../../common/FilterTitle'
 
 const TeamList = React.memo(function TeamList({ selectedTeamId, competitors, handleTeamSelect }) {
     return (

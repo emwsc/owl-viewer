@@ -5,8 +5,6 @@ display: flex;
 align-items: center;
 margin-bottom: 10px;
 cursor: pointer;
-/* border: 1px solid;
-border-color: ${(props) => '#' + props.borderColor}; */
 width: 250px;
 `
 
@@ -16,9 +14,8 @@ width: ${(props) => props.big ? '32px' : '16px'};
 height: ${(props) => props.big ? '32px' : '16px'};
 background-repeat: no-repeat;
 background-size: cover;
-margin:${(props) => !props.hasMargin ? '0 auto' : 0};
-margin-right:${(props) => props.hasMargin ? '10px' : ''};
-margin-left:${(props) => props.hasMargin ? '10px' : ''};
+margin-right:10px;
+margin-left:10px;
 `
 
 export const TeamTitle = styled.div`

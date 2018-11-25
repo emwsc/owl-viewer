@@ -1,26 +1,5 @@
 import styled from 'styled-components'
 
-
-export const GamesWrapper = styled.div`
-overflow-y: auto;
-height: calc(100vh - 20px);
-::-webkit-scrollbar-track
-{
-	background-color: #F5F5F5;
-}
-
-::-webkit-scrollbar
-{
-	width: 10px;
-	background-color: #F5F5F5;
-}
-
-::-webkit-scrollbar-thumb
-{
-	background-color: gray;
-}
-`
-
 export const GameCard = styled.div`
 width: fit-content;
 margin: 10px;
@@ -32,9 +11,6 @@ padding: 10px;
 background: white;
 border-radius: 5px;
 transition: all 0.25s ease;
-/* :hover {
-    box-shadow:0px 12px 56px 2px #424242;
-  } */
 `
 
 export const Teams = styled.div`

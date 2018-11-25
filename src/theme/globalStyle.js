@@ -70,20 +70,13 @@ max-width: 1215px;
 margin: 0 auto;
 `
 
-export const FilterTitle = styled.div`
-margin-left: 10px;
-    color: #616161;
-    margin-bottom: 10px;
-`
-
-
-export const SearchWindowWrapper = styled.div`
+export const PopupWrapper = styled.div`
 border-radius: 5px;
 padding: 10px;
 position: fixed;
 right: 50px;
-width: 200px;
 bottom: 50px;
+width: 200px;
 height: 100px;
 box-shadow: -10px -10px 30px 4px rgba(0,0,0,0.1), 10px 10px 30px 4px rgba(45,78,255,0.15);
 display: flex;

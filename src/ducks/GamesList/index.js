@@ -1,18 +1,14 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { getTeamSchedule } from '../utils/dataUtils';
-import Game from './Game';
-import { GamesWrapper } from '../theme/gameStyle';
+import { getTeamSchedule } from '../../utils/dataUtils';
+import Game from '../Game/index';
+import { isGameVisible } from './utils'
 
-
-function isGameVisible(game, visibleStages) {
-    return visibleStages.some(stage => stage.title === game.bracket && stage.isVisible);
-}
-
-const Games = React.memo(function Games({ firebase, teamid, visibleStages, updateSearchWindow }) {
+const GamesList = React.memo(function GamesList({ firebase, teamid, visibleStages, updateSearchWindow }) {
 
     const [matches, setMatches] = useState(null);
     const [isLoaderVisible, setIsLoaderVisible] = useState(true);
+
     useEffect(() => {
         setIsLoaderVisible(true);
         setMatches(null);
@@ -36,4 +32,4 @@ const Games = React.memo(function Games({ firebase, teamid, visibleStages, updat
 })
 
 
-export default Games;
+export default GamesList;

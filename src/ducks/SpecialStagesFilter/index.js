@@ -1,9 +1,9 @@
 import React from 'react';
-import { StagesWrapper, Stage } from '../theme/stagesStyle'
-import { FilterTitle } from '../theme/globalStyle'
+import { StagesWrapper, Stage } from './styling'
+import { FilterTitle } from '../../common/FilterTitle'
 
 
-const Stages = React.memo(function Stages({ stages, changeStagesVisibility, primaryColor }) {
+const SpecialStagesFilter = React.memo(function Stages({ stages, changeStagesVisibility, primaryColor }) {
 
     return (
         <React.Fragment>
@@ -15,4 +15,4 @@ const Stages = React.memo(function Stages({ stages, changeStagesVisibility, prim
     )
 });
 
-export default Stages;
+export default SpecialStagesFilter;
