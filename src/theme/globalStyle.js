@@ -34,42 +34,6 @@ export const TopMenuWrapper = styled.div`
 grid-area: top;
 `
 
-export const TeamListWrapper = styled.div`
-grid-area: teams;
-border-right: 1px solid #BDBDBD;
-`
-
-export const ContentWrapper = styled.div`
-grid-area: content;
-overflow-y: auto;
-height: calc(100vh - 60px);
-display: flex;
-flex-wrap: wrap;
-justify-content: center;
-::-webkit-scrollbar-track
-{
-	background-color: #F5F5F5;
-}
-
-::-webkit-scrollbar
-{
-	width: 10px;
-	background-color: #F5F5F5;
-}
-
-::-webkit-scrollbar-thumb
-{
-	background-color: gray;
-}
-`
-
-export const StagesWrapper = styled.div`
-grid-area: stages;
-border-left: 1px solid #BDBDBD;
-padding-left: 10px;
-padding-right: 10px;
-`
-
 export const Root = styled.div`
 max-width: 1215px;
 margin: 0 auto;

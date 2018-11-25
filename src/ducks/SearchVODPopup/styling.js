@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const OpenWindowButton = styled.button`
-background: ${(props) => props.primaryColor};
+background: gray;
 color: white;
 font-weight: 700;
 padding: 5px;

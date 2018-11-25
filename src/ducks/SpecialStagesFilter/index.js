@@ -4,7 +4,6 @@ import { FilterTitle } from '../../common/FilterTitle'
 
 
 const SpecialStagesFilter = React.memo(function Stages({ stages, changeStagesVisibility, primaryColor }) {
-
     return (
         <React.Fragment>
             <FilterTitle>Special stages filter</FilterTitle>
@@ -15,4 +14,4 @@ const SpecialStagesFilter = React.memo(function Stages({ stages, changeStagesVis
     )
 });
 
-export default SpecialStagesFilter;
+export { SpecialStagesFilter };

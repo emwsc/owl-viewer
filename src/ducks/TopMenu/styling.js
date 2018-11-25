@@ -14,4 +14,6 @@ export const StyledItem = styled.div`
 margin: 3px;
 margin-right: 10px;
 cursor: pointer;
+color: white;
+text-decoration: none;
 `
