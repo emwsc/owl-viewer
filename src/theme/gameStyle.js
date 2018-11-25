@@ -23,7 +23,7 @@ height: calc(100vh - 20px);
 
 export const GameCard = styled.div`
 width: fit-content;
-margin: 30px auto;
+margin: 10px;
 border-left: 5px solid;
 border-right: 5px solid;
 border-left-color: ${(props) => props.leftColor};

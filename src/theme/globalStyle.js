@@ -40,6 +40,7 @@ overflow-y: auto;
 height: calc(100vh - 20px);
 display: flex;
 flex-wrap: wrap;
+justify-content: center;
 ::-webkit-scrollbar-track
 {
 	background-color: #F5F5F5;
@@ -65,7 +66,7 @@ padding-right: 10px;
 `
 
 export const Root = styled.div`
-max-width: 1300px;
+max-width: 1215px;
 margin: 0 auto;
 `
 
