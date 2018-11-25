@@ -22,13 +22,13 @@ margin-left:${(props) => props.hasMargin ? '10px' : ''};
 `
 
 export const TeamTitle = styled.div`
-background: ${(props) => props.isSelected ? '#' + props.primaryColor : 'inherit'}; 
+background: ${(props) => props.isSelected ? props.primaryColor : 'inherit'}; 
 color:  ${(props) => props.isSelected ? 'white' : 'black'}; ;
 padding: 5px;
 flex-grow: 2;
 transition: all 0.25s ease;
 :hover {
-    background: ${(props) => '#' + props.primaryColor};
+    background: ${(props) => props.primaryColor};
     color: white;
   }
 `

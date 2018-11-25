@@ -1,35 +1,44 @@
-import { owlGetTeams, owlGetTeamDetailedData } from './owlApi';
 import { CLIENT_ID } from '../twitch_api/integration'
 
-export function getOwlTeams() {
-    return owlGetTeams().then(response => {
-        return response.json();
-    })
+export function getOwlTeams(firebase) {
+    return new Promise((resolve, reject) => {
+        const db = firebase.firestore();
+        db.collection("teams").orderBy('name').get().then((querySnapshot) => {
+            let teams = [];
+            querySnapshot.forEach((doc) => {
+                teams.push(doc.data());
+            });
+            resolve(teams);
+        });
+    });
 }
 
-export function getOwlTeamDetailedData(teamid) {
-    return owlGetTeamDetailedData(teamid).then(response => {
-        return response.json();
-    }).then(competitor => {
-        competitor.schedule = competitor.schedule.map(game => { return { ...game, startDate: timeConverter(game.startDate) } }).sort((a, b) => a.startDate - b.startDate);
-        return competitor;
+export function getTeamSchedule(firebase, teamid) {
+    return new Promise((resolve, reject) => {
+        const db = firebase.firestore();
+        db.collection("schedule").doc('2018').get().then((doc) => {
+            const schedule = doc.data();
+            let matches = [];
+            schedule.stages.forEach(stage => {
+                stage.weeks.forEach(week => {
+                    const selectedMatches = week.matches.filter(match => {
+                        return match.competitors.some(team => team.id === teamid);
+                    }).map(match => { return { ...match, startDate: timeConverter(match.startDate) } });
+                    if (selectedMatches && selectedMatches.length > 0) {
+                        matches = matches.concat(selectedMatches);
+                    }
+                })
+            })
+            debugger;
+            resolve(matches);
+        });
     })
 }
 
 
 
 export function timeConverter(UNIX_timestamp) {
-
-    var a = new Date(UNIX_timestamp);
-    // var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    // var year = a.getFullYear();
-    // var month = months[a.getMonth()];
-    // var date = a.getDate();
-    // var hour = a.getHours();
-    // var min = a.getMinutes();
-    // var sec = a.getSeconds();
-    //var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec;
-    //return time;
+    let a = new Date(UNIX_timestamp);
     return a;
 }
 

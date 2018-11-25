@@ -1,5 +1,11 @@
 import { createGlobalStyle } from 'styled-components'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
+
+const FadeInAnimation = keyframes`  
+  from { opacity: 0; bottom: 25px; }
+  to { opacity: 1; bottom: 50px; }
+`;
+
 
 export const GlobalStyle = createGlobalStyle`
   body {
@@ -30,6 +36,25 @@ border-right: 1px solid #BDBDBD;
 
 export const ContentWrapper = styled.div`
 grid-area: content;
+overflow-y: auto;
+height: calc(100vh - 20px);
+display: flex;
+flex-wrap: wrap;
+::-webkit-scrollbar-track
+{
+	background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb
+{
+	background-color: gray;
+}
 `
 
 export const StagesWrapper = styled.div`
@@ -40,7 +65,7 @@ padding-right: 10px;
 `
 
 export const Root = styled.div`
-max-width: 1000px;
+max-width: 1300px;
 margin: 0 auto;
 `
 
@@ -56,11 +81,12 @@ border-radius: 5px;
 padding: 10px;
 position: fixed;
 right: 50px;
-bottom: 50px;
 width: 200px;
+bottom: 50px;
 height: 100px;
 box-shadow: -10px -10px 30px 4px rgba(0,0,0,0.1), 10px 10px 30px 4px rgba(45,78,255,0.15);
 display: flex;
 justify-content: center;
 align-items: center;
+animation: ${FadeInAnimation} 0.25s ease 1;
 `

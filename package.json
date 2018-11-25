@@ -1,8 +1,9 @@
 {
   "name": "owl-viewer",
-  "version": "0.1.0",
+  "version": "2018.11.25.01",
   "private": true,
   "dependencies": {
+    "firebase": "^5.5.9",
     "react": "^16.7.0-alpha.0",
     "react-dom": "^16.7.0-alpha.0",
     "react-scripts": "2.1.1",
@@ -12,7 +13,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint:js": "lint"
   },
   "eslintConfig": {
     "extends": "react-app"

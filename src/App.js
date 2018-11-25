@@ -1,4 +1,5 @@
 import React from 'react';
+import firebase from 'firebase'
 import { Root, AppWrapper, TeamListWrapper, ContentWrapper, GlobalStyle, StagesWrapper, SearchWindowWrapper } from './theme/globalStyle'
 import { getOwlTeams } from './utils/dataUtils';
 import { useState, useEffect } from 'react';
@@ -6,68 +7,10 @@ import TeamList from './components/TeamList'
 import Games from './components/Games'
 import Stages from './components/Stages';
 import SearchWindow from './components/SearchWindow';
+import { firebaseConfig } from './firebase/config'
+import { defaultStages } from './utils/constants'
 
-//TODO: сделать переключение темы
-//TODO: загружать games постфактум
-
-const defaultStages = [
-  {
-    title: 'Stage 1',
-    isVisible: true,
-    allowedToFilter: false
-  },
-  {
-    title: 'Stage 2',
-    isVisible: true,
-    allowedToFilter: false
-  },
-  {
-    title: 'Stage 3',
-    isVisible: true,
-    allowedToFilter: false
-  },
-  {
-    title: 'Stage 4',
-    isVisible: true,
-    allowedToFilter: false
-  },
-  {
-    title: 'Stage 1 Title Matches',
-    isVisible: false,
-    allowedToFilter: true
-  },
-  {
-    title: 'Stage 2 Title Matches',
-    isVisible: false,
-    allowedToFilter: true
-  },
-  {
-    title: 'Stage 3 Title Matches',
-    isVisible: false,
-    allowedToFilter: true
-  },
-  {
-    title: 'Stage 4 Title Matches',
-    isVisible: false,
-    allowedToFilter: true
-  },
-  {
-    title: 'Quarterfinals',
-    isVisible: false,
-    allowedToFilter: true
-  },
-  {
-    title: 'Semifinals',
-    isVisible: false,
-    allowedToFilter: true
-  },
-  {
-    title: 'Grand Final',
-    isVisible: false,
-    allowedToFilter: true
-  }
-]
-
+firebase.initializeApp(firebaseConfig);
 
 const App = React.memo(() => {
 
@@ -79,9 +22,7 @@ const App = React.memo(() => {
   const [selectedVideos, setSelectedVideos] = useState(null);
 
   useEffect(() => {
-    getOwlTeams().then(teamInfo => {
-      setCompetitors(teamInfo.competitors.map(item => item.competitor))
-    });
+    getOwlTeams(firebase).then(setCompetitors);
   }, []);
 
 
@@ -101,7 +42,6 @@ const App = React.memo(() => {
   }
 
   function handleUpdateSearchWindow(params) {
-    debugger;
     setSearchWindowVisible(params.isVisible);
     setSearchWindowText(params.text);
     setSelectedVideos(params.selectedVideos);
@@ -119,7 +59,7 @@ const App = React.memo(() => {
             <TeamList selectedTeamId={selectedTeamId} competitors={competitors} handleTeamSelect={handleTeamSelect} />
           </TeamListWrapper>
           <ContentWrapper>
-            {selectedTeamId && <Games visibleStages={visibleStages} teamid={selectedTeamId} updateSearchWindow={handleUpdateSearchWindow} />}
+            {selectedTeamId && <Games firebase={firebase} visibleStages={visibleStages} teamid={selectedTeamId} updateSearchWindow={handleUpdateSearchWindow} />}
           </ContentWrapper>
           <StagesWrapper>
             <Stages primaryColor={selectedTeam ? selectedTeam.primaryColor : null} changeStagesVisibility={handleChangeStagesVisibility} stages={visibleStages.filter(stage => stage.allowedToFilter)} />

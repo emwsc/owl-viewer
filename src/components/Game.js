@@ -1,6 +1,6 @@
 import React from 'react';
 import { TeamLogo } from '../theme/teamStyle'
-import { GameCard, GameCard__Teams, GameCard__Team, GameCard__Info, GameCard__VS, GameCard__TeamTitle, GameCard__SeachVODButton } from '../theme/gameStyle'
+import { GameCard, Teams, Team, Info, VS, TeamTitle, SeachVODButton, ShowResults, ButtonsContainer } from '../theme/gameStyle'
 import { useState, useEffect } from 'react';
 import { searchGameOnTwitch, DEFAULT_SEARCH_TEXT, VIDEOS_NOT_FOUND, VIDEOS_FOUND } from '../utils/dataUtils';
 
@@ -22,27 +22,29 @@ const Game = React.memo(function Game({ game, updateSearchWindow }) {
 
     return (
         <GameCard leftColor={game.competitors[0].primaryColor} rightColor={game.competitors[1].primaryColor}>
-            <GameCard__Teams>
-                <GameCard__Team>
+            <Teams>
+                <Team>
                     <TeamLogo big logoUrl={game.competitors[0].logo} />
-                    <GameCard__TeamTitle >{game.competitors[0].name}</GameCard__TeamTitle>
-                </GameCard__Team>
-                {!isResultsVisibile && <GameCard__VS>VS</GameCard__VS>}
-                {isResultsVisibile && <GameCard__VS>{game.scores[0].value + ' - ' + game.scores[1].value}</GameCard__VS>}
-                <GameCard__Team>
+                    <TeamTitle >{game.competitors[0].name}</TeamTitle>
+                </Team>
+                {!isResultsVisibile && <VS>VS</VS>}
+                {isResultsVisibile && <VS>{game.scores[0] + ' - ' + game.scores[1]}</VS>}
+                <Team>
                     <TeamLogo big logoUrl={game.competitors[1].logo} />
-                    <GameCard__TeamTitle >{game.competitors[1].name}</GameCard__TeamTitle>
-                </GameCard__Team>
-            </GameCard__Teams>
-            <GameCard__Info>{game.startDate.toLocaleDateString()}</GameCard__Info>
-            <GameCard__Info>{game.bracket.stage.title}</GameCard__Info>
-            <div>
-                <label htmlFor="show-results">Show results</label>
-                <input id="show-results" onClick={onResultsVisivilityClick} type="checkbox" />
-            </div>
-            <GameCard__SeachVODButton primaryColor={game.competitors[0].primaryColor} onClick={onOpenGameClick}>
-                Search for VOD on twitch
-            </GameCard__SeachVODButton>
+                    <TeamTitle >{game.competitors[1].name}</TeamTitle>
+                </Team>
+            </Teams>
+            <Info>{game.startDate.toLocaleDateString()}</Info>
+            <Info>{game.bracket}</Info>
+            <ButtonsContainer>
+                <ShowResults background={game.competitors[0].secondaryColor} onClick={onResultsVisivilityClick}>
+                    <label htmlFor={'show-results-' + game.id}>Show results</label>
+                    <input id={'show-results-' + game.id} onClick={onResultsVisivilityClick} type="checkbox" />
+                </ShowResults>
+                <SeachVODButton background={game.competitors[0].secondaryColor} onClick={onOpenGameClick}>
+                    Search for VOD on twitch
+            </SeachVODButton>
+            </ButtonsContainer>
         </GameCard>
     )
 })
