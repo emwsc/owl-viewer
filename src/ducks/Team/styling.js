@@ -10,8 +10,8 @@ width: 250px;
 
 export const TeamLogo = styled.div`
 background-image: url( ${(props) => props.logoUrl});
-width: ${(props) => props.big ? '32px' : '16px'};
-height: ${(props) => props.big ? '32px' : '16px'};
+width: 16px;
+height: 16px;
 background-repeat: no-repeat;
 background-size: cover;
 margin-right:10px;

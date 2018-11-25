@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import firebase from 'firebase'
-import { Root, AppWrapper, TeamListWrapper, ContentWrapper, GlobalStyle, StagesWrapper, PopupWrapper } from './theme/globalStyle'
+
+import { firebaseConfig } from './firebase/config'
+import { defaultStages } from './utils/constants'
+
 import { getOwlTeams } from './utils/dataUtils';
-import { useState, useEffect } from 'react';
+
+import { Root, AppWrapper, TeamListWrapper, ContentWrapper, GlobalStyle, StagesWrapper, PopupWrapper, TopMenuWrapper } from './theme/globalStyle'
+import { TopMenu } from './ducks/TopMenu/index'
 import TeamList from './ducks/TeamList/index'
 import GamesList from './ducks/GamesList/index'
 import SpecialStagesFilter from './ducks/SpecialStagesFilter/index';
 import SearchVODPopup from './ducks/SearchVODPopup/index';
-import { firebaseConfig } from './firebase/config'
-import { defaultStages } from './utils/constants'
 
 firebase.initializeApp(firebaseConfig);
 
@@ -55,6 +58,9 @@ const App = React.memo(() => {
       <GlobalStyle />
       <Root>
         <AppWrapper>
+          <TopMenuWrapper>
+            <TopMenu />
+          </TopMenuWrapper>
           <TeamListWrapper>
             <TeamList
               selectedTeamId={selectedTeamId}

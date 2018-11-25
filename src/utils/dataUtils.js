@@ -29,7 +29,6 @@ export function getTeamSchedule(firebase, teamid) {
                     }
                 })
             })
-            debugger;
             resolve(matches);
         });
     })

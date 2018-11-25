@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
 import styled, { keyframes } from 'styled-components'
+import { FONT } from '../utils/constants';
 
 const FadeInAnimation = keyframes`  
   from { opacity: 0; bottom: 25px; }
@@ -11,7 +12,7 @@ export const GlobalStyle = createGlobalStyle`
   body {
     padding: 0;
     margin: 0;
-    font-family: 'Open Sans', sans-serif;
+    font-family: ${(props) => FONT};
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background: #F6F6F6
@@ -21,12 +22,16 @@ export const GlobalStyle = createGlobalStyle`
 
 export const AppWrapper = styled.div`
 display: grid;
-grid-template: 'teams content stages';
+grid-template: 'top top top' 'teams content stages';
+grid-template-rows: 50px 1fr;
 grid-template-columns: auto 1fr 200px;
 grid-gap: 10px;
-padding: 10px;
 background: #F0F1F4;
 height: calc(100vh - 20px);
+`
+
+export const TopMenuWrapper = styled.div`
+grid-area: top;
 `
 
 export const TeamListWrapper = styled.div`
@@ -37,7 +42,7 @@ border-right: 1px solid #BDBDBD;
 export const ContentWrapper = styled.div`
 grid-area: content;
 overflow-y: auto;
-height: calc(100vh - 20px);
+height: calc(100vh - 60px);
 display: flex;
 flex-wrap: wrap;
 justify-content: center;

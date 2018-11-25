@@ -57,3 +57,4 @@ export const defaultStages = [
     }
 ]
 
+export const FONT = "'Roboto', sans-serif;";

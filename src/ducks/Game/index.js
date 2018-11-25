@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { GameCard, Teams, Team, Info, VS, TeamTitle, SeachVODButton, ShowResults, ButtonsContainer } from './styling'
+import { GameCard, Info, Team, AdditionalInfo, VS, TeamTitle, SeachVODButton, ShowResults, ButtonsContainer, TeamLogo, Checkbox } from './styling'
 import { searchGameOnTwitch, DEFAULT_SEARCH_TEXT, VIDEOS_NOT_FOUND, VIDEOS_FOUND } from '../../utils/dataUtils';
 
 const Game = React.memo(function Game({ game, updateSearchWindow }) {
@@ -20,28 +20,48 @@ const Game = React.memo(function Game({ game, updateSearchWindow }) {
 
     return (
         <GameCard leftColor={game.competitors[0].primaryColor} rightColor={game.competitors[1].primaryColor}>
-            <Teams>
+            <Info>
                 <Team>
-                    {/* <TeamLogo big logoUrl={game.competitors[0].logo} /> */}
-                    <TeamTitle >{game.competitors[0].name}</TeamTitle>
+                    <TeamLogo
+                        logoUrl={game.competitors[0].logo}
+                    />
+                    <TeamTitle>
+                        {game.competitors[0].name}
+                    </TeamTitle>
                 </Team>
-                {!isResultsVisibile && <VS>VS</VS>}
-                {isResultsVisibile && <VS>{game.scores[0] + ' - ' + game.scores[1]}</VS>}
+                <div>
+                    {!isResultsVisibile && <VS>VS</VS>}
+                    {isResultsVisibile && <VS>{game.scores[0] + ' - ' + game.scores[1]}</VS>}
+                    <AdditionalInfo>{game.startDate.toLocaleDateString()}</AdditionalInfo>
+                    <AdditionalInfo>{game.bracket}</AdditionalInfo>
+                </div>
                 <Team>
-                    {/* <TeamLogo big logoUrl={game.competitors[1].logo} /> */}
-                    <TeamTitle >{game.competitors[1].name}</TeamTitle>
+                    <TeamLogo
+                        logoUrl={game.competitors[1].logo}
+                    />
+                    <TeamTitle>
+                        {game.competitors[1].name}
+                    </TeamTitle>
                 </Team>
-            </Teams>
-            <Info>{game.startDate.toLocaleDateString()}</Info>
-            <Info>{game.bracket}</Info>
+            </Info>
             <ButtonsContainer>
-                <ShowResults background={game.competitors[0].secondaryColor} onClick={onResultsVisivilityClick}>
-                    <label htmlFor={'show-results-' + game.id}>Show results</label>
-                    <input id={'show-results-' + game.id} onClick={onResultsVisivilityClick} type="checkbox" />
+                <ShowResults
+                    background={game.competitors[0].secondaryColor}>
+                    <label
+                        htmlFor={'show-results-' + game.id}>
+                        Show results
+                    </label>
+                    <Checkbox
+                        id={'show-results-' + game.id}
+                        onClick={onResultsVisivilityClick}
+                        type="checkbox"
+                    />
                 </ShowResults>
-                <SeachVODButton background={game.competitors[0].secondaryColor} onClick={onOpenGameClick}>
+                <SeachVODButton
+                    background={game.competitors[0].secondaryColor}
+                    onClick={onOpenGameClick}>
                     Search for VOD on twitch
-            </SeachVODButton>
+                </SeachVODButton>
             </ButtonsContainer>
         </GameCard>
     )
