@@ -1,5 +1,5 @@
 import React from 'react';
-import { OpenWindowButton } from './styling';
+import { StyledOpenWindowButton } from './styling';
 import { onOpenVideosClick } from './utils';
 
 const SearchVODPopup = React.memo(({ text, selectedVideos, primaryColor }) => (
@@ -7,12 +7,12 @@ const SearchVODPopup = React.memo(({ text, selectedVideos, primaryColor }) => (
     <div>{text}</div>
     {selectedVideos && selectedVideos.length > 0
                 && (
-                <OpenWindowButton
+                <StyledOpenWindowButton
                   primaryColor={primaryColor}
                   onClick={() => { onOpenVideosClick(selectedVideos); }}
                 >
                     Click to open VODs
-                </OpenWindowButton>
+                </StyledOpenWindowButton>
                 )
             }
   </div>

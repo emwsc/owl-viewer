@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const OpenWindowButton = styled.button`
+export const StyledOpenWindowButton = styled.button`
 background: gray;
 color: white;
 font-weight: 700;

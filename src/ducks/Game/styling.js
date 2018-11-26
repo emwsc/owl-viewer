@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { FONT } from '../../utils/constants';
 
-export const GameCard = styled.div`
+export const StyledGameCard = styled.div`
 width: fit-content;
 margin: 10px;
 border-left: 5px solid;
@@ -17,23 +17,23 @@ grid-template-rows: auto 30px;
 grid-gap: 5px;
 `;
 
-export const Info = styled.div`
+export const StyledInfo = styled.div`
 display: grid;
 align-items: center;
 grid-template-columns: 120px 64px 120px;
 `;
 
-export const Team = styled.div`
+export const StyledTeam = styled.div`
 text-align:center;
 `;
 
 
-export const AdditionalInfo = styled.div`
+export const StyledAdditionalInfo = styled.div`
 font-size: 12px;
 text-align: center;
 `;
 
-export const VS = styled.div`
+export const StyledVS = styled.div`
 text-align: center;
 display: flex;
 align-items: center;
@@ -41,13 +41,13 @@ font-weight: 700;
 justify-content: center;
 `;
 
-export const TeamTitle = styled.div`
+export const StyledTeamTitle = styled.div`
 font-weight: 700;
 margin-top: 10px;
 font-size: 14px;
 `;
 
-export const SeachVODButton = styled.button`
+export const StyledSeachVODButton = styled.button`
 background: ${props => props.background};
 color: white;
 font-weight: 700;
@@ -60,7 +60,7 @@ font-family: ${() => FONT};
 font-size: 12px;
 `;
 
-export const ShowResults = styled.div`
+export const StyledShowResults = styled.div`
 background: ${props => props.background};
 color: white;
 font-weight: 700;
@@ -75,19 +75,19 @@ display: flex;
 align-items: center;
 `;
 
-export const Checkbox = styled.input`
+export const StyledCheckbox = styled.input`
 margin: 0;
 margin-left: 5px;
 `;
 
-export const ButtonsContainer = styled.div`
+export const StyledButtonsContainer = styled.div`
 display: flex;
 align-items: center;
 justify-content: space-evenly;
 `;
 
 
-export const TeamLogo = styled.div`
+export const StyledTeamLogo = styled.div`
 background-image: url( ${props => props.logoUrl});
 width: 32px;
 height: 32px;

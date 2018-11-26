@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { TeamListWrapper } from './styling';
+import { StyledTeamListWrapper } from './styling';
 import TeamList from '../TeamList/index';
 import GamesList from '../GamesList/index';
 import StyledContentWrapper from '../../common/ContentWrapper';
@@ -45,13 +45,13 @@ const ScheduleByTeam = React.memo((props) => {
 
   return (
     <React.Fragment>
-      <TeamListWrapper>
+      <StyledTeamListWrapper>
         <TeamList
           selectedTeamId={selectedTeamId}
           competitors={competitors}
           handleTeamSelect={handleTeamSelect}
         />
-      </TeamListWrapper>
+      </StyledTeamListWrapper>
       <StyledContentWrapper>
         {selectedTeamId
           && (

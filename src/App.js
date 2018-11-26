@@ -5,7 +5,7 @@ import firebase from 'firebase';
 import { firebaseConfig } from './firebase/config';
 
 import {
-  Root, AppWrapper, GlobalStyle, PopupWrapper, TopMenuWrapper,
+  StyledRoot, StyledAppWrapper, StyledGlobalStyle, StyledPopupWrapper, StyledTopMenuWrapper,
 } from './theme/globalStyle';
 import { TopMenu } from './ducks/TopMenu/index';
 import SearchVODPopup from './ducks/SearchVODPopup/index';
@@ -27,12 +27,12 @@ const App = () => {
 
   return (
     <React.Fragment>
-      <GlobalStyle />
-      <Root>
-        <AppWrapper>
-          <TopMenuWrapper>
+      <StyledGlobalStyle />
+      <StyledRoot>
+        <StyledAppWrapper>
+          <StyledTopMenuWrapper>
             <TopMenu />
-          </TopMenuWrapper>
+          </StyledTopMenuWrapper>
           <Route
             path="/teams"
             render={() => (
@@ -45,19 +45,19 @@ const App = () => {
               />
             )}
           />
-        </AppWrapper>
+        </StyledAppWrapper>
         {searchWindowVisibile
           && (
-            <PopupWrapper>
+            <StyledPopupWrapper>
               <SearchVODPopup
                 text={searchWindowText}
                 selectedVideos={selectedVideos}
               />
-            </PopupWrapper>
+            </StyledPopupWrapper>
           )
         }
 
-      </Root>
+      </StyledRoot>
     </React.Fragment>
   );
 };

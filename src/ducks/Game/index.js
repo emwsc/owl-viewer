@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import {
-  GameCard, Info, Team,
-  AdditionalInfo, VS, TeamTitle,
-  SeachVODButton, ShowResults,
-  ButtonsContainer, TeamLogo, Checkbox,
+  StyledGameCard, StyledInfo, StyledTeam,
+  StyledAdditionalInfo, StyledVS, StyledTeamTitle,
+  StyledSeachVODButton, StyledShowResults,
+  StyledButtonsContainer, StyledTeamLogo, StyledCheckbox,
 } from './styling';
 import {
   searchGameOnTwitch, DEFAULT_SEARCH_TEXT, VIDEOS_NOT_FOUND, VIDEOS_FOUND,
@@ -25,36 +25,36 @@ const Game = React.memo(({ game, updateSearchWindow }) => {
   }
 
   return (
-    <GameCard
+    <StyledGameCard
       leftColor={game.competitors[0].primaryColor}
       rightColor={game.competitors[1].primaryColor}
     >
-      <Info>
-        <Team>
-          <TeamLogo
+      <StyledInfo>
+        <StyledTeam>
+          <StyledTeamLogo
             logoUrl={game.competitors[0].logo}
           />
-          <TeamTitle>
+          <StyledTeamTitle>
             {game.competitors[0].name}
-          </TeamTitle>
-        </Team>
+          </StyledTeamTitle>
+        </StyledTeam>
         <div>
-          {!isResultsVisibile && <VS>VS</VS>}
-          {isResultsVisibile && <VS>{`${game.scores[0]} - ${game.scores[1]}`}</VS>}
-          <AdditionalInfo>{game.startDate.toLocaleDateString()}</AdditionalInfo>
-          <AdditionalInfo>{game.bracket}</AdditionalInfo>
+          {!isResultsVisibile && <StyledVS>VS</StyledVS>}
+          {isResultsVisibile && <StyledVS>{`${game.scores[0]} - ${game.scores[1]}`}</StyledVS>}
+          <StyledAdditionalInfo>{game.startDate.toLocaleDateString()}</StyledAdditionalInfo>
+          <StyledAdditionalInfo>{game.bracket}</StyledAdditionalInfo>
         </div>
-        <Team>
-          <TeamLogo
+        <StyledTeam>
+          <StyledTeamLogo
             logoUrl={game.competitors[1].logo}
           />
-          <TeamTitle>
+          <StyledTeamTitle>
             {game.competitors[1].name}
-          </TeamTitle>
-        </Team>
-      </Info>
-      <ButtonsContainer>
-        <ShowResults
+          </StyledTeamTitle>
+        </StyledTeam>
+      </StyledInfo>
+      <StyledButtonsContainer>
+        <StyledShowResults
           background={game.competitors[0].secondaryColor}
         >
           <label
@@ -62,20 +62,20 @@ const Game = React.memo(({ game, updateSearchWindow }) => {
           >
             Show results
           </label>
-          <Checkbox
+          <StyledCheckbox
             id={`show-results-${game.id}`}
             onClick={onResultsVisivilityClick}
             type="checkbox"
           />
-        </ShowResults>
-        <SeachVODButton
+        </StyledShowResults>
+        <StyledSeachVODButton
           background={game.competitors[0].secondaryColor}
           onClick={onOpenGameClick}
         >
           Search for VOD on twitch
-        </SeachVODButton>
-      </ButtonsContainer>
-    </GameCard>
+        </StyledSeachVODButton>
+      </StyledButtonsContainer>
+    </StyledGameCard>
   );
 });
 

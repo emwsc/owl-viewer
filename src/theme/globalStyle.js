@@ -7,7 +7,7 @@ const FadeInAnimation = keyframes`
 `;
 
 
-export const GlobalStyle = createGlobalStyle`
+export const StyledGlobalStyle = createGlobalStyle`
   body {
     padding: 0;
     margin: 0;
@@ -19,7 +19,7 @@ export const GlobalStyle = createGlobalStyle`
 `;
 
 
-export const AppWrapper = styled.div`
+export const StyledAppWrapper = styled.div`
 display: grid;
 grid-template: 'top top top' 'teams content stages';
 grid-template-rows: 50px 1fr;
@@ -29,16 +29,16 @@ background: #F0F1F4;
 height: calc(100vh - 20px);
 `;
 
-export const TopMenuWrapper = styled.div`
+export const StyledTopMenuWrapper = styled.div`
 grid-area: top;
 `;
 
-export const Root = styled.div`
+export const StyledRoot = styled.div`
 max-width: 1215px;
 margin: 0 auto;
 `;
 
-export const PopupWrapper = styled.div`
+export const StyledPopupWrapper = styled.div`
 border-radius: 5px;
 padding: 10px;
 position: fixed;

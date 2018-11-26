@@ -1,23 +1,23 @@
 import React from 'react';
 
-import { TeamSection, TeamTitle, TeamLogo } from './styling';
+import { StyledTeamSection, StyledTeamTitle, StyledTeamLogo } from './styling';
 
-const Team = React.memo(({ competitor, handleTeamSelect, selectedTeamId }) => {
+const StyledTeam = React.memo(({ competitor, handleTeamSelect, selectedTeamId }) => {
   function onTeamSectionClick() {
     handleTeamSelect(competitor.id);
   }
 
   return (
-    <TeamSection onClick={onTeamSectionClick} borderColor={competitor.secondaryColor}>
-      <TeamLogo logoUrl={competitor.logo} />
-      <TeamTitle
+    <StyledTeamSection onClick={onTeamSectionClick} borderColor={competitor.secondaryColor}>
+      <StyledTeamLogo logoUrl={competitor.logo} />
+      <StyledTeamTitle
         isSelected={selectedTeamId === competitor.id}
         primaryColor={competitor.primaryColor}
       >
         {competitor.name}
-      </TeamTitle>
-    </TeamSection>
+      </StyledTeamTitle>
+    </StyledTeamSection>
   );
 });
 
-export default Team;
+export default StyledTeam;
