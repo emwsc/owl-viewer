@@ -1,7 +1,9 @@
-import styled, { keyframes } from 'styled-components'
+import styled from 'styled-components';
 
-export const FilterTitle = styled.div`
+const StyledFilterTitle = styled.div`
 margin-left: 10px;
     color: #616161;
     margin-bottom: 10px;
-`
+`;
+
+export default StyledFilterTitle;

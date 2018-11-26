@@ -1,5 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
-import styled, { keyframes } from 'styled-components'
+import styled, { keyframes, createGlobalStyle } from 'styled-components';
 import { FONT } from '../utils/constants';
 
 const FadeInAnimation = keyframes`  
@@ -12,12 +11,12 @@ export const GlobalStyle = createGlobalStyle`
   body {
     padding: 0;
     margin: 0;
-    font-family: ${(props) => FONT};
+    font-family: ${() => FONT};
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background: #F6F6F6
   }
-`
+`;
 
 
 export const AppWrapper = styled.div`
@@ -28,16 +27,16 @@ grid-template-columns: auto 1fr 200px;
 grid-gap: 10px;
 background: #F0F1F4;
 height: calc(100vh - 20px);
-`
+`;
 
 export const TopMenuWrapper = styled.div`
 grid-area: top;
-`
+`;
 
 export const Root = styled.div`
 max-width: 1215px;
 margin: 0 auto;
-`
+`;
 
 export const PopupWrapper = styled.div`
 border-radius: 5px;
@@ -52,4 +51,4 @@ display: flex;
 justify-content: center;
 align-items: center;
 animation: ${FadeInAnimation} 0.25s ease 1;
-`
+`;

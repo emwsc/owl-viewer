@@ -1,7 +1,6 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
-
-export const ContentWrapper = styled.div`
+const StyledContentWrapper = styled.div`
 grid-area: content;
 overflow-y: auto;
 height: calc(100vh - 60px);
@@ -10,17 +9,20 @@ flex-wrap: wrap;
 justify-content: center;
 ::-webkit-scrollbar-track
 {
-	background-color: #F5F5F5;
+background-color: #F5F5F5;
 }
 
 ::-webkit-scrollbar
 {
-	width: 10px;
-	background-color: #F5F5F5;
+width: 10px;
+background-color: #F5F5F5;
 }
 
 ::-webkit-scrollbar-thumb
 {
-	background-color: gray;
+background-color: gray;
 }
-`
+`;
+
+
+export default StyledContentWrapper;

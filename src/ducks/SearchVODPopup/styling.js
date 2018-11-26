@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const OpenWindowButton = styled.button`
 background: gray;
@@ -9,5 +9,4 @@ border-radius: 5px;
 margin-top: 5px;
 cursor: pointer;
 border: none;
-`
-
+`;

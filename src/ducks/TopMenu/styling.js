@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const StyledTopMenu = styled.div`
 width: 100%;
@@ -7,7 +7,7 @@ background: #282829;
 color: white;
 display: flex;
 align-items: center;
-`
+`;
 
 
 export const StyledItem = styled.div`
@@ -16,4 +16,4 @@ margin-right: 10px;
 cursor: pointer;
 color: white;
 text-decoration: none;
-`
+`;

@@ -1,17 +1,22 @@
 import React from 'react';
-import { StagesWrapper, Stage } from './styling'
-import { FilterTitle } from '../../common/FilterTitle'
+import StyledStage from './styling';
+import StyledFilterTitle from '../../common/FilterTitle';
 
 
-const SpecialStagesFilter = React.memo(function Stages({ stages, changeStagesVisibility, primaryColor }) {
-    return (
-        <React.Fragment>
-            <FilterTitle>Special stages filter</FilterTitle>
-            <StagesWrapper>
-                {stages.map((stage, index) => <Stage onClick={() => { changeStagesVisibility(stage.title) }} isSelected={stage.isVisible} primaryColor={primaryColor} key={'stage-' + index}>{stage.title}</Stage>)}
-            </StagesWrapper>
-        </React.Fragment>
-    )
-});
+const SpecialStagesFilter = React.memo(({ stages, changeStagesVisibility, primaryColor }) => (
+  <React.Fragment>
+    <StyledFilterTitle>Special stages filter</StyledFilterTitle>
+    {stages.map(stage => (
+      <StyledStage
+        onClick={() => { changeStagesVisibility(stage.title); }}
+        isSelected={stage.isVisible}
+        primaryColor={primaryColor}
+        key={stage.title}
+      >
+        {stage.title}
+      </StyledStage>
+    ))}
+  </React.Fragment>
+));
 
 export { SpecialStagesFilter };
