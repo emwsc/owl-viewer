@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getTeamSchedule } from '../../utils/dataUtils';
+import { getTeamSchedule } from './utils';
 import Game from '../Game/index';
 import { isGameVisible } from './utils';
 

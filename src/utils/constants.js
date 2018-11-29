@@ -58,3 +58,8 @@ export const defaultStages = [
 ];
 
 export const FONT = "'Roboto', sans-serif;";
+
+
+export const DEFAULT_SEARCH_TEXT = 'Search in progess...';
+export const VIDEOS_NOT_FOUND = 'VODs not found';
+export const VIDEOS_FOUND = 'VODs found';

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const Years = styled.div`
+export const StyledYears = styled.div`
 display: flex;
 background: #282829;
 color: white;
@@ -9,14 +9,14 @@ width: fit-content;
 margin: 0 auto;
 `
 
-export const Year = styled.div`
+export const StyledYear = styled.div`
 margin: 5px 10px 5px 10px;
 cursor: pointer;
 color: ${(props) => props.isSelected ? 'white' : '#9E9E9E'};
 font-weight: ${(props) => props.isSelected ? 'bold' : 'normal'};
 `
 
-export const Delimiter = styled.div`
+export const StyledDelimiter = styled.div`
 background: white;
 width: 2px;
 border-radius: 2px;

@@ -1,21 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { StyledTeamListWrapper } from './styling';
-import TeamList from '../TeamList/index';
+import { StyledTeamListWrapper, StyledContentWrapper } from './styling';
+import TeamList from './TeamList/index';
 import GamesList from '../GamesList/index';
-import StyledContentWrapper from '../../common/ContentWrapper';
 import StyledStagesWrapper from '../../common/StagesWrapper';
 import { SpecialStagesFilter } from '../SpecialStagesFilter/index';
 
-import { getOwlTeams } from '../../utils/dataUtils';
+import { getOwlTeams } from './utils';
 import { defaultStages } from '../../utils/constants';
 
 const ScheduleByTeam = React.memo((props) => {
   const {
     firebase,
     handleUpdateSearchWindow,
-    setSearchWindowVisible,
-    setSearchWindowText,
-    setSelectedVideos,
     selectedYear
   } = props;
 
@@ -37,13 +33,10 @@ const ScheduleByTeam = React.memo((props) => {
   function handleTeamSelect(teamid) {
     setSelectedTeam(teamid);
     setVisibleStages([...defaultStages]);
-    setSearchWindowVisible(false);
-    setSearchWindowText('params.text');
-    setSelectedVideos(null);
   }
 
   const selectedTeam = competitors.find(competitor => competitor.id === selectedTeamId);
-
+  
   return (
     <React.Fragment>
       <StyledTeamListWrapper>
@@ -53,7 +46,7 @@ const ScheduleByTeam = React.memo((props) => {
           handleTeamSelect={handleTeamSelect}
         />
       </StyledTeamListWrapper>
-      <StyledContentWrapper>
+      <StyledContentWrapper flex>
         {selectedTeamId
           && (
             <GamesList

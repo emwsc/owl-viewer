@@ -1,20 +1,21 @@
 import React from 'react';
-import { Years, Year, Delimiter } from './styled';
+import { StyledYears, StyledYear, StyledDelimiter } from './styled';
 
 const YearFilter = ({ selectedYear, setSelectedYear }) => {
     return (
-        <Years>
-            <Year
+        <StyledYears>
+            <StyledYear
                 onClick={() => setSelectedYear(2018)}
                 isSelected={selectedYear === 2018}>
-                2018
-            </Year>
-            <Delimiter />
-            <Year
+                2017-2018
+            </StyledYear>
+            <StyledDelimiter />
+            <StyledYear
                 onClick={() => setSelectedYear(2019)}
                 isSelected={selectedYear === 2019}>
-                2019</Year>
-        </Years>
+                2018-2019
+                </StyledYear>
+        </StyledYears>
     )
 }
 

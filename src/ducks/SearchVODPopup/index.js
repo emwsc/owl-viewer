@@ -6,16 +6,16 @@ const SearchVODPopup = React.memo(({ text, selectedVideos, primaryColor }) => (
   <div>
     <div>{text}</div>
     {selectedVideos && selectedVideos.length > 0
-                && (
-                <StyledOpenWindowButton
-                  primaryColor={primaryColor}
-                  onClick={() => { onOpenVideosClick(selectedVideos); }}
-                >
-                    Click to open VODs
+      && (
+        <StyledOpenWindowButton
+          primaryColor={primaryColor}
+          onClick={() => { onOpenVideosClick(selectedVideos); }}
+        >
+          Click to open VODs
                 </StyledOpenWindowButton>
-                )
-            }
+      )
+    }
   </div>
 ));
 
-export default SearchVODPopup;
+export { SearchVODPopup };

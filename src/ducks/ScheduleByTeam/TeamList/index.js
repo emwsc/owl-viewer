@@ -1,6 +1,6 @@
 import React from 'react';
-import Team from '../Team/index';
-import StyledFilterTitle from '../../common/FilterTitle';
+import Team from './Team/index';
+import StyledFilterTitle from '../../../common/FilterTitle';
 
 const TeamList = React.memo(({ selectedTeamId, competitors, handleTeamSelect }) => (
   <React.Fragment>

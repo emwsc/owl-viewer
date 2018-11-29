@@ -26,7 +26,7 @@ grid-template-rows: 50px 30px 1fr;
 grid-template-columns: 250px 1fr 250px;
 grid-gap: 10px;
 background: #F5EFED;
-height: 100vh;
+min-height: 100vh;
 `;
 
 export const StyledTopMenuWrapper = styled.div`
