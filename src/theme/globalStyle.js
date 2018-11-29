@@ -21,12 +21,12 @@ export const StyledGlobalStyle = createGlobalStyle`
 
 export const StyledAppWrapper = styled.div`
 display: grid;
-grid-template: 'top top top' 'teams content stages';
-grid-template-rows: 50px 1fr;
-grid-template-columns: auto 1fr 200px;
+grid-template: 'top top top' 'year year year' 'teams content stages';
+grid-template-rows: 50px 30px 1fr;
+grid-template-columns: 250px 1fr 250px;
 grid-gap: 10px;
-background: #F0F1F4;
-height: calc(100vh - 20px);
+background: #F5EFED;
+height: 100vh;
 `;
 
 export const StyledTopMenuWrapper = styled.div`
@@ -34,7 +34,7 @@ grid-area: top;
 `;
 
 export const StyledRoot = styled.div`
-max-width: 1215px;
+max-width: 1300px;
 margin: 0 auto;
 `;
 
@@ -52,3 +52,8 @@ justify-content: center;
 align-items: center;
 animation: ${FadeInAnimation} 0.25s ease 1;
 `;
+
+
+export const YearFilterWrapper = styled.div`
+grid-area: year;
+`

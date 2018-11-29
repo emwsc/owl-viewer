@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const StyledContentWrapper = styled.div`
 grid-area: content;
 overflow-y: auto;
-height: calc(100vh - 60px);
+height: calc(100vh - 100px);
 display: flex;
 flex-wrap: wrap;
 justify-content: center;

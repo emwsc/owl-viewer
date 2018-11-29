@@ -16,6 +16,7 @@ const ScheduleByTeam = React.memo((props) => {
     setSearchWindowVisible,
     setSearchWindowText,
     setSelectedVideos,
+    selectedYear
   } = props;
 
   const [competitors, setCompetitors] = useState([]);
@@ -57,6 +58,7 @@ const ScheduleByTeam = React.memo((props) => {
           && (
             <GamesList
               firebase={firebase}
+              selectedYear={selectedYear}
               visibleStages={visibleStages}
               teamid={selectedTeamId}
               updateSearchWindow={handleUpdateSearchWindow}

@@ -4,7 +4,11 @@ import Game from '../Game/index';
 import { isGameVisible } from './utils';
 
 const GamesList = React.memo(({
-  firebase, teamid, visibleStages, updateSearchWindow,
+  firebase,
+  teamid,
+  visibleStages,
+  updateSearchWindow,
+  selectedYear
 }) => {
   const [matches, setMatches] = useState(null);
   const [isLoaderVisible, setIsLoaderVisible] = useState(true);
@@ -12,11 +16,11 @@ const GamesList = React.memo(({
   useEffect(() => {
     setIsLoaderVisible(true);
     setMatches(null);
-    getTeamSchedule(firebase, teamid).then((scheduledMatches) => {
+    getTeamSchedule(firebase, teamid, selectedYear).then((scheduledMatches) => {
       setMatches(scheduledMatches);
       setIsLoaderVisible(false);
     });
-  }, [teamid]);
+  }, [teamid, selectedYear]);
 
   return (
     <React.Fragment>
@@ -30,6 +34,10 @@ const GamesList = React.memo(({
                 game={game}
                 updateSearchWindow={updateSearchWindow}
               />))}
+            {matches.length === 0 &&
+              <div>
+                No matches found
+            </div>}
           </React.Fragment>
         )}
     </React.Fragment>
