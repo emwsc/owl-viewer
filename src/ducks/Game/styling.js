@@ -20,7 +20,7 @@ grid-gap: 5px;
 export const StyledInfo = styled.div`
 display: grid;
 align-items: center;
-grid-template-columns: 120px 64px 120px;
+grid-template-columns: 110px 64px 110px;
 `;
 
 export const StyledTeam = styled.div`

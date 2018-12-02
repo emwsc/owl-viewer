@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyledTeamListWrapper, StyledContentWrapper } from './styling';
+import { StyledTeamListWrapper, StyledScheduleByTeamContentWrapper } from './styling';
 import TeamList from './TeamList/index';
 import GamesList from '../GamesList/index';
 import StyledStagesWrapper from '../../common/StagesWrapper';
@@ -7,6 +7,8 @@ import { SpecialStagesFilter } from '../SpecialStagesFilter/index';
 
 import { getOwlTeams } from './utils';
 import { defaultStages } from '../../utils/constants';
+
+import { areSchedulesEqual } from '../../utils/utils'
 
 const ScheduleByTeam = React.memo((props) => {
   const {
@@ -36,7 +38,7 @@ const ScheduleByTeam = React.memo((props) => {
   }
 
   const selectedTeam = competitors.find(competitor => competitor.id === selectedTeamId);
-  
+
   return (
     <React.Fragment>
       <StyledTeamListWrapper>
@@ -46,7 +48,7 @@ const ScheduleByTeam = React.memo((props) => {
           handleTeamSelect={handleTeamSelect}
         />
       </StyledTeamListWrapper>
-      <StyledContentWrapper flex>
+      <StyledScheduleByTeamContentWrapper flex>
         {selectedTeamId
           && (
             <GamesList
@@ -57,7 +59,7 @@ const ScheduleByTeam = React.memo((props) => {
               updateSearchWindow={handleUpdateSearchWindow}
             />
           )}
-      </StyledContentWrapper>
+      </StyledScheduleByTeamContentWrapper>
       <StyledStagesWrapper>
         <SpecialStagesFilter
           primaryColor={selectedTeam && selectedTeam.primaryColor}
@@ -67,6 +69,6 @@ const ScheduleByTeam = React.memo((props) => {
       </StyledStagesWrapper>
     </React.Fragment>
   );
-});
+}, areSchedulesEqual);
 
 export { ScheduleByTeam };

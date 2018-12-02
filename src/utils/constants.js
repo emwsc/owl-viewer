@@ -1,6 +1,11 @@
 
 export const defaultStages = [
   {
+    title: 'Preseason',
+    isVisible: true,
+    allowedToFilter: false,
+  },
+  {
     title: 'Stage 1',
     isVisible: true,
     allowedToFilter: false,
@@ -57,8 +62,8 @@ export const defaultStages = [
   },
 ];
 
-export const FONT = "'Roboto', sans-serif;";
 
+export const FONT = "'Roboto', sans-serif;";
 
 export const DEFAULT_SEARCH_TEXT = 'Search in progess...';
 export const VIDEOS_NOT_FOUND = 'VODs not found';

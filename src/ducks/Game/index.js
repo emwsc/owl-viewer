@@ -12,38 +12,25 @@ import {
   DEFAULT_SEARCH_TEXT, VIDEOS_NOT_FOUND, VIDEOS_FOUND
 } from '../../utils/constants'
 import { timeConverter } from '../../utils/dataUtils'
-import { StyledPopupWrapper } from '../../theme/globalStyle'
-import { SearchVODPopup } from '../SearchVODPopup/index'
+// import { StyledPopupWrapper } from '../../theme/globalStyle'
+// import { SearchVODPopup } from '../SearchVODPopup/index'
 
 const Game = React.memo(({ game, updateSearchWindow }) => {
+
   const startDateLocaleString = timeConverter(game.startDate).toLocaleDateString();
-
   const [isResultsVisibile, changeResultsVisibility] = useState(false);
-
-
-  const [searchWindowVisibile, setSearchWindowVisible] = useState(false);
-  const [searchWindowText, setSearchWindowText] = useState('');
-  const [selectedVideos, setSelectedVideos] = useState(null);
-
-  const handleUpdateSearchWindow = (params) => {
-    setSearchWindowVisible(params.isVisible);
-    setSearchWindowText(params.text);
-    setSelectedVideos(params.selectedVideos);
-  }
-
-
 
   function onResultsVisivilityClick() {
     changeResultsVisibility(!isResultsVisibile);
   }
 
   function onOpenGameClick() {
-    var elem = window.document.getElementById('popup');
-    if (elem) elem.parentNode.removeChild(elem);
-    handleUpdateSearchWindow({ text: DEFAULT_SEARCH_TEXT, isVisible: true });
+    // var elem = window.document.getElementById('popup');
+    // if (elem) elem.parentNode.removeChild(elem);
+    updateSearchWindow({ text: DEFAULT_SEARCH_TEXT, isVisible: true });
     searchGameOnTwitch(game).then((selectedVideos) => {
       const text = !selectedVideos || selectedVideos.length === 0 ? VIDEOS_NOT_FOUND : VIDEOS_FOUND;
-      handleUpdateSearchWindow({ text, isVisible: true, selectedVideos });
+      updateSearchWindow({ text, isVisible: true, selectedVideos });
     });
   }
 
@@ -100,16 +87,7 @@ const Game = React.memo(({ game, updateSearchWindow }) => {
         </StyledSeachVODButton>
         </StyledButtonsContainer>
       </StyledGameCard>
-      {searchWindowVisibile
-        && (
-          <StyledPopupWrapper id='popup'>
-            <SearchVODPopup
-              text={searchWindowText}
-              selectedVideos={selectedVideos}
-            />
-          </StyledPopupWrapper>
-        )
-      }
+
     </React.Fragment>
 
   );

@@ -16,3 +16,7 @@ display: flex;
 flex-wrap: wrap;
 justify-content: left;
 `
+
+export const StyledMsg = styled.div`
+margin-left: 10px;
+`
