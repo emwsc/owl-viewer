@@ -1,8 +1,9 @@
 import styled from 'styled-components'
+import { NICE_BLACK } from '../../utils/constants'
 
 export const StyledYears = styled.div`
 display: flex;
-background: #282829;
+background: ${() => NICE_BLACK};
 color: white;
 border-radius: 5px;
 width: fit-content;

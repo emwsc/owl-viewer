@@ -1,9 +1,10 @@
 import styled from 'styled-components';
+import { NICE_BLACK } from '../../utils/constants'
 
 export const StyledTopMenu = styled.div`
 width: 100%;
 height: 100%;
-background: #282829;
+background: ${() => NICE_BLACK};
 color: white;
 display: flex;
 align-items: center;

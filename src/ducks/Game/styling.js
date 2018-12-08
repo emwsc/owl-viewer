@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { FONT } from '../../utils/constants';
+import { FONT, NICE_BLACK } from '../../utils/constants';
 
 export const StyledGameCard = styled.div`
 width: fit-content;
@@ -15,6 +15,8 @@ transition: all 0.25s ease;
 display: grid;
 grid-template-rows: auto 30px;
 grid-gap: 5px;
+border-bottom: 1px solid lightgray;
+border-top: 1px solid lightgray;
 `;
 
 export const StyledInfo = styled.div`
@@ -48,7 +50,7 @@ font-size: 14px;
 `;
 
 export const StyledSeachVODButton = styled.button`
-background: ${props => props.background};
+background: ${(props) => NICE_BLACK};
 color: white;
 font-weight: 700;
 padding: 5px;
@@ -61,7 +63,7 @@ font-size: 12px;
 `;
 
 export const StyledShowResults = styled.div`
-background: ${props => props.background};
+background: ${ () => NICE_BLACK};
 color: white;
 font-weight: 700;
 padding: 5px;

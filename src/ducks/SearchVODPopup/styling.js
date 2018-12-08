@@ -1,7 +1,8 @@
 import styled from 'styled-components';
+import { NICE_BLACK } from '../../utils/constants'
 
 export const StyledOpenWindowButton = styled.button`
-background: #282829;
+background: ${() => NICE_BLACK};
 color: white;
 font-weight: 700;
 padding: 5px;
