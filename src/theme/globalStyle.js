@@ -25,7 +25,7 @@ grid-template: 'top top top' 'year year year' 'teams content stages';
 grid-template-rows: 50px 30px 1fr;
 grid-template-columns: 250px 1fr 250px;
 grid-gap: 10px;
-background: #F5EFED;
+/* background: #F5EFED; */
 min-height: 100vh;
 `;
 

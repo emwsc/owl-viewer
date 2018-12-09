@@ -4,19 +4,18 @@ import { FONT, NICE_BLACK } from '../../utils/constants';
 export const StyledGameCard = styled.div`
 width: fit-content;
 margin: 10px;
-border-left: 5px solid;
+/* border-left: 5px solid;
 border-right: 5px solid;
 border-left-color: ${props => props.leftColor};
-border-right-color: ${props => props.rightColor};
+border-right-color: ${props => props.rightColor}; */
 padding: 10px;
 background: white;
 border-radius: 5px;
 transition: all 0.25s ease;
 display: grid;
-grid-template-rows: auto 30px;
+grid-template-rows: auto auto 30px;
 grid-gap: 5px;
-border-bottom: 1px solid lightgray;
-border-top: 1px solid lightgray;
+border: 1px solid lightgray;
 `;
 
 export const StyledInfo = styled.div`

@@ -45,20 +45,31 @@ const Game = React.memo(({ game, updateSearchWindow }) => {
             <StyledTeamLogo
               logoUrl={game.competitors[0].logo}
             />
-            <StyledTeamTitle>
-              {game.competitors[0].name}
-            </StyledTeamTitle>
+
           </StyledTeam>
           <div>
             {!isResultsVisibile && <StyledVS>VS</StyledVS>}
             {isResultsVisibile && <StyledVS>{`${game.scores[0]} - ${game.scores[1]}`}</StyledVS>}
-            <StyledAdditionalInfo>{startDateLocaleString}</StyledAdditionalInfo>
-            <StyledAdditionalInfo>{game.bracket}</StyledAdditionalInfo>
           </div>
           <StyledTeam>
             <StyledTeamLogo
               logoUrl={game.competitors[1].logo}
             />
+          </StyledTeam>
+        </StyledInfo>
+        <StyledInfo>
+          <StyledTeam>
+
+            <StyledTeamTitle>
+              {game.competitors[0].name}
+            </StyledTeamTitle>
+          </StyledTeam>
+          <div>
+            <StyledAdditionalInfo>{startDateLocaleString}</StyledAdditionalInfo>
+            <StyledAdditionalInfo>{game.bracket}</StyledAdditionalInfo>
+          </div>
+          <StyledTeam>
+
             <StyledTeamTitle>
               {game.competitors[1].name}
             </StyledTeamTitle>
