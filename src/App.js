@@ -19,7 +19,7 @@ firebase.initializeApp(firebaseConfig);
 
 const App = () => {
 
-  const [selectedYear, setSelectedYear] = useState(2018);
+  const [selectedYear, setSelectedYear] = useState(2019);
 
   const [searchWindowVisibile, setSearchWindowVisible] = useState(false);
   const [searchWindowText, setSearchWindowText] = useState('');
