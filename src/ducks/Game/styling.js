@@ -16,6 +16,7 @@ display: grid;
 grid-template-rows: auto auto 30px;
 grid-gap: 5px;
 border: 1px solid lightgray;
+box-shadow: 0 1px 0px rgba(0,0,0,0.12), 0 1px 3px rgba(0,0,0,0.24);
 `;
 
 export const StyledInfo = styled.div`

@@ -16,6 +16,9 @@ import { StyledPopupWrapper } from './theme/globalStyle'
 import { SearchVODPopup } from './ducks/SearchVODPopup'
 
 firebase.initializeApp(firebaseConfig);
+firebase.firestore().enablePersistence()
+
+
 
 const App = () => {
 

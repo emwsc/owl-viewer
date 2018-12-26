@@ -2,7 +2,7 @@ import React from 'react';
 import { StyledScheduleTitle, StyledStage } from './styled'
 import { Week } from './Week/index'
 
-const Stage = React.memo(({ stage, visibleStages, updateSearchWindow }) => {
+const Stage = ({ stage, visibleStages, updateSearchWindow }) => {
     return (
         <StyledStage>
             <StyledScheduleTitle>
@@ -17,6 +17,6 @@ const Stage = React.memo(({ stage, visibleStages, updateSearchWindow }) => {
                 />)}
         </StyledStage>
     )
-})
+}
 
 export { Stage };
