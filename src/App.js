@@ -40,48 +40,40 @@ const App = () => {
   return (
     <React.Fragment>
       <StyledGlobalStyle />
-      <StyledRoot>
-        <StyledAppWrapper>
-          <StyledTopMenuWrapper>
-            <TopMenu />
-          </StyledTopMenuWrapper>
-          <YearFilterWrapper>
-            <YearFilter
-              selectedYear={selectedYear}
-              setSelectedYear={setSelectedYear}
-            />
-          </YearFilterWrapper>
-          <Route
-            path="/"
-            exact
-            render={() => (
-              <Schedule
-                firebase={firebase}
-                selectedYear={selectedYear}
-                handleUpdateSearchWindow={handleUpdateSearchWindow}
-              />
-            )}
+      <TopMenu />
+      <YearFilter
+        selectedYear={selectedYear}
+        setSelectedYear={setSelectedYear}
+      />
+      <Route
+        path="/"
+        exact
+        render={() => (
+          <Schedule
+            firebase={firebase}
+            selectedYear={selectedYear}
+            handleUpdateSearchWindow={handleUpdateSearchWindow}
           />
-          <Route
-            path="/teams"
-            render={() => (
-              <ScheduleByTeam
-                firebase={firebase}
-                selectedYear={selectedYear}
-                handleUpdateSearchWindow={handleUpdateSearchWindow}
-              />
-            )}
-          />
-        </StyledAppWrapper>
-        {searchWindowVisibile && (
-          <StyledPopupWrapper id="popup">
-            <SearchVODPopup
-              text={searchWindowText}
-              selectedVideos={selectedVideos}
-            />
-          </StyledPopupWrapper>
         )}
-      </StyledRoot>
+      />
+      <Route
+        path="/teams"
+        render={() => (
+          <ScheduleByTeam
+            firebase={firebase}
+            selectedYear={selectedYear}
+            handleUpdateSearchWindow={handleUpdateSearchWindow}
+          />
+        )}
+      />
+      {searchWindowVisibile && (
+        <StyledPopupWrapper id="popup">
+          <SearchVODPopup
+            text={searchWindowText}
+            selectedVideos={selectedVideos}
+          />
+        </StyledPopupWrapper>
+      )}
     </React.Fragment>
   );
 };

@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { NICE_BLACK } from "../../utils/constants";
+import { NICE_BLACK, NICE_PURPLE } from "../../utils/constants";
+import { StyledContentWrapper } from "../../common/StyledContentWrapper";
 
 export const StyledTopMenu = styled.div`
   width: 100%;
@@ -11,9 +12,7 @@ export const StyledTopMenu = styled.div`
   top: 0;
 `;
 
-export const StyledTopMenuItemsWrapper = styled.div`
-  max-width: 100vh;
-  margin: 0 auto;
+export const StyledTopMenuItemsWrapper = styled(StyledContentWrapper)`
   width: 100%;
   display: flex;
   align-items: center;
@@ -26,4 +25,9 @@ export const StyledItem = styled.div`
   cursor: pointer;
   color: white;
   text-decoration: none;
+`;
+
+export const StyledItemIcon = styled.span`
+  margin-right: 5px;
+  color: ${() => NICE_PURPLE};
 `;

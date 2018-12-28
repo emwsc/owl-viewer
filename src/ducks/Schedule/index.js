@@ -1,38 +1,23 @@
 import React, { useState, useEffect } from "react";
-
-import { getSchedule, getCachedSchedule } from "./utils";
-
+import { getSchedule, getCachedSchedule, areEqualStages } from "./utils";
 import { Stage } from "./Stage/index";
-import { SpecialStagesFilter } from "../SpecialStagesFilter/index";
-
-import { StyledScheduleContentWrapper, StyledScheduleStages } from "./styled";
-import StyledStagesWrapper from "../../common/StagesWrapper";
-
 import { areSchedulesEqual } from "../../utils/utils";
 import { defaultStages } from "../../utils/constants";
-
-const areEqualStages = (prevProps, nextProps) => {
-  return (
-    prevProps.scheduleYear === nextProps.scheduleYear &&
-    prevProps.visibleStages.filter(x => x.isVisible).length ===
-      nextProps.visibleStages.filter(x => x.isVisible).length
-  );
-};
+import { StyledContentWrapper } from "../../common/StyledContentWrapper";
+import { StyledSchedule } from "./styled";
 
 const ScheduleLayout = React.memo(
   ({ scheduleYear, visibleStages, stages, handleUpdateSearchWindow }) => {
     return (
       <React.Fragment>
-        <StyledScheduleStages key={scheduleYear}>
-          {stages.slice(0, 1).map(stage => (
-            <Stage
-              visibleStages={visibleStages}
-              key={stage.id}
-              stage={stage}
-              updateSearchWindow={handleUpdateSearchWindow}
-            />
-          ))}
-        </StyledScheduleStages>
+        {stages.slice(0, 1).map(stage => (
+          <Stage
+            visibleStages={visibleStages}
+            key={stage.id}
+            stage={stage}
+            updateSearchWindow={handleUpdateSearchWindow}
+          />
+        ))}
       </React.Fragment>
     );
   },
@@ -89,7 +74,7 @@ const Schedule = React.memo(
 
     return (
       <React.Fragment>
-        <StyledScheduleContentWrapper>
+        <StyledSchedule>
           {state.isLoading && <div>Loading...</div>}
           {!state.isLoading && state.schedule && state.schedule.stages && (
             <ScheduleLayout
@@ -102,13 +87,7 @@ const Schedule = React.memo(
           {!state.isLoading && !state.schedule.stages && (
             <div>Schedule not found</div>
           )}
-        </StyledScheduleContentWrapper>
-        {/* <StyledStagesWrapper>
-          <SpecialStagesFilter
-            changeStagesVisibility={handleChangeStagesVisibility}
-            stages={state.visibleStages.filter(stage => stage.allowedToFilter)}
-          />
-        </StyledStagesWrapper> */}
+        </StyledSchedule>
       </React.Fragment>
     );
   },

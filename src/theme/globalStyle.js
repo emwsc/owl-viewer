@@ -1,5 +1,5 @@
 import styled, { keyframes, createGlobalStyle } from "styled-components";
-import { FONT } from "../utils/constants";
+import { FONT, NICE_PURPLE } from "../utils/constants";
 
 const FadeInAnimation = keyframes`  
   from { opacity: 0; bottom: 25px; }
@@ -17,25 +17,6 @@ export const StyledGlobalStyle = createGlobalStyle`
   }
 `;
 
-export const StyledAppWrapper = styled.div`
-  /* display: grid; */
-  /* grid-template: 'top' 'year' 'content'; */
-  /* grid-template-rows: 50px 30px 1fr; */
-  /* grid-template-columns: 250px 1fr 250px; */
-  /* grid-gap: 10px; */
-  /* background: #F5EFED; */
-  /* min-height: 100vh; */
-`;
-
-export const StyledTopMenuWrapper = styled.div`
-  /* grid-area: top; */
-`;
-
-export const StyledRoot = styled.div`
-  /* max-width: 1300px;
-margin: 0 auto; */
-`;
-
 export const StyledPopupWrapper = styled.div`
   border-radius: 5px;
   padding: 10px;
@@ -50,14 +31,4 @@ export const StyledPopupWrapper = styled.div`
   justify-content: center;
   align-items: center;
   animation: ${FadeInAnimation} 0.25s ease 1;
-`;
-
-export const YearFilterWrapper = styled.div`
-  /* grid-area: year; */
-  position: fixed;
-  width: 100%;
-  height: 50px;
-  top: 50px;
-  background: #6247aa;
-  padding-top: 20px;
 `;

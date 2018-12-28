@@ -100,3 +100,11 @@ export function getCachedSchedule(selectedYear) {
       .then(resolve);
   });
 }
+
+export const areEqualStages = (prevProps, nextProps) => {
+  return (
+    prevProps.scheduleYear === nextProps.scheduleYear &&
+    prevProps.visibleStages.filter(x => x.isVisible).length ===
+      nextProps.visibleStages.filter(x => x.isVisible).length
+  );
+};
