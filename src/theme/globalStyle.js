@@ -18,13 +18,13 @@ export const StyledGlobalStyle = createGlobalStyle`
 `;
 
 export const StyledAppWrapper = styled.div`
-  display: grid;
+  /* display: grid; */
   /* grid-template: 'top' 'year' 'content'; */
   /* grid-template-rows: 50px 30px 1fr; */
   /* grid-template-columns: 250px 1fr 250px; */
-  grid-gap: 10px;
+  /* grid-gap: 10px; */
   /* background: #F5EFED; */
-  min-height: 100vh;
+  /* min-height: 100vh; */
 `;
 
 export const StyledTopMenuWrapper = styled.div`
@@ -57,7 +57,7 @@ export const YearFilterWrapper = styled.div`
   position: fixed;
   width: 100%;
   height: 50px;
-  margin-top: 50px;
-  background: #e0e0e0;
+  top: 50px;
+  background: #6247aa;
   padding-top: 20px;
 `;

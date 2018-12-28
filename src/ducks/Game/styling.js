@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { FONT, NICE_BLACK } from '../../utils/constants';
 
 export const StyledGameCard = styled.div`
-width: fit-content;
+width: 300px;
 margin: 10px;
 /* border-left: 5px solid;
 border-right: 5px solid;

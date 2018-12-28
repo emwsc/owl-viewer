@@ -8,6 +8,7 @@ export const StyledTopMenu = styled.div`
   height: 50px;
   background: ${() => NICE_BLACK};
   color: white;
+  top: 0;
 `;
 
 export const StyledTopMenuItemsWrapper = styled.div`

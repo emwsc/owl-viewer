@@ -1,29 +1,17 @@
 import styled from "styled-components";
 
 export const StyledContentWrapper = styled.div`
-  height: calc(100vh - 100px);
-  max-width: 100vh;
+  max-width: 1390px;
   margin: 0 auto;
-  width: 100%;
-  @media (max-width: 1000px) {
-    max-width: 650px;
+  margin-top: 140px;
+  @media (max-width: 1400px) {
+    max-width: 1030px;
   }
-  @media (max-width: 655px) {
-    max-width: 350px;
+  @media (max-width: 1045px) {
+    max-width: 685px;
   }
-  /* overflow-y: auto;
-::-webkit-scrollbar-track
-{
-background-color: #F5F5F5;
-}
 
-::-webkit-scrollbar
-{
-width: 10px;
-background-color: #F5F5F5;
-}
-::-webkit-scrollbar-thumb
-{
-background-color: gray;
-} */
+  @media (max-width: 700px) {
+    max-width: 400px;
+  }
 `;

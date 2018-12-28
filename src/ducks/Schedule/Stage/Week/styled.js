@@ -17,8 +17,10 @@ export const StyledGamesByDate = styled.div`
   /* display: flex;
   flex-wrap: wrap;
   justify-content: left; */
-  display: grid;
-  grid-template-columns: repeat(auto-fit, 320px);
+  /* display: grid;
+  grid-template-columns: repeat(auto-fit, 320px); */
+  display: flex;
+  flex-wrap: wrap;
 `;
 
 export const StyledMsg = styled.div`
