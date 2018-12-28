@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { NICE_BLACK, NICE_PURPLE } from "../../utils/constants";
+import { NICE_BLACK, PLUMP_PURPLE } from "../../utils/constants";
 import { StyledContentWrapper } from "../../common/StyledContentWrapper";
 
 export const StyledTopMenu = styled.div`
@@ -29,5 +29,5 @@ export const StyledItem = styled.div`
 
 export const StyledItemIcon = styled.span`
   margin-right: 5px;
-  color: ${() => NICE_PURPLE};
+  color: ${() => PLUMP_PURPLE};
 `;

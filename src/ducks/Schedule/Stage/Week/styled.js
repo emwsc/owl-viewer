@@ -28,7 +28,7 @@ export const StyledMsg = styled.div`
 `;
 
 export const StyledDate = styled.div`
-  margin-left: 10px;
+  margin: 10px 10px;
   font-size: 16px;
   font-weight: bold;
 `;

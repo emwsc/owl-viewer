@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { NICE_BLACK, NICE_PURPLE } from "../../utils/constants";
+import { NICE_BLACK, PLUMP_PURPLE } from "../../utils/constants";
 
 export const StyledYearFilterWrapper = styled.div`
   /* grid-area: year; */
@@ -7,7 +7,7 @@ export const StyledYearFilterWrapper = styled.div`
   width: 100%;
   height: 50px;
   top: 50px;
-  background: ${() => NICE_PURPLE};
+  background: ${() => PLUMP_PURPLE};
   padding-top: 20px;
 `;
 

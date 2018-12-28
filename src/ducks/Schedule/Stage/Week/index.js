@@ -10,12 +10,14 @@ import {
   StyledDate
 } from "./styled";
 import { timeConverter } from "../../../../utils/dataUtils";
+import SmallGameCard from "../../../SmallGameCard";
 
 const Week = React.memo(({ week, visibleStages, updateSearchWindow }) => {
   const games = week.matches
     .filter(game => isGameVisible(game, visibleStages))
     .map(game => ({
       ...game,
+      startDateObj: timeConverter(game.startDate),
       startDateLocaleString: timeConverter(game.startDate).toLocaleDateString()
     }));
   const dates = [...new Set(games.map(game => game.startDateLocaleString))];
@@ -30,7 +32,7 @@ const Week = React.memo(({ week, visibleStages, updateSearchWindow }) => {
               {games
                 .filter(game => game.startDateLocaleString === date)
                 .map(game => (
-                  <Game
+                  <SmallGameCard
                     key={"schedule-" + game.id}
                     game={game}
                     updateSearchWindow={updateSearchWindow}

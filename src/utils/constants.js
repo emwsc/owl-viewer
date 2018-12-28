@@ -63,7 +63,7 @@ export const defaultStages = [
 
 export const FONT = "'Roboto', sans-serif;";
 export const NICE_BLACK = "#282829";
-export const NICE_PURPLE = "#6247aa";
+export const PLUMP_PURPLE = "#6247aa";
 
 export const DEFAULT_SEARCH_TEXT = "Search in progess...";
 export const VIDEOS_NOT_FOUND = "VODs not found";

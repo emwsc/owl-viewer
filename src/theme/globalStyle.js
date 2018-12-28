@@ -1,5 +1,5 @@
 import styled, { keyframes, createGlobalStyle } from "styled-components";
-import { FONT, NICE_PURPLE } from "../utils/constants";
+import { FONT, PLUMP_PURPLE } from "../utils/constants";
 
 const FadeInAnimation = keyframes`  
   from { opacity: 0; bottom: 25px; }
