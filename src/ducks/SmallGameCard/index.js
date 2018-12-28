@@ -10,10 +10,26 @@ import {
   StyledScore
 } from "./styled";
 import { datediff } from "./utils";
+import { searchGameOnTwitch } from "../../utils/dataUtils";
+import {
+  DEFAULT_SEARCH_TEXT,
+  VIDEOS_NOT_FOUND,
+  VIDEOS_FOUND
+} from "../../utils/constants";
 
 const SmallGameCard = React.memo(({ game, updateSearchWindow }) => {
   const [isScoreVisible, changeScoreVisibility] = useState(false);
   const nowDate = new Date();
+  function onOpenGameClick() {
+    updateSearchWindow({ text: DEFAULT_SEARCH_TEXT, isVisible: true });
+    searchGameOnTwitch(game).then(selectedVideos => {
+      const text =
+        !selectedVideos || selectedVideos.length === 0
+          ? VIDEOS_NOT_FOUND
+          : VIDEOS_FOUND;
+      updateSearchWindow({ text, isVisible: true, selectedVideos });
+    });
+  }
   return (
     <StyledSmallGameCard>
       <div>
@@ -50,6 +66,7 @@ const SmallGameCard = React.memo(({ game, updateSearchWindow }) => {
           </div>
           <div>
             <StyledTwitchIcon
+              onClick={onOpenGameClick}
               title="Search VOD on Twitch"
               className="fab fa-twitch"
             />

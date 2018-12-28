@@ -41,10 +41,10 @@ const App = () => {
     <React.Fragment>
       <StyledGlobalStyle />
       <TopMenu />
-      <YearFilter
+      {/* <YearFilter
         selectedYear={selectedYear}
         setSelectedYear={setSelectedYear}
-      />
+      /> */}
       <Route
         path="/"
         exact

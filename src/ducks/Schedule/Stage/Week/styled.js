@@ -7,7 +7,6 @@ export const StyledWeek = styled.div`
 export const StyledWeekTitle = styled.div`
   font-size: 24px;
   font-weight: bold;
-  margin-left: 10px;
   margin-bottom: 5px;
 `;
 
@@ -28,7 +27,7 @@ export const StyledMsg = styled.div`
 `;
 
 export const StyledDate = styled.div`
-  margin: 10px 10px;
+  margin: 10px 0px;
   font-size: 16px;
   font-weight: bold;
 `;

@@ -3,8 +3,8 @@ import { getSchedule, getCachedSchedule, areEqualStages } from "./utils";
 import { Stage } from "./Stage/index";
 import { areSchedulesEqual } from "../../utils/utils";
 import { defaultStages } from "../../utils/constants";
-import { StyledContentWrapper } from "../../common/StyledContentWrapper";
 import { StyledSchedule } from "./styled";
+import Filters from "./Filters";
 
 const ScheduleLayout = React.memo(
   ({ scheduleYear, visibleStages, stages, handleUpdateSearchWindow }) => {
@@ -74,6 +74,7 @@ const Schedule = React.memo(
 
     return (
       <React.Fragment>
+        <Filters firebase={firebase} />
         <StyledSchedule>
           {state.isLoading && <div>Loading...</div>}
           {!state.isLoading && state.schedule && state.schedule.stages && (

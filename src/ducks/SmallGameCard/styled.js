@@ -35,6 +35,8 @@ export const StyledButtonsContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  align-items: center;
+  cursor: pointer;
 `;
 
 export const StyledTwitchIcon = styled.i`
