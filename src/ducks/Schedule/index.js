@@ -6,11 +6,20 @@ import { defaultStages } from "../../utils/constants";
 import { StyledSchedule } from "./styled";
 import Filters from "./Filters";
 
-const ScheduleLayout = React.memo(
-  ({ scheduleYear, visibleStages, stages, handleUpdateSearchWindow }) => {
-    return (
-      <React.Fragment>
-        {stages.slice(0, 1).map(stage => (
+const ScheduleLayout = React.memo(props => {
+  const {
+    selectedStage,
+    scheduleYear,
+    visibleStages,
+    stages,
+    handleUpdateSearchWindow
+  } = props;
+  debugger;
+  return (
+    <React.Fragment>
+      {stages
+        .filter(stage => stage.name === selectedStage)
+        .map(stage => (
           <Stage
             visibleStages={visibleStages}
             key={stage.id}
@@ -18,81 +27,86 @@ const ScheduleLayout = React.memo(
             updateSearchWindow={handleUpdateSearchWindow}
           />
         ))}
-      </React.Fragment>
-    );
-  },
-  areEqualStages
-);
+    </React.Fragment>
+  );
+}, areEqualStages);
 
-const Schedule = React.memo(
-  ({ firebase, selectedYear, handleUpdateSearchWindow }) => {
-    // const [schedule, setSchedule] = useState({});
-    // const [isLoading, setIsLoading] = useState(true);
-    // const [visibleStages, setVisibleStages] = useState([...defaultStages]);
+const Schedule = React.memo(({ firebase, handleUpdateSearchWindow }) => {
+  const [selectedStage, setSelectedStage] = useState(null);
+  const [state, setState] = useState({
+    schedule: {},
+    isLoading: true,
+    visibleStages: [...defaultStages],
+    selectedYear: 2019
+  });
 
-    const [state, setState] = useState({
-      schedule: {},
-      isLoading: true,
-      visibleStages: [...defaultStages]
-    });
+  useEffect(
+    () => {
+      let tempSelectedStage = null;
 
-    useEffect(
-      () => {
-        // if (!state.isLoading) {
-        //     // setIsLoading(true)
-        //     // setSchedule({});
-        //     setState({ ...state, isLoading: true, schedule: {} })
-        // };
-        getCachedSchedule(selectedYear)
-          .then(cachedSchedule => {
-            // setSchedule(fetchedSchedule);
-            // setIsLoading(false);
-            if (cachedSchedule)
-              setState({
-                ...state,
-                isLoading: false,
-                schedule: cachedSchedule
-              });
-          })
-          .then(() => getSchedule(selectedYear, firebase))
-          .then(fetchedSchedule => {
-            setState({ ...state, isLoading: false, schedule: fetchedSchedule });
-          });
-      },
-      [selectedYear]
-    );
+      getCachedSchedule(state.selectedYear)
+        .then(cachedSchedule => {
+          if (cachedSchedule) {
+            setState({
+              ...state,
+              isLoading: false,
+              schedule: cachedSchedule
+            });
+          }
+          setSelectedStage(
+            cachedSchedule ? cachedSchedule.stages[0].name : null
+          );
+          tempSelectedStage = cachedSchedule
+            ? cachedSchedule.stages[0].name
+            : null;
+        })
+        .then(() => getSchedule(state.selectedYear, firebase))
+        .then(fetchedSchedule => {
+          const fetchedState = {
+            ...state,
+            isLoading: false,
+            schedule: fetchedSchedule
+          };
+          if (!tempSelectedStage && !selectedStage)
+            setSelectedStage(fetchedSchedule.stages[0].name);
+          setState(fetchedState);
+        });
+    },
+    [state.selectedYear]
+  );
 
-    function handleChangeStagesVisibility(stageTitle) {
-      const newVisibleStages = state.visibleStages.map(stage => ({ ...stage }));
-      const selectedStage = newVisibleStages.find(
-        stage => stage.title === stageTitle
-      );
-      selectedStage.isVisible = !selectedStage.isVisible;
-      // setVisibleStages(newVisibleStages);
-      setState({ ...state, visibleStages: newVisibleStages });
-    }
+  function setSelectedYear(year) {
+    setState({ ...state, selectedYear: year });
+  }
 
-    return (
-      <React.Fragment>
-        <Filters firebase={firebase} />
-        <StyledSchedule>
-          {state.isLoading && <div>Loading...</div>}
-          {!state.isLoading && state.schedule && state.schedule.stages && (
+  return (
+    <React.Fragment>
+      {state.isLoading && <div>Loading...</div>}
+      {!state.isLoading && state.schedule && state.schedule.stages && (
+        <React.Fragment>
+          <Filters
+            firebase={firebase}
+            selectedYear={state.selectedYear}
+            selectedStage={selectedStage}
+            setSelectedYear={setSelectedYear}
+            setSelectedStage={setSelectedStage}
+          />
+          <StyledSchedule>
             <ScheduleLayout
+              selectedStage={selectedStage}
               scheduleYear={state.schedule.year}
               stages={state.schedule.stages}
               visibleStages={state.visibleStages}
               handleUpdateSearchWindow={handleUpdateSearchWindow}
             />
-          )}
-          {!state.isLoading && !state.schedule.stages && (
-            <div>Schedule not found</div>
-          )}
-        </StyledSchedule>
-      </React.Fragment>
-    );
-  },
-  areSchedulesEqual
-);
+          </StyledSchedule>
+        </React.Fragment>
+      )}
+      {!state.isLoading && !state.schedule.stages && (
+        <div>Schedule not found</div>
+      )}
+    </React.Fragment>
+  );
+}, areSchedulesEqual);
 
 export { Schedule };

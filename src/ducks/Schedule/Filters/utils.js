@@ -1,12 +1,37 @@
+import { getDBStore } from "../../../utils/db";
+
+const idbTeams = getDBStore("teams");
+
+export function getCachedOwlTeams() {
+  return new Promise(resolve => {
+    resolve(idbTeams.getAll());
+  });
+}
+
 export function getOwlTeams(firebase) {
-    return new Promise((resolve) => {
-        const db = firebase.firestore();
-        db.collection('teams').orderBy('name').get().then((querySnapshot) => {
-            const teams = [];
-            querySnapshot.forEach((doc) => {
-                teams.push(doc.data());
-            });
-            resolve(teams);
+  return new Promise(resolve => {
+    const db = firebase.firestore();
+    db.collection("teams")
+      .orderBy("name")
+      .get()
+      .then(querySnapshot => {
+        const teams = [];
+        querySnapshot.forEach(doc => {
+          const data = doc.data();
+          teams.push(data);
+          idbTeams.set(data);
         });
-    });
+        resolve(teams);
+      });
+  });
+}
+
+export function sortTeams(a, b) {
+  if (a.name < b.name) {
+    return -1;
+  }
+  if (a.name > b.name) {
+    return 1;
+  }
+  return 0;
 }

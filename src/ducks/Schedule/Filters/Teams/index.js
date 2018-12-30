@@ -6,7 +6,7 @@ const Teams = ({ teams }) => {
   return (
     <StyledTeams>
       {teams.map(team => (
-        <Team team={team} />
+        <Team key={team.id} team={team} />
       ))}
     </StyledTeams>
   );

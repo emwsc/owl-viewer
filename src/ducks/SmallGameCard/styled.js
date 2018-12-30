@@ -8,7 +8,7 @@ export const StyledSmallGameCard = styled.div`
   border-radius: 5px;
   transition: all 0.25s ease;
   width: 225px;
-  margin: 5px;
+  margin: 5px 5px 5px 0px;
   display: flex;
   font-size: 14px;
   padding: 5px;

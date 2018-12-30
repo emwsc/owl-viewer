@@ -27,22 +27,26 @@ export const defaultStages = [
   {
     title: "Stage 1 Title Matches",
     isVisible: false,
-    allowedToFilter: true
+    allowedToFilter: true,
+    isStagePlayoff: true
   },
   {
     title: "Stage 2 Title Matches",
     isVisible: false,
-    allowedToFilter: true
+    allowedToFilter: true,
+    isStagePlayoff: true
   },
   {
     title: "Stage 3 Title Matches",
     isVisible: false,
-    allowedToFilter: true
+    allowedToFilter: true,
+    isStagePlayoff: true
   },
   {
     title: "Stage 4 Title Matches",
     isVisible: false,
-    allowedToFilter: true
+    allowedToFilter: true,
+    isStagePlayoff: true
   },
   {
     title: "Quarterfinals",

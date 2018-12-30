@@ -23,7 +23,7 @@ firebase.initializeApp(firebaseConfig);
 firebase.firestore().enablePersistence();
 
 const App = () => {
-  const [selectedYear, setSelectedYear] = useState(2019);
+  // const [selectedYear, setSelectedYear] = useState(2019);
 
   const [searchWindowVisibile, setSearchWindowVisible] = useState(false);
   const [searchWindowText, setSearchWindowText] = useState("");
@@ -35,37 +35,29 @@ const App = () => {
     setSelectedVideos(params.selectedVideos);
   };
 
-  //TODO: add HOC or renderProp for schedules 'cause they have same special stages filter
-
   return (
     <React.Fragment>
       <StyledGlobalStyle />
       <TopMenu />
-      {/* <YearFilter
-        selectedYear={selectedYear}
-        setSelectedYear={setSelectedYear}
-      /> */}
       <Route
         path="/"
         exact
         render={() => (
           <Schedule
             firebase={firebase}
-            selectedYear={selectedYear}
             handleUpdateSearchWindow={handleUpdateSearchWindow}
           />
         )}
       />
-      <Route
+      {/* <Route
         path="/teams"
         render={() => (
           <ScheduleByTeam
             firebase={firebase}
-            selectedYear={selectedYear}
             handleUpdateSearchWindow={handleUpdateSearchWindow}
           />
         )}
-      />
+      /> */}
       {searchWindowVisibile && (
         <StyledPopupWrapper id="popup">
           <SearchVODPopup

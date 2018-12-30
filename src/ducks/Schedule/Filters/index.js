@@ -1,21 +1,44 @@
 import React, { useState, useEffect } from "react";
-import { getOwlTeams } from "./utils";
+import { getOwlTeams, getCachedOwlTeams, sortTeams } from "./utils";
 import { StyledFilters } from "./styled";
 import Seasons from "./Seasons";
 import Teams from "./Teams";
+import Stages from "./Stages";
 import { StyledContentWrapper } from "../../../common/StyledContentWrapper";
 
-const Filters = ({ firebase }) => {
+const Filters = props => {
+  const {
+    firebase,
+    selectedYear,
+    selectedStage,
+    setSelectedYear,
+    setSelectedStage
+  } = props;
   const [teams, setTeams] = useState([]);
 
   useEffect(() => {
-    getOwlTeams(firebase).then(setTeams);
+    getCachedOwlTeams()
+      .then(teams => {
+        setTeams(teams.sort(sortTeams));
+        if (!teams || teams.length === 0) return getOwlTeams(firebase);
+        return null;
+      })
+      .then(teams => {
+        if (teams) setTeams(teams);
+      });
   }, []);
 
   return (
     <StyledFilters>
       <StyledContentWrapper>
-        <Seasons />
+        <Seasons
+          selectedYear={selectedYear}
+          setSelectedYear={setSelectedYear}
+        />
+        <Stages
+          selectedStage={selectedStage}
+          setSelectedStage={setSelectedStage}
+        />
         <Teams teams={teams} />
       </StyledContentWrapper>
     </StyledFilters>
