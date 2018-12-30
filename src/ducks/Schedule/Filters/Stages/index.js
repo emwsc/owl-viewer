@@ -3,7 +3,7 @@ import { StyledStages } from "./styled";
 import { StyledFilterItem } from "../styled";
 import { defaultStages } from "../../../../utils/constants";
 
-const Stages = ({ selectedStage, setSelectedStage }) => {
+const Stages = React.memo(({ selectedStage, setSelectedStage }) => {
   return (
     <StyledStages>
       {defaultStages
@@ -21,6 +21,6 @@ const Stages = ({ selectedStage, setSelectedStage }) => {
         ))}
     </StyledStages>
   );
-};
+});
 
 export default Stages;

@@ -7,26 +7,14 @@ import { StyledSchedule } from "./styled";
 import Filters from "./Filters";
 
 const ScheduleLayout = React.memo(props => {
-  const {
-    selectedStage,
-    scheduleYear,
-    visibleStages,
-    stages,
-    handleUpdateSearchWindow
-  } = props;
-  debugger;
+  const { selectedStage, stages, handleUpdateSearchWindow } = props;
+  const stage = stages.find(stage => stage.name === selectedStage);
   return (
     <React.Fragment>
-      {stages
-        .filter(stage => stage.name === selectedStage)
-        .map(stage => (
-          <Stage
-            visibleStages={visibleStages}
-            key={stage.id}
-            stage={stage}
-            updateSearchWindow={handleUpdateSearchWindow}
-          />
-        ))}
+      {stage && (
+        <Stage stage={stage} updateSearchWindow={handleUpdateSearchWindow} />
+      )}
+      {!stage && <div>Schedule not found</div>}
     </React.Fragment>
   );
 }, areEqualStages);
@@ -36,7 +24,6 @@ const Schedule = React.memo(({ firebase, handleUpdateSearchWindow }) => {
   const [state, setState] = useState({
     schedule: {},
     isLoading: true,
-    visibleStages: [...defaultStages],
     selectedYear: 2019
   });
 
@@ -94,7 +81,6 @@ const Schedule = React.memo(({ firebase, handleUpdateSearchWindow }) => {
           <StyledSchedule>
             <ScheduleLayout
               selectedStage={selectedStage}
-              scheduleYear={state.schedule.year}
               stages={state.schedule.stages}
               visibleStages={state.visibleStages}
               handleUpdateSearchWindow={handleUpdateSearchWindow}

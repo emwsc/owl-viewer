@@ -2,7 +2,7 @@ import React from "react";
 import Team from "./Team";
 import { StyledTeams } from "./styled";
 
-const Teams = ({ teams }) => {
+const Teams = React.memo(({ teams }) => {
   return (
     <StyledTeams>
       {teams.map(team => (
@@ -10,6 +10,6 @@ const Teams = ({ teams }) => {
       ))}
     </StyledTeams>
   );
-};
+});
 
 export default Teams;

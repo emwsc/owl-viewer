@@ -26,8 +26,6 @@ export function getCachedSchedule(selectedYear) {
 export const areEqualStages = (prevProps, nextProps) => {
   return (
     prevProps.selectedStage === nextProps.selectedStage &&
-    prevProps.scheduleYear === nextProps.scheduleYear &&
-    prevProps.visibleStages.filter(x => x.isVisible).length ===
-      nextProps.visibleStages.filter(x => x.isVisible).length
+    prevProps.scheduleYear === nextProps.scheduleYear
   );
 };

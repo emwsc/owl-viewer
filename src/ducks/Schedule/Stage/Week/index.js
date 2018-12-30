@@ -12,14 +12,13 @@ import {
 import { timeConverter } from "../../../../utils/dataUtils";
 import SmallGameCard from "../../../SmallGameCard";
 
-const Week = React.memo(({ week, visibleStages, updateSearchWindow }) => {
-  const games = week.matches
-    .filter(game => isGameVisible(game, visibleStages))
-    .map(game => ({
-      ...game,
-      startDateObj: timeConverter(game.startDate),
-      startDateLocaleString: timeConverter(game.startDate).toLocaleDateString()
-    }));
+const Week = React.memo(props => {
+  const { week, updateSearchWindow, isPlayoffStage } = props;
+  const games = week.matches.map(game => ({
+    ...game,
+    startDateObj: timeConverter(game.startDate),
+    startDateLocaleString: timeConverter(game.startDate).toLocaleDateString()
+  }));
   const dates = [...new Set(games.map(game => game.startDateLocaleString))];
   return (
     <StyledWeek>
@@ -35,18 +34,13 @@ const Week = React.memo(({ week, visibleStages, updateSearchWindow }) => {
                   <SmallGameCard
                     key={"schedule-" + game.id}
                     game={game}
+                    isTeamsHidden={isPlayoffStage}
                     updateSearchWindow={updateSearchWindow}
                   />
                 ))}
             </StyledGamesByDate>
           </div>
         ))}
-
-        {games.length === 0 && (
-          <StyledMsg>
-            Games not found or hidden by special stages filter
-          </StyledMsg>
-        )}
       </StyledGamesInWeek>
     </StyledWeek>
   );

@@ -2,7 +2,7 @@ import React from "react";
 import { StyledFilterItem } from "../styled";
 import { StyledSeasons } from "./styled";
 
-const Seasons = ({ selectedYear, setSelectedYear }) => {
+const Seasons = React.memo(({ selectedYear, setSelectedYear }) => {
   return (
     <StyledSeasons>
       <StyledFilterItem
@@ -23,6 +23,6 @@ const Seasons = ({ selectedYear, setSelectedYear }) => {
       </StyledFilterItem>
     </StyledSeasons>
   );
-};
+});
 
 export default Seasons;
