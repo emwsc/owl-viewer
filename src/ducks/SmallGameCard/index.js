@@ -10,8 +10,7 @@ import {
 } from "./styled";
 import { datediff, isTeamsVisibleByDefault, openGameVOD } from "./utils";
 
-const SmallGameCard = React.memo(({ game, isTeamsHidden, selectedTeams }) => {
-  console.log(game);
+const SmallGameCard = ({ game, isTeamsHidden, selectedTeams }) => {
   const [isScoreVisible, changeScoreVisibility] = useState(false);
   const [isTeamsVisible, changeTeamsVisibility] = useState(
     isTeamsVisibleByDefault(game.bracket) && !isTeamsHidden
@@ -27,12 +26,22 @@ const SmallGameCard = React.memo(({ game, isTeamsHidden, selectedTeams }) => {
 
   const highlight = (isTeamOneSelected || isTeamTwoSelected) && isTeamsVisible;
 
-  const nowDate = new Date();
+  const teamOneProps = {
+    highlight: isTeamOneSelected && isTeamsVisible,
+    primaryColor: game.competitors[0].primaryColor
+  };
 
+  const teamTwoProps = {
+    highlight: isTeamTwoSelected && isTeamsVisible,
+    primaryColor: game.competitors[1].primaryColor
+  };
+
+  const nowDate = new Date();
   return (
     <StyledSmallGameCard highlight={highlight}>
       {!isTeamsVisible && (
         <StyledTeamContainer
+          showPointer={!isTeamsVisible}
           onClick={() => changeTeamsVisibility(!isTeamsVisible)}
         >
           Click to show teams in playoff game
@@ -40,27 +49,15 @@ const SmallGameCard = React.memo(({ game, isTeamsHidden, selectedTeams }) => {
       )}
       {isTeamsVisible && (
         <div>
-          <StyledTeamContainer
-            highlight={isTeamOneSelected && isTeamsVisible}
-            primaryColor={game.competitors[0].primaryColor}
-          >
+          <StyledTeamContainer {...teamOneProps}>
             <StyledTeamLogo logoUrl={game.competitors[0].logo} />
-            <StyledTeamName
-              highlight={isTeamOneSelected && isTeamsVisible}
-              primaryColor={game.competitors[0].primaryColor}
-            >
+            <StyledTeamName {...teamOneProps}>
               {game.competitors[0].name}
             </StyledTeamName>
           </StyledTeamContainer>
-          <StyledTeamContainer
-            highlight={isTeamTwoSelected && isTeamsVisible}
-            primaryColor={game.competitors[1].primaryColor}
-          >
+          <StyledTeamContainer {...teamTwoProps}>
             <StyledTeamLogo logoUrl={game.competitors[1].logo} />
-            <StyledTeamName
-              highlight={isTeamTwoSelected && isTeamsVisible}
-              primaryColor={game.competitors[1].primaryColor}
-            >
+            <StyledTeamName {...teamTwoProps}>
               {game.competitors[1].name}
             </StyledTeamName>
           </StyledTeamContainer>
@@ -99,6 +96,6 @@ const SmallGameCard = React.memo(({ game, isTeamsHidden, selectedTeams }) => {
       )}
     </StyledSmallGameCard>
   );
-});
+};
 
 export default SmallGameCard;

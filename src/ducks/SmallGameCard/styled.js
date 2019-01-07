@@ -14,11 +14,11 @@ export const StyledSmallGameCard = styled.div`
   padding: 5px;
   justify-content: space-between;
   align-items: center;
-  z-index: -1;
   height: 50px;
 `;
 
 export const StyledTeamContainer = styled.div`
+  cursor: ${props => (props.showPointer ? "pointer" : "auto")};
   display: flex;
   align-items: center;
   margin: 5px;

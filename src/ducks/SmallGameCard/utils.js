@@ -14,6 +14,7 @@ export function openGameVOD(matchid) {
   fetch(BASE_VIDEO_URL + matchid + LOCALE_APPENDIX)
     .then(result => result.json())
     .then(result => {
+      debugger;
       if (result.code === 404) {
         alert("VOD not found");
         return;

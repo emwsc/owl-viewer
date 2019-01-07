@@ -9,7 +9,7 @@ import {
 import { timeConverter } from "../../../../utils/dataUtils";
 import SmallGameCard from "../../../SmallGameCard";
 
-const Week = React.memo(props => {
+const Week = props => {
   const { week, isPlayoffStage, selectedTeams } = props;
   const games = week.matches.map(game => ({
     ...game,
@@ -41,6 +41,6 @@ const Week = React.memo(props => {
       </StyledGamesInWeek>
     </StyledWeek>
   );
-});
+};
 
 export { Week };
