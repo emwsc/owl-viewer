@@ -5,22 +5,32 @@ import {
   StyledTeamContainer,
   StyledButtonsContainer,
   StyledTwitchIcon,
-  StyledScore
+  StyledScore,
+  StyledTeamName
 } from "./styled";
 import { datediff, isTeamsVisibleByDefault, openGameVOD } from "./utils";
 
 const SmallGameCard = React.memo(({ game, isTeamsHidden, selectedTeams }) => {
+  console.log(game);
   const [isScoreVisible, changeScoreVisibility] = useState(false);
   const [isTeamsVisible, changeTeamsVisibility] = useState(
     isTeamsVisibleByDefault(game.bracket) && !isTeamsHidden
   );
 
-  const isSelected = selectedTeams.some(
-    id => game.competitors[0].id === id || game.competitors[1].id === id
+  const isTeamOneSelected = selectedTeams.some(
+    id => game.competitors[0].id === id
   );
+
+  const isTeamTwoSelected = selectedTeams.some(
+    id => game.competitors[1].id === id
+  );
+
+  const highlight = (isTeamOneSelected || isTeamTwoSelected) && isTeamsVisible;
+
   const nowDate = new Date();
+
   return (
-    <StyledSmallGameCard highlightCard={isSelected && isTeamsVisible}>
+    <StyledSmallGameCard highlight={highlight}>
       {!isTeamsVisible && (
         <StyledTeamContainer
           onClick={() => changeTeamsVisibility(!isTeamsVisible)}
@@ -30,13 +40,29 @@ const SmallGameCard = React.memo(({ game, isTeamsHidden, selectedTeams }) => {
       )}
       {isTeamsVisible && (
         <div>
-          <StyledTeamContainer>
+          <StyledTeamContainer
+            highlight={isTeamOneSelected && isTeamsVisible}
+            primaryColor={game.competitors[0].primaryColor}
+          >
             <StyledTeamLogo logoUrl={game.competitors[0].logo} />
-            {game.competitors[0].name}
+            <StyledTeamName
+              highlight={isTeamOneSelected && isTeamsVisible}
+              primaryColor={game.competitors[0].primaryColor}
+            >
+              {game.competitors[0].name}
+            </StyledTeamName>
           </StyledTeamContainer>
-          <StyledTeamContainer>
+          <StyledTeamContainer
+            highlight={isTeamTwoSelected && isTeamsVisible}
+            primaryColor={game.competitors[1].primaryColor}
+          >
             <StyledTeamLogo logoUrl={game.competitors[1].logo} />
-            {game.competitors[1].name}
+            <StyledTeamName
+              highlight={isTeamTwoSelected && isTeamsVisible}
+              primaryColor={game.competitors[1].primaryColor}
+            >
+              {game.competitors[1].name}
+            </StyledTeamName>
           </StyledTeamContainer>
         </div>
       )}

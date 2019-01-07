@@ -3,10 +3,7 @@ import { NICE_BLACK, PLUMP_PURPLE } from "../../utils/constants";
 
 export const StyledSmallGameCard = styled.div`
   border: 1px solid lightgray;
-  box-shadow: ${props =>
-    props.highlightCard
-      ? "0 0px 1px 2px #F44336"
-      : "0 1px 0px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.24)"};
+  box-shadow: 0 1px 0px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.24);
   background: white;
   border-radius: 5px;
   transition: all 0.25s ease;
@@ -18,21 +15,17 @@ export const StyledSmallGameCard = styled.div`
   justify-content: space-between;
   align-items: center;
   z-index: -1;
-  transform: ${props => props.highlightCard && "scale(1.1)"};
-  margin-left: ${props => (props.highlightCard ? "15px" : "5px")};
-  margin-right: ${props => (props.highlightCard ? "20px" : "5px")};
+  height: 50px;
 `;
-
-// transform: scale(1.1);
-//     margin-left: 15px;
-//     margin-right: 20px;
-//     box-shadow: 0 0px 1px 2px #181B32;
-//     z-index: -1;
 
 export const StyledTeamContainer = styled.div`
   display: flex;
   align-items: center;
   margin: 5px;
+  width: fit-content;
+  border: ${props =>
+    props.highlight ? "1px solid " + props.primaryColor : "none"};
+  padding-left: ${props => (props.highlight ? "5px" : "0px")};
 `;
 
 export const StyledTeamLogo = styled.div`
@@ -58,4 +51,11 @@ export const StyledTwitchIcon = styled.i`
 
 export const StyledScore = styled.div`
   margin: 5px;
+`;
+
+export const StyledTeamName = styled.span`
+  transition: all 0.25s ease;
+  color: ${props => (props.highlight ? "white" : "black")};
+  padding: ${props => (props.highlight ? "0px 5px" : "0px")};
+  background: ${props => (props.highlight ? props.primaryColor : "white")};
 `;

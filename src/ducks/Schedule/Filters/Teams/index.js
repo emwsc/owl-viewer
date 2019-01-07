@@ -7,7 +7,7 @@ const Teams = React.memo(({ teams, selectedTeams, setSelectedTeams }) => {
     const array = [...selectedTeams];
     const index = selectedTeams.indexOf(teamId);
     if (index && index === -1) array.push(teamId);
-    else array.splice(index, array.length);
+    else array.splice(index, 1);
     setSelectedTeams(array);
   }
 
