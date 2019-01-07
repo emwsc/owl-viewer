@@ -11,9 +11,10 @@ import {
 } from "./styled";
 import { timeConverter } from "../../../../utils/dataUtils";
 import SmallGameCard from "../../../SmallGameCard";
+import { AppContextConsumer } from "../../../../AppContext";
 
 const Week = React.memo(props => {
-  const { week, updateSearchWindow, isPlayoffStage } = props;
+  const { week, isPlayoffStage } = props;
   const games = week.matches.map(game => ({
     ...game,
     startDateObj: timeConverter(game.startDate),
@@ -31,12 +32,15 @@ const Week = React.memo(props => {
               {games
                 .filter(game => game.startDateLocaleString === date)
                 .map(game => (
-                  <SmallGameCard
-                    key={"schedule-" + game.id}
-                    game={game}
-                    isTeamsHidden={isPlayoffStage}
-                    updateSearchWindow={updateSearchWindow}
-                  />
+                  <AppContextConsumer key={"schedule-" + game.id}>
+                    {context => (
+                      <SmallGameCard
+                        context={context}
+                        game={game}
+                        isTeamsHidden={isPlayoffStage}
+                      />
+                    )}
+                  </AppContextConsumer>
                 ))}
             </StyledGamesByDate>
           </div>

@@ -1,30 +1,15 @@
 import React, { useState } from "react";
 import { Route } from "react-router-dom";
-import firebase from "firebase";
 
-import { firebaseConfig } from "./firebase/config";
-
-import {
-  StyledRoot,
-  StyledAppWrapper,
-  StyledGlobalStyle,
-  StyledTopMenuWrapper,
-  YearFilterWrapper
-} from "./theme/globalStyle";
+import { StyledGlobalStyle } from "./theme/globalStyle";
 import { TopMenu } from "./ducks/TopMenu/index";
-import { ScheduleByTeam } from "./ducks/ScheduleByTeam/index";
-import { YearFilter } from "./ducks/YearFilter";
-import { Schedule } from "./ducks/Schedule";
+import Schedule from "./ducks/Schedule";
 
 import { StyledPopupWrapper } from "./theme/globalStyle";
 import { SearchVODPopup } from "./ducks/SearchVODPopup";
-
-firebase.initializeApp(firebaseConfig);
-firebase.firestore().enablePersistence();
+import { AppContextProvider } from "./AppContext";
 
 const App = () => {
-  // const [selectedYear, setSelectedYear] = useState(2019);
-
   const [searchWindowVisibile, setSearchWindowVisible] = useState(false);
   const [searchWindowText, setSearchWindowText] = useState("");
   const [selectedVideos, setSelectedVideos] = useState(null);
@@ -35,21 +20,14 @@ const App = () => {
     setSelectedVideos(params.selectedVideos);
   };
 
-  return (
-    <React.Fragment>
-      <StyledGlobalStyle />
-      <TopMenu />
-      <Route
-        path="/"
-        exact
-        render={() => (
+  /*
+  {render={() => (
           <Schedule
             firebase={firebase}
             handleUpdateSearchWindow={handleUpdateSearchWindow}
           />
-        )}
-      />
-      {/* <Route
+        )} }
+      { <Route
         path="/teams"
         render={() => (
           <ScheduleByTeam
@@ -57,7 +35,19 @@ const App = () => {
             handleUpdateSearchWindow={handleUpdateSearchWindow}
           />
         )}
-      /> */}
+      /> }
+
+*/
+
+  const contextValue = {
+    handleUpdateSearchWindow: handleUpdateSearchWindow
+  };
+
+  return (
+    <AppContextProvider value={contextValue}>
+      <StyledGlobalStyle />
+      <TopMenu />
+      <Route path="/" exact component={Schedule} />
       {searchWindowVisibile && (
         <StyledPopupWrapper id="popup">
           <SearchVODPopup
@@ -66,7 +56,7 @@ const App = () => {
           />
         </StyledPopupWrapper>
       )}
-    </React.Fragment>
+    </AppContextProvider>
   );
 };
 

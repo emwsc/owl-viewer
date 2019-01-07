@@ -3,21 +3,16 @@ import { StyledScheduleTitle, StyledStage } from "./styled";
 import { Week } from "./Week/index";
 import { checkIsPlayoffStage } from "./utils";
 
-const Stage = ({ stage, updateSearchWindow }) => {
+const Stage = React.memo(({ stage }) => {
   const isPlayoffStage = checkIsPlayoffStage(stage.name);
   return (
     <StyledStage>
       <StyledScheduleTitle>{stage.name}</StyledScheduleTitle>
       {stage.weeks.map(week => (
-        <Week
-          key={week.id}
-          week={week}
-          isPlayoffStage={isPlayoffStage}
-          updateSearchWindow={updateSearchWindow}
-        />
+        <Week key={week.id} week={week} isPlayoffStage={isPlayoffStage} />
       ))}
     </StyledStage>
   );
-};
+});
 
 export { Stage };

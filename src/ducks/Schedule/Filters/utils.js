@@ -1,4 +1,5 @@
 import { getDBStore } from "../../../utils/db";
+import configuredFirebase from "../../../firebase/firebase";
 
 const idbTeams = getDBStore("teams");
 
@@ -8,9 +9,9 @@ export function getCachedOwlTeams() {
   });
 }
 
-export function getOwlTeams(firebase) {
+export function getOwlTeams() {
   return new Promise(resolve => {
-    const db = firebase.firestore();
+    const db = configuredFirebase.firestore();
     db.collection("teams")
       .orderBy("name")
       .get()
