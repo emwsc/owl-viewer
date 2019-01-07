@@ -11,6 +11,8 @@ const Filters = props => {
     firebase,
     selectedYear,
     selectedStage,
+    selectedTeams,
+    setSelectedTeams,
     setSelectedYear,
     setSelectedStage
   } = props;
@@ -39,7 +41,11 @@ const Filters = props => {
           selectedStage={selectedStage}
           setSelectedStage={setSelectedStage}
         />
-        <Teams teams={teams} />
+        <Teams
+          teams={teams}
+          selectedTeams={selectedTeams}
+          setSelectedTeams={setSelectedTeams}
+        />
       </StyledContentWrapper>
     </StyledFilters>
   );

@@ -8,23 +8,19 @@ import {
   StyledScore
 } from "./styled";
 import { datediff, isTeamsVisibleByDefault, openGameVOD } from "./utils";
-import { searchGameOnTwitch } from "../../utils/dataUtils";
-import {
-  DEFAULT_SEARCH_TEXT,
-  VIDEOS_NOT_FOUND,
-  VIDEOS_FOUND
-} from "../../utils/constants";
 
-const SmallGameCard = React.memo(({ context, game, isTeamsHidden }) => {
-  const { handleUpdateSearchWindow } = context;
+const SmallGameCard = React.memo(({ game, isTeamsHidden, selectedTeams }) => {
   const [isScoreVisible, changeScoreVisibility] = useState(false);
   const [isTeamsVisible, changeTeamsVisibility] = useState(
     isTeamsVisibleByDefault(game.bracket) && !isTeamsHidden
   );
-  const nowDate = new Date();
 
+  const isSelected = selectedTeams.some(
+    id => game.competitors[0].id === id || game.competitors[1].id === id
+  );
+  const nowDate = new Date();
   return (
-    <StyledSmallGameCard>
+    <StyledSmallGameCard highlightCard={isSelected && isTeamsVisible}>
       {!isTeamsVisible && (
         <StyledTeamContainer
           onClick={() => changeTeamsVisibility(!isTeamsVisible)}

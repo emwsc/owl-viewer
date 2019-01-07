@@ -1,3 +1,5 @@
+import { BASE_VIDEO_URL, LOCALE_APPENDIX } from "./constants";
+
 export function datediff(first, second) {
   return Math.round((second - first) / (1000 * 60 * 60 * 24));
 }
@@ -9,12 +11,9 @@ export function isTeamsVisibleByDefault(bracket) {
 }
 
 export function openGameVOD(matchid) {
-  fetch(
-    `https://api.overwatchleague.com/vods?tag=esports-match-${matchid}&locale=en-en`
-  )
+  fetch(BASE_VIDEO_URL + matchid + LOCALE_APPENDIX)
     .then(result => result.json())
     .then(result => {
-      debugger;
       if (result.code === 404) {
         alert("VOD not found");
         return;

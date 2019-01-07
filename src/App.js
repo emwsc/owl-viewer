@@ -7,7 +7,6 @@ import Schedule from "./ducks/Schedule";
 
 import { StyledPopupWrapper } from "./theme/globalStyle";
 import { SearchVODPopup } from "./ducks/SearchVODPopup";
-import { AppContextProvider } from "./AppContext";
 
 const App = () => {
   const [searchWindowVisibile, setSearchWindowVisible] = useState(false);
@@ -20,31 +19,8 @@ const App = () => {
     setSelectedVideos(params.selectedVideos);
   };
 
-  /*
-  {render={() => (
-          <Schedule
-            firebase={firebase}
-            handleUpdateSearchWindow={handleUpdateSearchWindow}
-          />
-        )} }
-      { <Route
-        path="/teams"
-        render={() => (
-          <ScheduleByTeam
-            firebase={firebase}
-            handleUpdateSearchWindow={handleUpdateSearchWindow}
-          />
-        )}
-      /> }
-
-*/
-
-  const contextValue = {
-    handleUpdateSearchWindow: handleUpdateSearchWindow
-  };
-
   return (
-    <AppContextProvider value={contextValue}>
+    <React.Fragment>
       <StyledGlobalStyle />
       <TopMenu />
       <Route path="/" exact component={Schedule} />
@@ -56,7 +32,7 @@ const App = () => {
           />
         </StyledPopupWrapper>
       )}
-    </AppContextProvider>
+    </React.Fragment>
   );
 };
 

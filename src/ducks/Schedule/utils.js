@@ -25,7 +25,10 @@ export function getCachedSchedule(selectedYear) {
 }
 
 export const areEqualStages = (prevProps, nextProps) => {
-  return prevProps.selectedStage === nextProps.selectedStage;
+  return (
+    prevProps.selectedStage === nextProps.selectedStage &&
+    prevProps.selectedTeams.length === nextProps.selectedTeams.length
+  );
 };
 
 export const useOnSelectedYear = props => {
