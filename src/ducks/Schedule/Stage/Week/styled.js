@@ -13,11 +13,6 @@ export const StyledWeekTitle = styled.div`
 export const StyledGamesInWeek = styled.div``;
 
 export const StyledGamesByDate = styled.div`
-  /* display: flex;
-  flex-wrap: wrap;
-  justify-content: left; */
-  /* display: grid;
-  grid-template-columns: repeat(auto-fit, 320px); */
   display: flex;
   flex-wrap: wrap;
 `;

@@ -6,11 +6,20 @@ import {
   StyledButtonsContainer,
   StyledTwitchIcon,
   StyledScore,
-  StyledTeamName
+  StyledTeamName,
+  StyledInfoContainer
 } from "./styled";
-import { datediff, isTeamsVisibleByDefault, openGameVOD } from "./utils";
+import {
+  datediff,
+  isTeamsVisibleByDefault,
+  openGameVOD,
+  getVods
+} from "./utils";
 
-const SmallGameCard = ({ game, isTeamsHidden, selectedTeams }) => {
+const nowDate = new Date();
+
+const SmallGameCard = props => {
+  const { game, isTeamsHidden, selectedTeams, setSelectedGameId } = props;
   const [isScoreVisible, changeScoreVisibility] = useState(false);
   const [isTeamsVisible, changeTeamsVisibility] = useState(
     isTeamsVisibleByDefault(game.bracket) && !isTeamsHidden
@@ -36,64 +45,70 @@ const SmallGameCard = ({ game, isTeamsHidden, selectedTeams }) => {
     primaryColor: game.competitors[1].primaryColor
   };
 
-  const nowDate = new Date();
+  function handleOnCardClick() {
+    if (!isTeamsVisible) {
+      changeTeamsVisibility(!isTeamsVisible);
+      return;
+    }
+    //if (setSelectedGameId) setSelectedGameId(game.id);
+  }
+
   return (
-    <StyledSmallGameCard highlight={highlight}>
-      {!isTeamsVisible && (
-        <StyledTeamContainer
-          showPointer={!isTeamsVisible}
-          onClick={() => changeTeamsVisibility(!isTeamsVisible)}
-        >
-          Click to show teams in playoff game
-        </StyledTeamContainer>
-      )}
-      {isTeamsVisible && (
-        <div>
-          <StyledTeamContainer {...teamOneProps}>
-            <StyledTeamLogo logoUrl={game.competitors[0].logo} />
-            <StyledTeamName {...teamOneProps}>
-              {game.competitors[0].name}
-            </StyledTeamName>
+    <StyledSmallGameCard highlight={highlight} onClick={handleOnCardClick}>
+      <StyledInfoContainer>
+        {!isTeamsVisible && (
+          <StyledTeamContainer>
+            Click to show teams in playoff game
           </StyledTeamContainer>
-          <StyledTeamContainer {...teamTwoProps}>
-            <StyledTeamLogo logoUrl={game.competitors[1].logo} />
-            <StyledTeamName {...teamTwoProps}>
-              {game.competitors[1].name}
-            </StyledTeamName>
-          </StyledTeamContainer>
-        </div>
-      )}
-      {nowDate < game.startDateObj && (
-        <div>{datediff(nowDate, game.startDateObj)}d</div>
-      )}
-      {isTeamsVisible && nowDate >= game.startDateObj && (
-        <div>
-          <StyledScore>{isScoreVisible ? game.scores[0] : "-"}</StyledScore>
-          <StyledScore>{isScoreVisible ? game.scores[1] : "-"}</StyledScore>
-        </div>
-      )}
-      {isTeamsVisible && nowDate >= game.startDateObj && (
-        <StyledButtonsContainer>
+        )}
+        {isTeamsVisible && (
           <div>
-            <i
-              onClick={() => changeScoreVisibility(!isScoreVisible)}
-              title={
-                isScoreVisible
-                  ? "Click to hide score"
-                  : "Click to reaveal score of the game"
-              }
-              className={isScoreVisible ? "fas fa-eye-slash" : "fas fa-eye"}
-            />
+            <StyledTeamContainer {...teamOneProps}>
+              <StyledTeamLogo logoUrl={game.competitors[0].logo} />
+              <StyledTeamName {...teamOneProps}>
+                {game.competitors[0].name}
+              </StyledTeamName>
+            </StyledTeamContainer>
+            <StyledTeamContainer {...teamTwoProps}>
+              <StyledTeamLogo logoUrl={game.competitors[1].logo} />
+              <StyledTeamName {...teamTwoProps}>
+                {game.competitors[1].name}
+              </StyledTeamName>
+            </StyledTeamContainer>
           </div>
+        )}
+        {nowDate < game.startDateObj && (
+          <div>{datediff(nowDate, game.startDateObj)}d</div>
+        )}
+        {isTeamsVisible && nowDate >= game.startDateObj && (
           <div>
-            <StyledTwitchIcon
-              onClick={() => openGameVOD(game.id)}
-              title="Open VOD if available"
-              className="fas fa-video"
-            />
+            <StyledScore>{isScoreVisible ? game.scores[0] : "-"}</StyledScore>
+            <StyledScore>{isScoreVisible ? game.scores[1] : "-"}</StyledScore>
           </div>
-        </StyledButtonsContainer>
-      )}
+        )}
+        {isTeamsVisible && nowDate >= game.startDateObj && (
+          <StyledButtonsContainer>
+            <div>
+              <i
+                onClick={() => changeScoreVisibility(!isScoreVisible)}
+                title={
+                  isScoreVisible
+                    ? "Click to hide score"
+                    : "Click to reaveal score of the game"
+                }
+                className={isScoreVisible ? "fas fa-eye-slash" : "fas fa-eye"}
+              />
+            </div>
+            <div>
+              <StyledTwitchIcon
+                onClick={() => setSelectedGameId(game.id)}
+                title="Open VOD if available"
+                className="fas fa-video"
+              />
+            </div>
+          </StyledButtonsContainer>
+        )}
+      </StyledInfoContainer>
     </StyledSmallGameCard>
   );
 };

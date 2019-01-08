@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { getDBStore } from "../../utils/db";
 import configuredFirebase from "../../firebase/firebase";
+import { getVodsJson } from "../../utils/owlApi";
 const idbschedule = getDBStore("schedule");
 
 export function getSchedule(selectedYear) {
@@ -69,3 +70,37 @@ export const useOnSelectedYear = props => {
     [state.selectedYear]
   );
 };
+
+export const useOnSelectGame = ({ selectedGameId, setVods }) => {
+  useEffect(
+    () => {
+      getVods(selectedGameId).then(setVods);
+    },
+    [selectedGameId]
+  );
+};
+
+export function getVods(matchid) {
+  return new Promise((resolve, reject) => {
+    if (!matchid) {
+      resolve([]);
+      return;
+    }
+    getVodsJson(matchid).then(results => {
+      if (results.code === 404) {
+        resolve([]);
+        return;
+      }
+      resolve(
+        results.data.map(item => {
+          return {
+            id: item.unique_id,
+            thumbnail: item.thumbnail,
+            title: item.title,
+            url: item.embed
+          };
+        })
+      );
+    });
+  });
+}

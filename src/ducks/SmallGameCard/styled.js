@@ -9,16 +9,19 @@ export const StyledSmallGameCard = styled.div`
   transition: all 0.25s ease;
   width: 225px;
   margin: 5px 5px 5px 0px;
-  display: flex;
   font-size: 14px;
   padding: 5px;
-  justify-content: space-between;
-  align-items: center;
+  cursor: pointer;
   height: 50px;
 `;
 
+export const StyledInfoContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 export const StyledTeamContainer = styled.div`
-  cursor: ${props => (props.showPointer ? "pointer" : "auto")};
   display: flex;
   align-items: center;
   margin: 5px;

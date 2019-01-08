@@ -8,9 +8,10 @@ import {
 } from "./styled";
 import { timeConverter } from "../../../../utils/dataUtils";
 import SmallGameCard from "../../../SmallGameCard";
+import { ScheduleContextConsumer } from "../../context";
 
 const Week = props => {
-  const { week, isPlayoffStage, selectedTeams } = props;
+  const { week, isPlayoffStage, selectedTeams, setSelectedGameId } = props;
   const games = week.matches.map(game => ({
     ...game,
     startDateObj: timeConverter(game.startDate),
@@ -33,6 +34,7 @@ const Week = props => {
                     game={game}
                     selectedTeams={selectedTeams}
                     isTeamsHidden={isPlayoffStage}
+                    setSelectedGameId={setSelectedGameId}
                   />
                 ))}
             </StyledGamesByDate>
