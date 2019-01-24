@@ -5,6 +5,7 @@ import { StyledSchedule } from "./styled";
 import Filters from "./Filters";
 import { initialState, NOT_FOUND_SCHEDULE_MSG } from "./constants";
 import Videos from "./Videos";
+import { Transition } from "react-spring";
 
 const ScheduleLayout = React.memo(props => {
   const { selectedStage, stages, selectedTeams, setSelectedGameId } = props;
@@ -76,9 +77,26 @@ const Schedule = () => {
           <StyledSchedule>
             <ScheduleLayout {...layoutProps} />
           </StyledSchedule>
-          {videoScreen.isVideosScreenVisible && (
+          {/* {videoScreen.isVideosScreenVisible && (
             <Videos vods={videoScreen.vods} clearVods={clearVods} />
-          )}
+          )} */}
+          <Transition
+            items={videoScreen.isVideosScreenVisible}
+            from={{ opacity: 0 }}
+            enter={{ opacity: 1 }}
+            leave={{ opacity: 0 }}
+          >
+            {toggle =>
+              toggle &&
+              (props => (
+                <Videos
+                  style={props}
+                  vods={videoScreen.vods}
+                  clearVods={clearVods}
+                />
+              ))
+            }
+          </Transition>
         </React.Fragment>
       )}
       {!state.isLoading && !state.schedule.stages && (

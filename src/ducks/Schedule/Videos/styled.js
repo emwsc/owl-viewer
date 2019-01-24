@@ -1,6 +1,16 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
-export const StyledVideos = styled.div`
+const fadeIn = keyframes`
+  from {
+    opacity: 0
+  }
+
+  to {
+    opacity: 1
+  }
+`;
+
+export const StyledVideosSection = styled.div`
   position: fixed;
   right: 0;
   top: 0;
@@ -8,6 +18,7 @@ export const StyledVideos = styled.div`
   width: 300px;
   background: #f9f9f9;
   padding: 10px;
+  /* animation: ${fadeIn} 0.25s ease-in; */
   &:after {
     content: "";
     position: fixed;

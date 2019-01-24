@@ -1,33 +1,68 @@
 import React, { useState } from "react";
-import { StyledVideos, StyledClose, StyledReveal } from "./styled";
+import { StyledVideosSection, StyledClose, StyledReveal } from "./styled";
 import Video from "./Video";
 import BigVideo from "./BigVideo";
 import { getRevealText } from "./utils";
+import { Transition, Spring } from "react-spring";
 
-const Videos = ({ vods, clearVods }) => {
+const Videos = ({ style, vods, clearVods }) => {
   const fullMatchVideo = vods.find(video => video.title.includes("Full"));
   const isExpandable = vods && vods.length > 0 && fullMatchVideo;
   const [isExpanded, setIsExpanded] = useState(false);
   return (
-    <StyledVideos>
+    <StyledVideosSection style={style}>
       <StyledClose onClick={() => clearVods()}>×</StyledClose>
-      {fullMatchVideo && <BigVideo {...fullMatchVideo} />}
-      {!isExpandable &&
-        vods
-          .filter(vod => !fullMatchVideo || vod.id !== fullMatchVideo.id)
-          .map(vod => <Video key={vod.id} {...vod} />)}
+      {fullMatchVideo && (
+        <Spring from={{ opacity: 0 }} to={{ opacity: 1 }}>
+          {props => (
+            <div style={props}>
+              <BigVideo {...fullMatchVideo} />
+            </div>
+          )}
+        </Spring>
+      )}
+      {!isExpandable && vods.length > 0 && (
+        <Spring from={{ opacity: 0 }} to={{ opacity: 1 }}>
+          {props => (
+            <div style={props}>
+              {vods
+                .filter(vod => !fullMatchVideo || vod.id !== fullMatchVideo.id)
+                .map(vod => (
+                  <Video key={vod.id} {...vod} />
+                ))}
+            </div>
+          )}
+        </Spring>
+      )}
       {isExpandable && (
         <React.Fragment>
           <StyledReveal onClick={() => setIsExpanded(!isExpanded)}>
             {getRevealText(isExpanded)}
           </StyledReveal>
-          {isExpanded &&
-            vods
-              .filter(vod => !fullMatchVideo || vod.id !== fullMatchVideo.id)
-              .map(vod => <Video key={vod.id} {...vod} />)}
+          <Transition
+            items={isExpanded}
+            from={{ opacity: 0, transform: "translate3d(60px,0,0)" }}
+            enter={{ opacity: 1, transform: "translate3d(0px,0,0)" }}
+            leave={{ opacity: 0, transform: "translate3d(60px,0,0)" }}
+          >
+            {toggle =>
+              toggle &&
+              (props => (
+                <div style={props}>
+                  {vods
+                    .filter(
+                      vod => !fullMatchVideo || vod.id !== fullMatchVideo.id
+                    )
+                    .map(vod => (
+                      <Video key={vod.id} {...vod} />
+                    ))}
+                </div>
+              ))
+            }
+          </Transition>
         </React.Fragment>
       )}
-    </StyledVideos>
+    </StyledVideosSection>
   );
 };
 
