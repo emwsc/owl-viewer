@@ -71,10 +71,15 @@ export const useOnSelectedYear = props => {
   );
 };
 
-export const useOnSelectGame = ({ selectedGameId, setVods }) => {
+export const useOnSelectGame = ({ selectedGameId, setVideoScreenState }) => {
   useEffect(
     () => {
-      getVods(selectedGameId).then(setVods);
+      if (selectedGameId) {
+        setVideoScreenState({ isVideosScreenVisible: true, vods: [] });
+        getVods(selectedGameId).then(vods =>
+          setVideoScreenState({ isVideosScreenVisible: true, vods })
+        );
+      }
     },
     [selectedGameId]
   );

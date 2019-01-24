@@ -5,7 +5,6 @@ import { StyledSchedule } from "./styled";
 import Filters from "./Filters";
 import { initialState, NOT_FOUND_SCHEDULE_MSG } from "./constants";
 import Videos from "./Videos";
-import { ScheduleContextProvider } from "./context";
 
 const ScheduleLayout = React.memo(props => {
   const { selectedStage, stages, selectedTeams, setSelectedGameId } = props;
@@ -27,8 +26,11 @@ const ScheduleLayout = React.memo(props => {
 const Schedule = () => {
   const [selectedStage, setSelectedStage] = useState(null);
   const [selectedTeams, setSelectedTeams] = useState([]);
-  const [selectedGameId, setSelectedGameId] = useState([]);
-  const [vods, setVods] = useState([]);
+  const [selectedGameId, setSelectedGameId] = useState(null);
+  const [videoScreen, setVideoScreenState] = useState({
+    vods: [],
+    isVideosScreenVisible: false
+  });
   const [state, setState] = useState(initialState);
 
   const filterProps = {
@@ -54,10 +56,15 @@ const Schedule = () => {
     setSelectedStage
   });
 
-  useOnSelectGame({ selectedGameId, setVods });
+  useOnSelectGame({ selectedGameId, setVideoScreenState });
 
   function setSelectedYear(year) {
     setState({ ...state, selectedYear: year });
+  }
+
+  function clearVods() {
+    setSelectedGameId(null);
+    setVideoScreenState({ isVideosScreenVisible: false, vods: [] });
   }
 
   return (
@@ -69,8 +76,8 @@ const Schedule = () => {
           <StyledSchedule>
             <ScheduleLayout {...layoutProps} />
           </StyledSchedule>
-          {vods && vods.length > 0 && (
-            <Videos vods={vods} clearVods={setSelectedGameId} />
+          {videoScreen.isVideosScreenVisible && (
+            <Videos vods={videoScreen.vods} clearVods={clearVods} />
           )}
         </React.Fragment>
       )}
