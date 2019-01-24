@@ -6,7 +6,7 @@ export const StyledVideos = styled.div`
   top: 0;
   height: 100vh;
   width: 300px;
-  background: #F9F9F9;
+  background: #f9f9f9;
   padding: 10px;
   &:after {
     content: "";
@@ -39,4 +39,11 @@ export const StyledClose = styled.div`
   border-bottom-left-radius: 10px;
   color: white;
   cursor: pointer;
+`;
+
+export const StyledReveal = styled.div`
+  cursor: pointer;
+  margin-bottom: 10px;
+  font-size: 16px;
+  user-select: none;
 `;

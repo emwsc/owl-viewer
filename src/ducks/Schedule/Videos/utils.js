@@ -4,3 +4,9 @@ export function openGameVOD(videoId) {
     "_blank"
   );
 }
+
+export function getRevealText(isExpanded) {
+  return isExpanded
+    ? "▼ Click to hide other videos"
+    : "▶ Click to show other videos";
+}

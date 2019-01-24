@@ -2,7 +2,7 @@ import React from "react";
 import { StyledVideo, StyledThumbnail } from "./styled";
 import { openGameVOD } from "../utils";
 
-const Video = video => {
+const BigVideo = video => {
   return (
     <StyledVideo title="Click to open" onClick={() => openGameVOD(video.id)}>
       <StyledThumbnail src={video.thumbnail} />
@@ -11,4 +11,4 @@ const Video = video => {
   );
 };
 
-export default Video;
+export default BigVideo;
