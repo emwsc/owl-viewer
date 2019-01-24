@@ -60,7 +60,10 @@ export const useOnSelectedYear = props => {
             isLoading: false,
             schedule: fetchedSchedule
           };
-          if (state.selectedYear === fetchedSchedule.selectedYear) {
+          if (
+            state.selectedYear === fetchedSchedule.selectedYear ||
+            !tempSelectedStage
+          ) {
             if (!tempSelectedStage && !selectedStage)
               setSelectedStage(fetchedSchedule.stages[0].name);
             setState(fetchedState);

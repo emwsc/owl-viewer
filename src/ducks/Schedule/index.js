@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { areEqualStages, useOnSelectedYear, useOnSelectGame } from "./utils";
 import { Stage } from "./Stage/index";
-import { StyledSchedule } from "./styled";
+import { StyledSchedule, StyledLoading } from "./styled";
 import Filters from "./Filters";
 import { initialState, NOT_FOUND_SCHEDULE_MSG } from "./constants";
 import Videos from "./Videos";
@@ -70,7 +70,7 @@ const Schedule = () => {
 
   return (
     <React.Fragment>
-      {state.isLoading && <div>Loading...</div>}
+      {state.isLoading && <StyledLoading>Loading...</StyledLoading>}
       {!state.isLoading && state.schedule && state.schedule.stages && (
         <React.Fragment>
           <Filters {...filterProps} />
