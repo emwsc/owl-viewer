@@ -20,9 +20,9 @@ const TopMenu = React.memo(
             Full schedule
           </StyledItem>
         </Link>
-        <Link to="/teams">
+        {/* <Link to="/teams">
           <StyledItem>By teams</StyledItem>
-        </Link>
+        </Link> */}
       </StyledTopMenuItemsWrapper>
     </StyledTopMenu>
   ),

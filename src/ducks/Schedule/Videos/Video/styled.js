@@ -12,4 +12,6 @@ export const StyledThumbnail = styled.img`
   min-width: 64px;
   height: 32px;
   margin-right: 5px;
+  border-radius: 5px;
+  margin-top: 2px;
 `;

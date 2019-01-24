@@ -77,9 +77,6 @@ const Schedule = () => {
           <StyledSchedule>
             <ScheduleLayout {...layoutProps} />
           </StyledSchedule>
-          {/* {videoScreen.isVideosScreenVisible && (
-            <Videos vods={videoScreen.vods} clearVods={clearVods} />
-          )} */}
           <Transition
             items={videoScreen.isVideosScreenVisible}
             from={{ opacity: 0 }}

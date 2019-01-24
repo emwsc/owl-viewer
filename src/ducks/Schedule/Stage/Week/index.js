@@ -8,7 +8,6 @@ import {
 } from "./styled";
 import { timeConverter } from "../../../../utils/dataUtils";
 import SmallGameCard from "../../../SmallGameCard";
-import { ScheduleContextConsumer } from "../../context";
 
 const Week = props => {
   const { week, isPlayoffStage, selectedTeams, setSelectedGameId } = props;
