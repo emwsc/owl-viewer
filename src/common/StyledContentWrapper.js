@@ -1,20 +1,16 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const StyledContentWrapper = styled.div`
-height: calc(100vh - 100px);
-overflow-y: auto;
-::-webkit-scrollbar-track
-{
-background-color: #F5F5F5;
-}
+  max-width: 1390px;
+  margin: 0 auto;
+  @media (max-width: 1400px) {
+    max-width: 1000px;
+  }
+  @media (max-width: 1045px) {
+    max-width: 800px;
+  }
 
-::-webkit-scrollbar
-{
-width: 10px;
-background-color: #F5F5F5;
-}
-::-webkit-scrollbar-thumb
-{
-background-color: gray;
-}
-`
+  @media (max-width: 755px) {
+    max-width: 500px;
+  }
+`;

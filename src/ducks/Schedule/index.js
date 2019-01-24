@@ -1,82 +1,106 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from "react";
+import { areEqualStages, useOnSelectedYear, useOnSelectGame } from "./utils";
+import { Stage } from "./Stage/index";
+import { StyledSchedule } from "./styled";
+import Filters from "./Filters";
+import { initialState, NOT_FOUND_SCHEDULE_MSG } from "./constants";
+import Videos from "./Videos";
+import { Transition } from "react-spring";
 
-import { getSchedule } from './utils'
+const ScheduleLayout = React.memo(props => {
+  const { selectedStage, stages, selectedTeams, setSelectedGameId } = props;
+  const stage = stages.find(stage => stage.name === selectedStage);
+  return (
+    <React.Fragment>
+      {stage && (
+        <Stage
+          stage={stage}
+          selectedTeams={selectedTeams}
+          setSelectedGameId={setSelectedGameId}
+        />
+      )}
+      {!stage && <div>{NOT_FOUND_SCHEDULE_MSG}</div>}
+    </React.Fragment>
+  );
+}, areEqualStages);
 
-import { Stage } from './Stage/index'
-import { SpecialStagesFilter } from '../SpecialStagesFilter/index';
+const Schedule = () => {
+  const [selectedStage, setSelectedStage] = useState(null);
+  const [selectedTeams, setSelectedTeams] = useState([]);
+  const [selectedGameId, setSelectedGameId] = useState(null);
+  const [videoScreen, setVideoScreenState] = useState({
+    vods: [],
+    isVideosScreenVisible: false
+  });
+  const [state, setState] = useState(initialState);
 
-import { StyledScheduleContentWrapper, StyledScheduleStages } from './styled'
-import StyledStagesWrapper from '../../common/StagesWrapper';
+  const filterProps = {
+    selectedYear: state.selectedYear,
+    selectedStage,
+    selectedTeams,
+    setSelectedYear,
+    setSelectedStage,
+    setSelectedTeams
+  };
 
-import { areSchedulesEqual } from '../../utils/utils';
-import { defaultStages } from '../../utils/constants';
+  const layoutProps = {
+    selectedStage,
+    selectedTeams,
+    stages: state.schedule.stages,
+    setSelectedGameId
+  };
 
+  useOnSelectedYear({
+    state,
+    setState,
+    selectedStage,
+    setSelectedStage
+  });
 
-const areEqualStages = (prevProps, nextProps) => {
-    return prevProps.scheduleYear === nextProps.scheduleYear &&
-        prevProps.visibleStages.filter(x => x.isVisible).length === nextProps.visibleStages.filter(x => x.isVisible).length
-}
+  useOnSelectGame({ selectedGameId, setVideoScreenState });
 
-const ScheduleStages = React.memo(({ scheduleYear, visibleStages, stages, handleUpdateSearchWindow }) => {
-    return (
-        <StyledScheduleStages key={scheduleYear}>
-            {stages.map(stage =>
-                <Stage
-                    visibleStages={visibleStages}
-                    key={stage.id}
-                    stage={stage}
-                    updateSearchWindow={handleUpdateSearchWindow}
-                />)}
-        </StyledScheduleStages>
-    )
-}, areEqualStages)
+  function setSelectedYear(year) {
+    setState({ ...state, selectedYear: year });
+  }
 
-const Schedule = React.memo(({ firebase, selectedYear, handleUpdateSearchWindow }) => {
+  function clearVods() {
+    setSelectedGameId(null);
+    setVideoScreenState({ isVideosScreenVisible: false, vods: [] });
+  }
 
-    const [schedule, setSchedule] = useState({});
-    const [isLoading, setIsLoading] = useState(true);
-    const [visibleStages, setVisibleStages] = useState([...defaultStages]);
-
-    useEffect(() => {
-        if (!isLoading) {
-            setIsLoading(true)
-            setSchedule({});
-        };
-        getSchedule(firebase, selectedYear).then(fetchedSchedule => {
-            setSchedule(fetchedSchedule);
-            setIsLoading(false);
-        })
-    }, [selectedYear]);
-
-    function handleChangeStagesVisibility(stageTitle) {
-        const newVisibleStages = visibleStages.map(stage => ({ ...stage }));
-        const selectedStage = newVisibleStages.find(stage => stage.title === stageTitle);
-        selectedStage.isVisible = !selectedStage.isVisible;
-        setVisibleStages(newVisibleStages);
-    }
-
-    return (
+  return (
+    <React.Fragment>
+      {state.isLoading && <div>Loading...</div>}
+      {!state.isLoading && state.schedule && state.schedule.stages && (
         <React.Fragment>
-            <StyledScheduleContentWrapper>
-                {isLoading && <div>Loading...</div>}
-                {!isLoading && schedule.stages &&
-                    <ScheduleStages
-                        scheduleYear={schedule.id}
-                        stages={schedule.stages}
-                        visibleStages={visibleStages}
-                        handleUpdateSearchWindow={handleUpdateSearchWindow}
-                    />
-                }
-                {!isLoading && !schedule.stages && <div>Schedule not found</div>}
-            </StyledScheduleContentWrapper>
-            <StyledStagesWrapper>
-                <SpecialStagesFilter
-                    changeStagesVisibility={handleChangeStagesVisibility}
-                    stages={visibleStages.filter(stage => stage.allowedToFilter)}
+          <Filters {...filterProps} />
+          <StyledSchedule>
+            <ScheduleLayout {...layoutProps} />
+          </StyledSchedule>
+          <Transition
+            items={videoScreen.isVideosScreenVisible}
+            from={{ opacity: 0 }}
+            enter={{ opacity: 1 }}
+            leave={{ opacity: 0 }}
+          >
+            {toggle =>
+              toggle &&
+              (props => (
+                <Videos
+                  style={props}
+                  vods={videoScreen.vods}
+                  clearVods={clearVods}
                 />
-            </StyledStagesWrapper>
+              ))
+            }
+          </Transition>
         </React.Fragment>
-    )
-}, areSchedulesEqual)
+      )}
+      {!state.isLoading && !state.schedule.stages && (
+        <div>{NOT_FOUND_SCHEDULE_MSG}</div>
+      )}
+    </React.Fragment>
+  );
+};
 
-export { Schedule }
+export default Schedule;

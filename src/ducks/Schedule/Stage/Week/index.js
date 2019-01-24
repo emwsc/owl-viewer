@@ -1,26 +1,47 @@
-import React from 'react';
-import Game from '../../../Game/index'
-import { isGameVisible } from './utils'
-import { StyledWeek, StyledGamesInWeek, StyledWeekTitle, StyledMsg } from './styled';
+import React from "react";
+import {
+  StyledWeek,
+  StyledGamesInWeek,
+  StyledWeekTitle,
+  StyledGamesByDate,
+  StyledDate
+} from "./styled";
+import { timeConverter } from "../../../../utils/dataUtils";
+import SmallGameCard from "../../../SmallGameCard";
 
-const Week = React.memo(({ week, visibleStages, updateSearchWindow }) => {
+const Week = props => {
+  const { week, isPlayoffStage, selectedTeams, setSelectedGameId } = props;
+  const games = week.matches.map(game => ({
+    ...game,
+    startDateObj: timeConverter(game.startDate),
+    startDateLocaleString: timeConverter(game.startDate).toLocaleDateString()
+  }));
+  const dates = [...new Set(games.map(game => game.startDateLocaleString))];
+  return (
+    <StyledWeek>
+      <StyledWeekTitle>{week.name}</StyledWeekTitle>
+      <StyledGamesInWeek>
+        {dates.map(date => (
+          <div key={date}>
+            <StyledDate>{date}</StyledDate>
+            <StyledGamesByDate>
+              {games
+                .filter(game => game.startDateLocaleString === date)
+                .map(game => (
+                  <SmallGameCard
+                    key={"schedule-" + game.id}
+                    game={game}
+                    selectedTeams={selectedTeams}
+                    isTeamsHidden={isPlayoffStage}
+                    setSelectedGameId={setSelectedGameId}
+                  />
+                ))}
+            </StyledGamesByDate>
+          </div>
+        ))}
+      </StyledGamesInWeek>
+    </StyledWeek>
+  );
+};
 
-    const filteredGames = week.matches.filter(game => isGameVisible(game, visibleStages));
-
-    return (
-        <StyledWeek >
-            <StyledWeekTitle>{week.name}</StyledWeekTitle>
-            <StyledGamesInWeek>
-                {filteredGames.map(game =>
-                    <Game
-                        key={'schedule-' + game.id}
-                        game={game}
-                        updateSearchWindow={updateSearchWindow}
-                    />)}
-                {filteredGames.length === 0 && <StyledMsg>Games not found or hidden by special stages filter</StyledMsg>}
-            </StyledGamesInWeek>
-        </StyledWeek>
-    )
-});
-
-export { Week }
+export { Week };
