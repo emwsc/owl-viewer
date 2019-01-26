@@ -9,14 +9,36 @@ import {
   StyledTeamName,
   StyledInfoContainer
 } from "./styled";
-import {
-  datediff,
-  isTeamsVisibleByDefault,
-  openGameVOD,
-  getVods
-} from "./utils";
+import { datediff, isTeamsVisibleByDefault } from "./utils";
 
 const nowDate = new Date();
+
+const PastGameButtons = ({
+  changeScoreVisibility,
+  isScoreVisible,
+  onSelectGameClick
+}) => (
+  <StyledButtonsContainer>
+    <div>
+      <i
+        onClick={() => changeScoreVisibility(!isScoreVisible)}
+        title={
+          isScoreVisible
+            ? "Click to hide score"
+            : "Click to reaveal score of the game"
+        }
+        className={isScoreVisible ? "fas fa-eye-slash" : "fas fa-eye"}
+      />
+    </div>
+    <div>
+      <StyledVODIcon
+        onClick={onSelectGameClick}
+        title="Open VODs if available"
+        className="fas fa-video"
+      />
+    </div>
+  </StyledButtonsContainer>
+);
 
 const SmallGameCard = props => {
   const { game, isTeamsHidden, selectedTeams, setSelectedGameId } = props;
@@ -90,26 +112,11 @@ const SmallGameCard = props => {
           </div>
         )}
         {isTeamsVisible && nowDate >= game.startDateObj && (
-          <StyledButtonsContainer>
-            <div>
-              <i
-                onClick={() => changeScoreVisibility(!isScoreVisible)}
-                title={
-                  isScoreVisible
-                    ? "Click to hide score"
-                    : "Click to reaveal score of the game"
-                }
-                className={isScoreVisible ? "fas fa-eye-slash" : "fas fa-eye"}
-              />
-            </div>
-            <div>
-              <StyledVODIcon
-                onClick={onSelectGameClick}
-                title="Open VODs if available"
-                className="fas fa-video"
-              />
-            </div>
-          </StyledButtonsContainer>
+          <PastGameButtons
+            changeScoreVisibility={changeScoreVisibility}
+            onSelectGameClick={onSelectGameClick}
+            isScoreVisible={isScoreVisible}
+          />
         )}
       </StyledInfoContainer>
     </StyledSmallGameCard>
