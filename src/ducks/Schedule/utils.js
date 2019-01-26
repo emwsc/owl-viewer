@@ -77,13 +77,7 @@ export const useOnSelectedYear = props => {
 export const useOnSelectGame = ({ selectedGameId, setVideoScreenState }) => {
   useEffect(
     () => {
-      if (selectedGameId)
-        window.history.pushState(null, null, `/?match=${selectedGameId}`);
-      else {
-        window.history.pushState(null, null, "/");
-        document.title = "Full OWL schedule | OWL Viewer";
-      }
-
+      debugger;
       if (selectedGameId) {
         setVideoScreenState({ isVideosScreenVisible: true, vods: [] });
         getVods(selectedGameId).then(vods => {

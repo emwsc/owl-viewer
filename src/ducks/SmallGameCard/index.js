@@ -75,6 +75,7 @@ const SmallGameCard = props => {
   }
 
   function onSelectGameClick() {
+    window.history.pushState(null, null, `/?match=${game.id}`);
     setSelectedGameId(game.id);
   }
 
