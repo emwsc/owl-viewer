@@ -26,11 +26,13 @@ const ScheduleLayout = React.memo(props => {
 }, areEqualStages);
 
 const Schedule = props => {
-  const { location } = props;
+  const { location } = window;
   const qsParams = query.parse(location.search);
   const [selectedStage, setSelectedStage] = useState(null);
   const [selectedTeams, setSelectedTeams] = useState([]);
-  const [selectedGameId, setSelectedGameId] = useState(qsParams.match);
+  const [selectedGameId, setSelectedGameId] = useState(
+    qsParams ? qsParams.match : null
+  );
   const [videoScreen, setVideoScreenState] = useState({
     vods: [],
     isVideosScreenVisible: false
@@ -60,13 +62,25 @@ const Schedule = props => {
     setSelectedStage
   });
 
-  useOnSelectGame({ selectedGameId, setVideoScreenState });
+  if (!selectedGameId && qsParams && qsParams.match)
+    setSelectedGameId(qsParams.match);
+  if (selectedGameId && (!qsParams || !qsParams.match)) {
+    setSelectedGameId(null);
+    setVideoScreenState({ isVideosScreenVisible: false, vods: [] });
+  }
+
+  useOnSelectGame({
+    selectedGameId: selectedGameId,
+    setVideoScreenState
+  });
 
   function setSelectedYear(year) {
     setState({ ...state, selectedYear: year });
   }
 
   function clearVods() {
+    window.history.pushState(null, null, "/");
+    document.title = "Full OWL schedule | OWL Viewer";
     setSelectedGameId(null);
     setVideoScreenState({ isVideosScreenVisible: false, vods: [] });
   }

@@ -18,8 +18,9 @@ export const StyledVideosSection = styled.div`
   width: 300px;
   background: #f9f9f9;
   padding: 10px;
+  z-index: 10;
   /* animation: ${fadeIn} 0.25s ease-in; */
-  &:after {
+  /* &:after {
     content: "";
     position: fixed;
     width: calc(100% - 320px);
@@ -29,7 +30,19 @@ export const StyledVideosSection = styled.div`
     z-index: 1;
     background-color: rgba(0, 0, 0, 0.5);
     display: block;
-  }
+  } */
+`;
+
+export const StyledBackground = styled.div`
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: block;
+  z-index: 9;
 `;
 
 export const StyledClose = styled.div`
