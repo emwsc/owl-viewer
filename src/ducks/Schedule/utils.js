@@ -77,7 +77,6 @@ export const useOnSelectedYear = props => {
 export const useOnSelectGame = ({ selectedGameId, setVideoScreenState }) => {
   useEffect(
     () => {
-      debugger;
       if (selectedGameId) {
         setVideoScreenState({ isVideosScreenVisible: true, vods: [] });
         getVods(selectedGameId).then(vods => {
