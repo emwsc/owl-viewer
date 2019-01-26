@@ -10,7 +10,7 @@ const App = () => {
     <React.Fragment>
       <StyledGlobalStyle />
       <TopMenu />
-      <Route path="/" exact component={Schedule} />
+      <Route path="/" exact component={Schedule} />  
     </React.Fragment>
   );
 };

@@ -6,6 +6,7 @@ import Filters from "./Filters";
 import { initialState, NOT_FOUND_SCHEDULE_MSG } from "./constants";
 import Videos from "./Videos";
 import { Transition } from "react-spring";
+import query from "query-string";
 
 const ScheduleLayout = React.memo(props => {
   const { selectedStage, stages, selectedTeams, setSelectedGameId } = props;
@@ -24,10 +25,12 @@ const ScheduleLayout = React.memo(props => {
   );
 }, areEqualStages);
 
-const Schedule = () => {
+const Schedule = props => {
+  const { location } = props;
+  const qsParams = query.parse(location.search);
   const [selectedStage, setSelectedStage] = useState(null);
   const [selectedTeams, setSelectedTeams] = useState([]);
-  const [selectedGameId, setSelectedGameId] = useState(null);
+  const [selectedGameId, setSelectedGameId] = useState(qsParams.match);
   const [videoScreen, setVideoScreenState] = useState({
     vods: [],
     isVideosScreenVisible: false

@@ -77,11 +77,22 @@ export const useOnSelectedYear = props => {
 export const useOnSelectGame = ({ selectedGameId, setVideoScreenState }) => {
   useEffect(
     () => {
+      if (selectedGameId)
+        window.history.pushState(null, null, `/?match=${selectedGameId}`);
+      else {
+        window.history.pushState(null, null, "/");
+        document.title = "Full OWL schedule | OWL Viewer";
+      }
+
       if (selectedGameId) {
         setVideoScreenState({ isVideosScreenVisible: true, vods: [] });
-        getVods(selectedGameId).then(vods =>
-          setVideoScreenState({ isVideosScreenVisible: true, vods })
-        );
+        getVods(selectedGameId).then(vods => {
+          const fullMatch = vods.find(vod => vod.title.includes("Full"));
+          if (fullMatch) document.title = fullMatch.title + " | OWL Viewer";
+          else if (vods && vods.length > 0)
+            document.title = vods[0].title + " | OWL Viewer";
+          setVideoScreenState({ isVideosScreenVisible: true, vods });
+        });
       }
     },
     [selectedGameId]

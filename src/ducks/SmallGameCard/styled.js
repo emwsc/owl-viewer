@@ -48,7 +48,7 @@ export const StyledButtonsContainer = styled.div`
   cursor: pointer;
 `;
 
-export const StyledTwitchIcon = styled.i`
+export const StyledVODIcon = styled.i`
   color: ${() => PLUMP_PURPLE};
 `;
 

@@ -4,7 +4,7 @@ import {
   StyledTeamLogo,
   StyledTeamContainer,
   StyledButtonsContainer,
-  StyledTwitchIcon,
+  StyledVODIcon,
   StyledScore,
   StyledTeamName,
   StyledInfoContainer
@@ -50,7 +50,10 @@ const SmallGameCard = props => {
       changeTeamsVisibility(!isTeamsVisible);
       return;
     }
-    //if (setSelectedGameId) setSelectedGameId(game.id);
+  }
+
+  function onSelectGameClick() {
+    setSelectedGameId(game.id);
   }
 
   return (
@@ -100,9 +103,9 @@ const SmallGameCard = props => {
               />
             </div>
             <div>
-              <StyledTwitchIcon
-                onClick={() => setSelectedGameId(game.id)}
-                title="Open VOD if available"
+              <StyledVODIcon
+                onClick={onSelectGameClick}
+                title="Open VODs if available"
                 className="fas fa-video"
               />
             </div>
