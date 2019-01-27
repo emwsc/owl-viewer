@@ -30,3 +30,5 @@ firebase.json
 /.firebase
 
 /src/firebase/config.js
+
+/functions/node_modules
