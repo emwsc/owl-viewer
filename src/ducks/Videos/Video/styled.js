@@ -5,6 +5,7 @@ export const StyledVideo = styled.div`
   margin-bottom: 10px;
   text-align: left;
   cursor: pointer;
+  font-size: 14px;
 `;
 
 export const StyledThumbnail = styled.img`

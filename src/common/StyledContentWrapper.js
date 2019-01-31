@@ -13,4 +13,8 @@ export const StyledContentWrapper = styled.div`
   @media (max-width: 755px) {
     max-width: 500px;
   }
+
+  @media (max-width: 555px) {
+    max-width: 265px;
+  }
 `;

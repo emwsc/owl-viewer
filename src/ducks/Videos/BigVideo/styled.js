@@ -13,6 +13,7 @@ export const StyledThumbnail = styled.img`
   height: 128px;
   margin: 0px 20px 10px;
   border-radius: 5px;
+  box-shadow: 0px 4px 8px 0px rgba(50, 50, 50, 0.75);
 `;
 
 export const StyledTitle = styled.div`

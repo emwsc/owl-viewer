@@ -76,7 +76,7 @@ export const StyledRevealArrow = styled.span`
   margin-right: 5px;
   transition: all 0.25s ease;
   display: inline-block;
-  transform: ${props => (props.isExpanded ? "rotate(-90deg)" : "rotate(0deg)")};
+  transform: ${props => (!props.isExpanded ? "rotate(-90deg)" : "rotate(0deg)")};
 `;
 
 export const StyledContainer = styled.div`

@@ -5,7 +5,12 @@ import { TYPES } from "../constants";
 
 const BigVideo = ({ id, title, thumbnail, label, type, url }) => {
   return (
-    <StyledVideo title="Click to open video" onClick={() => type===TYPES.MLG ? openGameVOD(id) : window.open(url, "_blank")}>
+    <StyledVideo
+      title={"Click to open VOD " + title}
+      onClick={() =>
+        type === TYPES.MLG ? openGameVOD(id) : window.open(url, "_blank")
+      }
+    >
       <StyledThumbnail src={thumbnail} />
       <StyledTitle>
         {label} • {title}
