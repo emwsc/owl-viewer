@@ -72,6 +72,7 @@ const SmallGameCard = props => {
   };
 
   function handleOnCardClick() {
+    if(nowDate < game.startDateObj) return;
     if (!isTeamsVisible) {
       changeTeamsVisibility(!isTeamsVisible);
       return;
