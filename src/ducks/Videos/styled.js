@@ -71,3 +71,14 @@ export const StyledMLG = styled.img`
 export const StyledTwichIcon = styled.i`
   font-size: 18px;
 `;
+
+export const StyledRevealArrow = styled.span`
+  margin-right: 5px;
+  transition: all 0.25s ease;
+  display: inline-block;
+  transform: ${props => (props.isExpanded ? "rotate(-90deg)" : "rotate(0deg)")};
+`;
+
+export const StyledContainer = styled.div`
+  margin: 0px 20px;
+`;

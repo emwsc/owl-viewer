@@ -9,8 +9,8 @@ export function openGameVOD(videoId) {
 
 export function getRevealText(isExpanded) {
   return isExpanded
-    ? "▼ Click to hide other videos"
-    : "▲ Click to show other videos";
+    ? "Click to hide other videos"
+    : "Click to show other videos";
 }
 
 export async function getMatchInfo(matchId) {

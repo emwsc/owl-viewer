@@ -5,7 +5,9 @@ import {
   StyledReveal,
   StyledBackground,
   StyledMLG,
-  StyledTwichIcon
+  StyledTwichIcon,
+  StyledRevealArrow,
+  StyledContainer
 } from "./styled";
 import Video from "./Video";
 import BigVideo from "./BigVideo";
@@ -16,9 +18,12 @@ import { TYPES } from "./constants";
 
 const OtherVideos = ({ setIsExpanded, isExpanded, vods, fullMatchVideo }) => {
   return (
-    <React.Fragment>
+    <StyledContainer>
       <StyledReveal onClick={() => setIsExpanded(!isExpanded)}>
-        {getRevealText(isExpanded)}
+        <React.Fragment>
+          <StyledRevealArrow isExpanded={isExpanded}>▼</StyledRevealArrow>
+          {getRevealText(isExpanded)}
+        </React.Fragment>
       </StyledReveal>
       <Transition
         items={isExpanded}
@@ -39,23 +44,25 @@ const OtherVideos = ({ setIsExpanded, isExpanded, vods, fullMatchVideo }) => {
           ))
         }
       </Transition>
-    </React.Fragment>
+    </StyledContainer>
   );
 };
 
 const AllVideos = ({ vods, fullMatchVideo }) => {
   return (
-    <Spring from={{ opacity: 0 }} to={{ opacity: 1 }}>
-      {props => (
-        <div style={props}>
-          {vods
-            .filter(vod => !fullMatchVideo || vod.id !== fullMatchVideo.id)
-            .map(vod => (
-              <Video key={vod.id} {...vod} />
-            ))}
-        </div>
-      )}
-    </Spring>
+    <StyledContainer>
+      <Spring from={{ opacity: 0 }} to={{ opacity: 1 }}>
+        {props => (
+          <div style={props}>
+            {vods
+              .filter(vod => !fullMatchVideo || vod.id !== fullMatchVideo.id)
+              .map(vod => (
+                <Video key={vod.id} {...vod} />
+              ))}
+          </div>
+        )}
+      </Spring>
+    </StyledContainer>
   );
 };
 
