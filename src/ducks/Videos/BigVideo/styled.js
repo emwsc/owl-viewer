@@ -1,9 +1,11 @@
 import styled from "styled-components";
 
 export const StyledVideo = styled.div`
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   cursor: pointer;
   font-weight: bold;
+  min-width: 256px;
+  min-height: 128px;
 `;
 
 export const StyledThumbnail = styled.img`
@@ -14,5 +16,5 @@ export const StyledThumbnail = styled.img`
 `;
 
 export const StyledTitle = styled.div`
-  margin: 0px 20px 20px;
+  margin: 0px 20px;
 `;

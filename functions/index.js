@@ -56,18 +56,19 @@ exports.schedulecron = functions.https.onRequest((req, res) => {
             })
           };
         });
-        const db = admin.firestore();
+        //const db = admin.firestore();
         const schedule = {
           year: 2019,
           lastUpdateTime,
           stages: stages
         };
-        db.collection("schedule")
-          .doc("2019")
-          .update(schedule)
-          .then(doc => {
-            res.status(200).send(lastUpdateTime);
-          });
+        debugger;
+        // db.collection("schedule")
+        //   .doc("2019")
+        //   .update(schedule)
+        //   .then(doc => {
+        //     res.status(200).send(lastUpdateTime);
+        //   });
       });
   });
 });

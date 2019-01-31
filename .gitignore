@@ -32,3 +32,5 @@ firebase.json
 /src/firebase/config.js
 
 /functions/node_modules
+
+doc.md

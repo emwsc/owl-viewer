@@ -21,7 +21,11 @@ const PastGameButtons = ({
   <StyledButtonsContainer>
     <div>
       <i
-        onClick={() => changeScoreVisibility(!isScoreVisible)}
+        onClick={event => {
+          event.preventDefault();
+          event.stopPropagation();
+          changeScoreVisibility(!isScoreVisible);
+        }}
         title={
           isScoreVisible
             ? "Click to hide score"
@@ -72,6 +76,7 @@ const SmallGameCard = props => {
       changeTeamsVisibility(!isTeamsVisible);
       return;
     }
+    onSelectGameClick();
   }
 
   function onSelectGameClick() {
@@ -80,7 +85,11 @@ const SmallGameCard = props => {
   }
 
   return (
-    <StyledSmallGameCard highlight={highlight} onClick={handleOnCardClick}>
+    <StyledSmallGameCard
+      showPointer={nowDate > game.startDateObj}
+      highlight={highlight}
+      onClick={handleOnCardClick}
+    >
       <StyledInfoContainer>
         {!isTeamsVisible && (
           <StyledTeamContainer>
