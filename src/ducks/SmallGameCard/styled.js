@@ -11,7 +11,7 @@ export const StyledSmallGameCard = styled.div`
   margin: 5px 5px 5px 0px;
   font-size: 14px;
   padding: 5px;
-  cursor: pointer;
+  cursor: ${props => props.showPointer && "pointer"};
   height: 50px;
 `;
 
@@ -45,7 +45,6 @@ export const StyledButtonsContainer = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  cursor: pointer;
 `;
 
 export const StyledVODIcon = styled.i`

@@ -4,7 +4,7 @@ import { Stage } from "./Stage/index";
 import { StyledSchedule, StyledLoading } from "./styled";
 import Filters from "./Filters";
 import { initialState, NOT_FOUND_SCHEDULE_MSG } from "./constants";
-import Videos from "./Videos";
+import Videos from "../Videos";
 import { Transition } from "react-spring";
 import query from "query-string";
 
@@ -104,6 +104,7 @@ const Schedule = props => {
               toggle &&
               (props => (
                 <Videos
+                  matchId={qsParams.match}
                   style={props}
                   vods={videoScreen.vods}
                   clearVods={clearVods}
