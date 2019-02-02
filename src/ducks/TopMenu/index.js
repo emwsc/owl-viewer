@@ -7,6 +7,7 @@ import {
   StyledItemIcon
 } from "./styling";
 import { areSchedulesEqual } from "../../utils/utils";
+import ChannelIncicator from "../ChannelIncicator";
 
 const TopMenu = React.memo(
   () => (
@@ -20,6 +21,7 @@ const TopMenu = React.memo(
             Full schedule
           </StyledItem>
         </Link>
+        <ChannelIncicator />
         {/* <Link to="/teams">
           <StyledItem>By teams</StyledItem>
         </Link> */}
