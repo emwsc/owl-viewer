@@ -83,10 +83,18 @@ const MLGIcon = () => <StyledMLG src="MLG_2017.svg" alt="MLG" />;
 const TwitchIcon = () => <StyledTwichIcon className="fab fa-twitch" />;
 
 const Videos = ({ style, vods, clearVods, matchId }) => {
-  const fullMatchVideo = vods.find(video => video.title.includes("Full"));
-  const isExpandable = vods && vods.length > 0 && fullMatchVideo;
   const [isExpanded, setIsExpanded] = useState(false);
   const [matchInfo, setMatchInfo] = useState(null);
+
+  const fullMatchVideo = vods.find(video => video.title.includes("Full"));
+  const isExpandable =
+    vods &&
+    vods.length > 0 &&
+    (fullMatchVideo ||
+      (matchInfo &&
+        matchInfo.id &&
+        matchInfo.vods &&
+        matchInfo.vods.length > 0));
 
   useEffect(() => {
     if (matchId) getMatchInfo(matchId).then(setMatchInfo);

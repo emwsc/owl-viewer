@@ -1,4 +1,5 @@
 import styled, { keyframes } from "styled-components";
+import { PLUMP_PURPLE } from "../../utils/constants";
 
 const Live = keyframes`
     0% {
@@ -23,10 +24,14 @@ export const StyledLive = styled.span`
   display: inline-block;
   width: 10px;
   height: 10px;
-  margin: 0 4px 0 5px;
+  margin: 0 10px;
   border-radius: 50%;
   background: #f44336;
   cursor: pointer;
   box-shadow: 0 0 0 rgba(244, 67, 54, 0.58);
   animation: ${Live} 1.5s infinite;
+`;
+
+export const StyledTwichIcon = styled.i`
+  color: ${PLUMP_PURPLE};
 `;

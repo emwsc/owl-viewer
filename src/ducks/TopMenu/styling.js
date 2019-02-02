@@ -17,6 +17,7 @@ export const StyledTopMenuItemsWrapper = styled(StyledContentWrapper)`
   display: flex;
   align-items: center;
   height: 100%;
+  /* justify-content: space-between; */
 `;
 
 export const StyledItem = styled.div`
@@ -29,4 +30,9 @@ export const StyledItem = styled.div`
 export const StyledItemIcon = styled.span`
   margin-right: 5px;
   color: ${() => PLUMP_PURPLE};
+`;
+
+export const StyledAboutLink = styled.span`
+  flex-grow: 2;
+  text-align: right;
 `;
