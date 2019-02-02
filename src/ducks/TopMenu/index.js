@@ -4,7 +4,8 @@ import {
   StyledTopMenu,
   StyledItem,
   StyledTopMenuItemsWrapper,
-  StyledItemIcon
+  StyledItemIcon,
+  StyledAboutLink
 } from "./styling";
 import { areSchedulesEqual } from "../../utils/utils";
 import ChannelIncicator from "../ChannelIncicator";
@@ -22,9 +23,11 @@ const TopMenu = React.memo(
           </StyledItem>
         </Link>
         <ChannelIncicator />
-        {/* <Link to="/teams">
-          <StyledItem>By teams</StyledItem>
-        </Link> */}
+        <StyledAboutLink>
+          <Link to="/about">
+            <StyledItem>About</StyledItem>
+          </Link>
+        </StyledAboutLink>
       </StyledTopMenuItemsWrapper>
     </StyledTopMenu>
   ),

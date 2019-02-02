@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { checkIsOWLChannelOnline } from "./utils";
 import { OWL_TWICH_CHANNEL_LINK } from "./constants";
-import { StyledTwitchLink, StyledLive } from "./styled";
+import { StyledTwitchLink, StyledLive, StyledTwichIcon } from "./styled";
 
 const ChannelIncicator = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -18,13 +18,14 @@ const ChannelIncicator = () => {
   if (isLive)
     return (
       <StyledTwitchLink href={OWL_TWICH_CHANNEL_LINK} target="_blank">
-        <StyledLive /> Overwatch League Twitch
+        <StyledLive />
+        <StyledTwichIcon className="fab fa-twitch" /> Overwatch League Twitch
       </StyledTwitchLink>
     );
 
   return (
     <StyledTwitchLink href={OWL_TWICH_CHANNEL_LINK} target="_blank">
-      Overwatch League Twitch
+      <StyledTwichIcon className="fab fa-twitch" /> Overwatch League Twitch
     </StyledTwitchLink>
   );
 };
