@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { NICE_BLACK, PLUMP_PURPLE } from "../../utils/constants";
 import { StyledContentWrapper } from "../../common/StyledContentWrapper";
 
-export const StyledTopMenu = styled.div`
+export const StyledTopMenu = styled.header`
   width: 100%;
   /* height: 100%; */
   position: fixed;
@@ -10,6 +10,9 @@ export const StyledTopMenu = styled.div`
   background: ${() => NICE_BLACK};
   color: white;
   top: 0;
+  @media (max-width: 555px) {
+    font-size: 14px;
+  }
 `;
 
 export const StyledTopMenuItemsWrapper = styled(StyledContentWrapper)`
@@ -33,6 +36,7 @@ export const StyledItemIcon = styled.span`
 `;
 
 export const StyledAboutLink = styled.span`
+  margin-right: 15px;
   flex-grow: 2;
   text-align: right;
 `;

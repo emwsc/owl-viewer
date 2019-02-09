@@ -15,6 +15,7 @@ export const StyledContentWrapper = styled.div`
   }
 
   @media (max-width: 555px) {
-    max-width: 265px;
+    max-width: 100%;
+    margin: 0px 10px;
   }
 `;

@@ -13,7 +13,7 @@ const About = () => {
         send me email to contact@owlv.space
       </article>
       <article>
-        OW icon in favicone - <a href="ic8.link/43388">ic8.link/43388</a>
+        OW icon in favicone - <a href="http://ic8.link/43388">ic8.link/43388</a>
       </article>
       <br />
       <article>Cheers ✌️</article>

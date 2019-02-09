@@ -17,14 +17,22 @@ const ChannelIncicator = () => {
   if (isLoading) return null;
   if (isLive)
     return (
-      <StyledTwitchLink href={OWL_TWICH_CHANNEL_LINK} target="_blank">
+      <StyledTwitchLink
+        rel="noreferrer"
+        href={OWL_TWICH_CHANNEL_LINK}
+        target="_blank"
+      >
         <StyledLive />
         <StyledTwichIcon className="fab fa-twitch" /> Overwatch League Twitch
       </StyledTwitchLink>
     );
 
   return (
-    <StyledTwitchLink href={OWL_TWICH_CHANNEL_LINK} target="_blank">
+    <StyledTwitchLink
+      rel="noreferrer"
+      href={OWL_TWICH_CHANNEL_LINK}
+      target="_blank"
+    >
       <StyledTwichIcon className="fab fa-twitch" /> Overwatch League Twitch
     </StyledTwitchLink>
   );

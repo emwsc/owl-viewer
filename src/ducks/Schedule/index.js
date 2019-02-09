@@ -86,7 +86,7 @@ const Schedule = props => {
   }
 
   return (
-    <React.Fragment>
+    <main>
       {state.isLoading && <StyledLoading>Loading...</StyledLoading>}
       {!state.isLoading && state.schedule && state.schedule.stages && (
         <React.Fragment>
@@ -117,7 +117,7 @@ const Schedule = props => {
       {!state.isLoading && !state.schedule.stages && (
         <div>{NOT_FOUND_SCHEDULE_MSG}</div>
       )}
-    </React.Fragment>
+    </main>
   );
 };
 
