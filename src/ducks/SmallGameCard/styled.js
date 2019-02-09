@@ -13,6 +13,10 @@ export const StyledSmallGameCard = styled.div`
   padding: 5px;
   cursor: ${props => props.showPointer && "pointer"};
   height: 50px;
+  min-width: 225px;
+  @media (max-width: 555px) {
+    width: 100vw;
+  }
 `;
 
 export const StyledInfoContainer = styled.div`
