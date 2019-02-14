@@ -1,5 +1,11 @@
-export function datediff(first, second) {
-  return Math.round((second - first) / (1000 * 60 * 60 * 24));
+export function datediff(moment, first, second) {
+  const m1 = moment(first);
+  m1.startOf("day");
+  const m2 = moment(second);
+  m2.startOf("day");
+  const inDays = Math.abs(m1.diff(m2, "days"));
+  if (inDays >= 1) return inDays + "d";
+  return moment(second).format("hh:mm");
 }
 
 export function isTeamsVisibleByDefault(bracket) {
