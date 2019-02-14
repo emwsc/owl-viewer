@@ -11,6 +11,9 @@ import {
 } from "./styled";
 import { datediff, isTeamsVisibleByDefault } from "./utils";
 import { TOTAL_SCORE_LESS_THEN } from "./constants";
+import moment from "moment";
+
+moment().format();
 
 const nowDate = new Date();
 
@@ -131,7 +134,9 @@ const SmallGameCard = props => {
           />
         )}
         {nowDate < game.startDateObj && (
-          <div>{datediff(nowDate, game.startDateObj)}d</div>
+          <div title={moment(game.startDateObj).format("hh:mm")}>
+            {datediff(moment, nowDate, game.startDateObj)}
+          </div>
         )}
         {isTeamsVisible &&
           nowDate >= game.startDateObj &&
