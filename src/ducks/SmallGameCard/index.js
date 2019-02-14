@@ -134,7 +134,7 @@ const SmallGameCard = props => {
           />
         )}
         {nowDate < game.startDateObj && (
-          <div title={moment(game.startDateObj).format("hh:mm")}>
+          <div title={moment(game.startDateObj).format("HH:mm")}>
             {datediff(moment, nowDate, game.startDateObj)}
           </div>
         )}
