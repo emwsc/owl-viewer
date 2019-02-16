@@ -1,0 +1,129 @@
+$color-fill: #212121;
+$color-bg: #FDD835;
+
+$animation-section: 100 / 20;
+
+/**/
+.hex-loader {}
+.hex-loader__tl {
+    animation-name: zoom-tl;
+}
+.hex-loader__tr {
+    animation-name: zoom-tr;
+}
+.hex-loader__l {
+    animation-name: zoom-l;
+}
+.hex-loader__c {
+    animation-name: zoom-c;
+}
+.hex-loader__r {
+    animation-name: zoom-r;
+}
+.hex-loader__bl {
+    animation-name: zoom-bl;
+}
+.hex-loader__br {
+    animation-name: zoom-br;
+}
+
+/**/
+.hex-loader__tl,
+.hex-loader__tr,
+.hex-loader__l,
+.hex-loader__c,
+.hex-loader__r,
+.hex-loader__bl,
+.hex-loader__br {
+    fill: $color-fill;
+    
+    transform: scale3d(0, 0, 0);
+    transform-origin: 50% 50%;
+    
+    animation-duration: 4000ms;
+    animation-iteration-count: infinite;
+}
+
+@keyframes zoom-tl {
+    0% {
+        transform: scale3d(0, 0, 0);
+    }
+    #{$animation-section * 3}%, #{$animation-section * 10}% {
+        transform: scale3d(1, 1, 0);
+    }
+    #{$animation-section * 13}%, 100% {
+        transform: scale3d(0, 0, 0);
+    }
+}
+
+@keyframes zoom-tr {
+    0%, #{$animation-section}% {
+        transform: scale3d(0, 0, 0);
+    }
+    #{$animation-section * 4}%, #{$animation-section * 11}% {
+        transform: scale3d(1, 1, 0);
+    }
+    #{$animation-section * 14}%, 100% {
+        transform: scale3d(0, 0, 0);
+    }
+}
+
+@keyframes zoom-r {
+    0%, #{$animation-section * 2}% {
+        transform: scale3d(0, 0, 0);
+    }
+    #{$animation-section * 5}%, #{$animation-section * 12}% {
+        transform: scale3d(1, 1, 0);
+    }
+    #{$animation-section * 15}%, 100% {
+        transform: scale3d(0, 0, 0);
+    }
+}
+
+@keyframes zoom-br {
+    0%, #{$animation-section * 3}% {
+        transform: scale3d(0, 0, 0);
+    }
+    #{$animation-section * 6}%, #{$animation-section * 13}% {
+        transform: scale3d(1, 1, 0);
+    }
+    #{$animation-section * 16}%, 100% {
+        transform: scale3d(0, 0, 0);
+    }
+}
+
+@keyframes zoom-bl {
+    0%, #{$animation-section * 4}% {
+        transform: scale3d(0, 0, 0);
+    }
+    #{$animation-section * 7}%, #{$animation-section * 14}% {
+        transform: scale3d(1, 1, 0);
+    }
+    #{$animation-section * 17}%, 100% {
+        transform: scale3d(0, 0, 0);
+    }
+}
+
+@keyframes zoom-l {
+    0%, #{$animation-section * 5}% {
+        transform: scale3d(0, 0, 0);
+    }
+    #{$animation-section * 8}%, #{$animation-section * 15}% {
+        transform: scale3d(1, 1, 0);
+    }
+    #{$animation-section * 18}%, 100% {
+        transform: scale3d(0, 0, 0);
+    }
+}
+
+@keyframes zoom-c {
+    0%, #{$animation-section * 6}% {
+        transform: scale3d(0, 0, 0);
+    }
+    #{$animation-section * 9}%, #{$animation-section * 16}% {
+        transform: scale3d(1, 1, 0);
+    }
+    #{$animation-section * 19}%, 100% {
+        transform: scale3d(0, 0, 0);
+    }
+}

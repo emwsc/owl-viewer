@@ -5,7 +5,7 @@ export function datediff(moment, first, second) {
   m2.startOf("day");
   const inDays = Math.abs(m1.diff(m2, "days"));
   if (inDays >= 1) return inDays + "d";
-  return moment(second).format("hh:mm");
+  return moment(second).format("HH:mm");
 }
 
 export function isTeamsVisibleByDefault(bracket) {

@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { areEqualStages, useOnSelectedYear, useOnSelectGame } from "./utils";
+import {
+  areEqualStages,
+  useOnSelectedYear,
+  useOnSelectGame,
+  getRandomLoadingPhrase
+} from "./utils";
 import { Stage } from "./Stage/index";
 import { StyledSchedule, StyledLoading } from "./styled";
 import Filters from "./Filters";
@@ -7,6 +12,7 @@ import { initialState, NOT_FOUND_SCHEDULE_MSG } from "./constants";
 import Videos from "../Videos";
 import { Transition } from "react-spring";
 import query from "query-string";
+import OverwatchLoading from "../OverwatchLoading";
 
 const ScheduleLayout = React.memo(props => {
   const { selectedStage, stages, selectedTeams, setSelectedGameId } = props;
@@ -87,7 +93,11 @@ const Schedule = props => {
 
   return (
     <main>
-      {state.isLoading && <StyledLoading>Loading...</StyledLoading>}
+      {state.isLoading && (
+        <StyledLoading>
+          <OverwatchLoading /> <span>{getRandomLoadingPhrase()}</span>
+        </StyledLoading>
+      )}
       {!state.isLoading && state.schedule && state.schedule.stages && (
         <React.Fragment>
           <Filters {...filterProps} />
