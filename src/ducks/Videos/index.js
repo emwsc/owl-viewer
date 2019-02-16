@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
-  StyledVideosSection,
-  StyledClose,
   StyledReveal,
-  StyledBackground,
   StyledMLG,
   StyledTwichIcon,
   StyledRevealArrow,
@@ -78,11 +75,11 @@ const FullMatch = ({ fullMatchVideo }) => {
   );
 };
 
-const MLGIcon = () => <StyledMLG src="MLG_2017.svg" alt="MLG" />;
+const MLGIcon = () => <StyledMLG src="/MLG_2017.svg" alt="MLG" />;
 
 const TwitchIcon = () => <StyledTwichIcon className="fab fa-twitch" />;
 
-const Videos = ({ style, vods, clearVods, matchId }) => {
+const Videos = ({ vods, matchId }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [matchInfo, setMatchInfo] = useState(null);
 
@@ -102,50 +99,46 @@ const Videos = ({ style, vods, clearVods, matchId }) => {
 
   return (
     <React.Fragment>
-      <StyledBackground style={style} onClick={clearVods} />
-      <StyledVideosSection style={style}>
-        <StyledClose onClick={() => clearVods()}>×</StyledClose>
-        {fullMatchVideo && matchInfo && (
-          <FullMatch
-            fullMatchVideo={{
-              ...fullMatchVideo,
-              label: <MLGIcon />,
-              type: TYPES.MLG,
-              thumbnail:
-                matchInfo &&
-                matchInfo.vods &&
-                matchInfo.vods.length > 0 &&
-                matchInfo.vods[0].thumbnails.custom
-                  ? matchInfo.vods[0].thumbnails.custom
-                  : fullMatchVideo.thumbnail
-            }}
-          />
-        )}
-        {matchInfo && matchInfo.vods && matchInfo.vods.length > 0 && (
-          <FullMatch
-            fullMatchVideo={{
-              ...matchInfo.vods[0],
-              label: <TwitchIcon />,
-              type: TYPES.TWITCH,
-              thumbnail: matchInfo.vods[0].thumbnails.custom
+      {matchInfo && matchInfo.id && <MatchInfo {...matchInfo} />}
+      {fullMatchVideo && matchInfo && (
+        <FullMatch
+          fullMatchVideo={{
+            ...fullMatchVideo,
+            label: <MLGIcon />,
+            type: TYPES.MLG,
+            thumbnail:
+              matchInfo &&
+              matchInfo.vods &&
+              matchInfo.vods.length > 0 &&
+              matchInfo.vods[0].thumbnails.custom
                 ? matchInfo.vods[0].thumbnails.custom
-                : matchInfo.vods[0].thumbnails.generated
-            }}
-          />
-        )}
-        {matchInfo && matchInfo.id && <MatchInfo {...matchInfo} />}
-        {!isExpandable && matchInfo && vods.length > 0 && (
-          <AllVideos vods={vods} fullMatchVideo={fullMatchVideo} />
-        )}
-        {isExpandable && matchInfo && (
-          <OtherVideos
-            setIsExpanded={setIsExpanded}
-            isExpanded={isExpanded}
-            vods={vods}
-            fullMatchVideo={fullMatchVideo}
-          />
-        )}
-      </StyledVideosSection>
+                : fullMatchVideo.thumbnail
+          }}
+        />
+      )}
+      {matchInfo && matchInfo.vods && matchInfo.vods.length > 0 && (
+        <FullMatch
+          fullMatchVideo={{
+            ...matchInfo.vods[0],
+            label: <TwitchIcon />,
+            type: TYPES.TWITCH,
+            thumbnail: matchInfo.vods[0].thumbnails.custom
+              ? matchInfo.vods[0].thumbnails.custom
+              : matchInfo.vods[0].thumbnails.generated
+          }}
+        />
+      )}
+      {!isExpandable && matchInfo && vods.length > 0 && (
+        <AllVideos vods={vods} fullMatchVideo={fullMatchVideo} />
+      )}
+      {isExpandable && matchInfo && (
+        <OtherVideos
+          setIsExpanded={setIsExpanded}
+          isExpanded={isExpanded}
+          vods={vods}
+          fullMatchVideo={fullMatchVideo}
+        />
+      )}
     </React.Fragment>
   );
 };

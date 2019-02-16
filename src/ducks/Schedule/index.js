@@ -9,7 +9,7 @@ import { Stage } from "./Stage/index";
 import { StyledSchedule, StyledLoading } from "./styled";
 import Filters from "./Filters";
 import { initialState, NOT_FOUND_SCHEDULE_MSG } from "./constants";
-import Videos from "../Videos";
+import SideScreenVideos from "../SideScreenVideos";
 import { Transition } from "react-spring";
 import query from "query-string";
 import OverwatchLoading from "../OverwatchLoading";
@@ -113,7 +113,7 @@ const Schedule = props => {
             {toggle =>
               toggle &&
               (props => (
-                <Videos
+                <SideScreenVideos
                   matchId={qsParams.match}
                   style={props}
                   vods={videoScreen.vods}

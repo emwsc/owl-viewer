@@ -12,6 +12,7 @@ export const StyledTopMenu = styled.header`
   top: 0;
   @media (max-width: 555px) {
     font-size: 14px;
+    width: auto;
   }
 `;
 

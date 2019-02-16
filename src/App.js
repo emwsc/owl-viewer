@@ -5,6 +5,7 @@ import { StyledGlobalStyle } from "./theme/globalStyle";
 import { TopMenu } from "./ducks/TopMenu/index";
 import Schedule from "./ducks/Schedule";
 import About from "./ducks/About";
+import Match from "./ducks/Match";
 
 const LazyAbout = React.lazy(() => import("./ducks/About"));
 
@@ -24,6 +25,7 @@ const App = () => {
         <React.Fragment>
           <TopMenu />
           <Route path="/" exact component={Schedule} />
+          <Route path="/matches/:matchId" exact component={Match} />
           <Route path="/about" exact component={SuspendedAbout} />
         </React.Fragment>
       </Router>
