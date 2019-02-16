@@ -65,3 +65,7 @@ export const StyledTeamName = styled.span`
   padding: ${props => (props.highlight ? "0px 5px" : "0px")};
   background: ${props => (props.highlight ? props.primaryColor : "white")};
 `;
+
+export const StyledWidth = styled.div`
+  width: ${props => props.width};
+`;

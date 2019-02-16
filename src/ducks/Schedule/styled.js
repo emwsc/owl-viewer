@@ -14,4 +14,8 @@ export const StyledLoading = styled(StyledContentWrapper)`
   justify-content: space-evenly;
   padding: 10px;
   width: 250px;
+  
+  @media (max-width: 555px) {
+    margin-top: 85px;
+  }
 `;

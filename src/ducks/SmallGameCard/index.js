@@ -7,7 +7,8 @@ import {
   StyledVODIcon,
   StyledScore,
   StyledTeamName,
-  StyledInfoContainer
+  StyledInfoContainer,
+  StyledWidth
 } from "./styled";
 import { datediff, isTeamsVisibleByDefault } from "./utils";
 import { TOTAL_SCORE_LESS_THEN } from "./constants";
@@ -50,7 +51,7 @@ const PastGameButtons = ({
 
 const Teams = ({ game, teamOneProps, teamTwoProps }) => {
   return (
-    <div>
+    <StyledWidth width="180px">
       <StyledTeamContainer {...teamOneProps}>
         <StyledTeamLogo logoUrl={game.competitors[0].logo} />
         <StyledTeamName {...teamOneProps}>
@@ -63,7 +64,7 @@ const Teams = ({ game, teamOneProps, teamTwoProps }) => {
           {game.competitors[1].name}
         </StyledTeamName>
       </StyledTeamContainer>
-    </div>
+    </StyledWidth>
   );
 };
 
