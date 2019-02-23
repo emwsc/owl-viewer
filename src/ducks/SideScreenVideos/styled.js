@@ -27,6 +27,9 @@ export const StyledClose = styled.div`
   border-bottom-left-radius: 10px;
   color: white;
   cursor: pointer;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+  border-left: 1px solid white;
 `;
 
 export const StyledMatchWindowOpen = styled.a`
@@ -45,6 +48,9 @@ export const StyledMatchWindowOpen = styled.a`
   color: white;
   cursor: pointer;
   top: 60px;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+  border-left: 1px solid white;
 `;
 
 export const StyledBackground = styled.div`

@@ -86,7 +86,7 @@ const Videos = ({ vods, matchId }) => {
   const fullMatchVideo = vods.find(video => video.title.includes("Full"));
   const isExpandable =
     vods &&
-    vods.length > 0 &&
+    vods.length > 1 &&
     (fullMatchVideo ||
       (matchInfo &&
         matchInfo.id &&
@@ -116,18 +116,22 @@ const Videos = ({ vods, matchId }) => {
           }}
         />
       )}
-      {matchInfo && matchInfo.vods && matchInfo.vods.length > 0 && (
-        <FullMatch
-          fullMatchVideo={{
-            ...matchInfo.vods[0],
-            label: <TwitchIcon />,
-            type: TYPES.TWITCH,
-            thumbnail: matchInfo.vods[0].thumbnails.custom
-              ? matchInfo.vods[0].thumbnails.custom
-              : matchInfo.vods[0].thumbnails.generated
-          }}
-        />
-      )}
+      {matchInfo &&
+        matchInfo.vods &&
+        matchInfo.vods.length > 0 &&
+        matchInfo.vods.map(vod => (
+          <FullMatch
+            key={vod.id}
+            fullMatchVideo={{
+              ...vod,
+              label: <TwitchIcon />,
+              type: TYPES.TWITCH,
+              thumbnail: vod.thumbnails.custom
+                ? vod.thumbnails.custom
+                : vod.thumbnails.generated
+            }}
+          />
+        ))}
       {!isExpandable && matchInfo && vods.length > 0 && (
         <AllVideos vods={vods} fullMatchVideo={fullMatchVideo} />
       )}

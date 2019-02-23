@@ -9,11 +9,11 @@ export const StyledMatch = styled(StyledContentWrapper)`
 `;
 
 export const StyledMatchGrid = styled.div`
-  display: grid;
+  display: block;
   grid-template-columns: repeat(auto-fit, 300px);
   grid-template-rows: auto auto auto;
   margin: 0 auto;
-  width: 750px;
+  width: 500px;
   & > div:nth-child(1) {
     color: black;
     font-size: 21px;
@@ -24,7 +24,7 @@ export const StyledMatchGrid = styled.div`
     grid-column-start: 1;
     grid-column-end: 2;
   }
-  & > div:nth-child(2) {
+  /* & > div:nth-child(2) {
     grid-row-start: 2;
     grid-row-end: 2;
     grid-column-start: 1;
@@ -42,7 +42,7 @@ export const StyledMatchGrid = styled.div`
     grid-row-end: 3;
     grid-column-start: 1;
     grid-column-end: 2;
-  }
+  } */
   @media (max-width: 770px) {
     display: block;
     width: 100%;
@@ -50,6 +50,9 @@ export const StyledMatchGrid = styled.div`
     & > div:nth-child(1) {
       font-size: 16px;
       width: auto;
+    }
+    & > div:last-child {
+      max-width: 70vw;
     }
   }
 `;

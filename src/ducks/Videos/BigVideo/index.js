@@ -2,8 +2,9 @@ import React from "react";
 import { StyledVideo, StyledThumbnail, StyledTitle } from "./styled";
 import { openGameVOD } from "../utils";
 import { TYPES } from "../constants";
+import { getEmojiForLangCode } from "./utils";
 
-const BigVideo = ({ id, title, thumbnail, label, type, url }) => {
+const BigVideo = ({ id, title, thumbnail, label, type, url, langCode }) => {
   return (
     <StyledVideo
       title={"Click to open VOD " + title}
@@ -13,7 +14,7 @@ const BigVideo = ({ id, title, thumbnail, label, type, url }) => {
     >
       <StyledThumbnail src={thumbnail} />
       <StyledTitle>
-        {label} • {title}
+        {getEmojiForLangCode(langCode)} {label} • {title}
       </StyledTitle>
     </StyledVideo>
   );
