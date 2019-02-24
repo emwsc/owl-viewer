@@ -1,5 +1,5 @@
-import styled, { keyframes } from "styled-components";
-import { PLUMP_PURPLE } from "../../utils/constants";
+import styled, { keyframes } from 'styled-components';
+import { PLUMP_PURPLE } from '../../utils/constants';
 
 const Live = keyframes`
     0% {

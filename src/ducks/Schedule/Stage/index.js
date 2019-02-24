@@ -1,7 +1,7 @@
-import React from "react";
-import { StyledScheduleTitle, StyledStage } from "./styled";
-import { Week } from "./Week/index";
-import { checkIsPlayoffStage } from "./utils";
+import React from 'react';
+import { StyledScheduleTitle, StyledStage } from './styled';
+import { Week } from './Week/index';
+import { checkIsPlayoffStage } from './utils';
 
 const Stage = React.memo(({ stage, selectedTeams, setSelectedGameId }) => {
   const isPlayoffStage = checkIsPlayoffStage(stage.name);

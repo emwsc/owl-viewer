@@ -1,8 +1,10 @@
 import React from "react";
-import './styles.scss'
+import "./styles.scss";
+import { StyledLoaderContainer } from "./styled";
+import { getRandomLoadingPhrase } from "./utils";
 
-const OverwatchLoading = () => {
-  return (
+const OverwatchLoading = () => (
+  <StyledLoaderContainer>
     <svg
       className="hex-loader"
       viewBox="0 0 62 57"
@@ -40,8 +42,9 @@ const OverwatchLoading = () => {
         className="hex-loader__br"
         d="M 40.5288 36.0311 C 41.0292 35.7463 41.8404 35.7463 42.3408 36.0311 L 49.6592 40.1965 C 50.1596 40.4813 50.5652 41.1774 50.5652 41.7514 L 50.5652 50.0661 C 50.5652 50.6401 50.1596 51.3362 49.6592 51.6211 L 42.3408 55.7864 C 41.8404 56.0712 41.0292 56.0712 40.5288 55.7864 L 33.2103 51.6211 C 32.71 51.3362 32.3044 50.6401 32.3044 50.0661 L 32.3044 41.7514 C 32.3044 41.1774 32.71 40.4813 33.2103 40.1965 L 40.5288 36.0311 Z"
       />
-    </svg>
-  );
-};
+    </svg>{" "}
+    <span>{getRandomLoadingPhrase()}</span>
+  </StyledLoaderContainer>
+);
 
 export default OverwatchLoading;

@@ -1,6 +1,6 @@
-import React from "react";
-import Team from "./Team";
-import { StyledTeams } from "./styled";
+import React from 'react';
+import Team from './Team';
+import { StyledTeams } from './styled';
 
 const Teams = React.memo(({ teams, selectedTeams, setSelectedTeams }) => {
   function onTeamClick(teamId) {

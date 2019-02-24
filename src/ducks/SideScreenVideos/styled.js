@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { NICE_BLACK, FONT } from "../../utils/constants";
+import styled from 'styled-components';
+import { NICE_BLACK, FONT } from '../../utils/constants';
 
 export const StyledVideosSection = styled.div`
   position: fixed;
@@ -14,7 +14,7 @@ export const StyledVideosSection = styled.div`
 
 export const StyledClose = styled.div`
   background: gray;
-  width: 35px;
+  width: 34px;
   height: 35px;
   font-size: 40px;
   display: flex;
@@ -27,14 +27,14 @@ export const StyledClose = styled.div`
   border-bottom-left-radius: 10px;
   color: white;
   cursor: pointer;
-  border-top: 1px solid white;
-  border-bottom: 1px solid white;
-  border-left: 1px solid white;
+  border-top: 1px solid #f9f9f9;
+  border-bottom: 1px solid #f9f9f9;
+  border-left: 1px solid #f9f9f9;
 `;
 
 export const StyledMatchWindowOpen = styled.a`
   background: gray;
-  width: 35px;
+  width: 34px;
   height: 35px;
   font-size: 16px;
   display: flex;
@@ -48,9 +48,9 @@ export const StyledMatchWindowOpen = styled.a`
   color: white;
   cursor: pointer;
   top: 60px;
-  border-top: 1px solid white;
-  border-bottom: 1px solid white;
-  border-left: 1px solid white;
+  border-top: 1px solid #f9f9f9;
+  border-bottom: 1px solid #f9f9f9;
+  border-left: 1px solid #f9f9f9;
 `;
 
 export const StyledBackground = styled.div`
@@ -63,4 +63,10 @@ export const StyledBackground = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
   display: block;
   z-index: 9;
+`;
+
+export const StyledVideosContainer = styled.div`
+  overflow-y: auto;
+  height: 96vh;
+  overflow-x: hidden;
 `;

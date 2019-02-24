@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { getOwlTeams, getCachedOwlTeams, sortTeams } from "./utils";
-import { StyledFilters } from "./styled";
-import Seasons from "./Seasons";
-import Teams from "./Teams";
-import Stages from "./Stages";
-import { StyledContentWrapper } from "../../../common/StyledContentWrapper";
+import React, { useState, useEffect } from 'react';
+import { getOwlTeams, getCachedOwlTeams, sortTeams } from './utils';
+import { StyledFilters } from './styled';
+import Seasons from './Seasons';
+import Teams from './Teams';
+import Stages from './Stages';
+import { StyledContentWrapper } from '../../../common/StyledContentWrapper';
 
-const Filters = props => {
+const Filters = (props) => {
   const {
     firebase,
     selectedYear,
@@ -14,18 +14,18 @@ const Filters = props => {
     selectedTeams,
     setSelectedTeams,
     setSelectedYear,
-    setSelectedStage
+    setSelectedStage,
   } = props;
   const [teams, setTeams] = useState([]);
 
   useEffect(() => {
     getCachedOwlTeams()
-      .then(teams => {
+      .then((teams) => {
         setTeams(teams.sort(sortTeams));
         if (!teams || teams.length === 0) return getOwlTeams(firebase);
         return null;
       })
-      .then(teams => {
+      .then((teams) => {
         if (teams) setTeams(teams);
       });
   }, []);

@@ -1,4 +1,4 @@
 export const TYPES = {
-  TWITCH: "TWITCH",
-  MLG: "MLG"
+  TWITCH: 'TWITCH',
+  MLG: 'MLG',
 };

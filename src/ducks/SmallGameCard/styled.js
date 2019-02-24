@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { NICE_BLACK, PLUMP_PURPLE } from "../../utils/constants";
+import { PLUMP_PURPLE } from "../../utils/constants";
 
 export const StyledSmallGameCard = styled.div`
   border: 1px solid lightgray;
@@ -31,7 +31,7 @@ export const StyledTeamContainer = styled.div`
   margin: 5px;
   width: fit-content;
   border: ${props =>
-    props.highlight ? "1px solid " + props.primaryColor : "none"};
+    props.highlight ? `1px solid ${props.primaryColor}` : "none"};
   padding-left: ${props => (props.highlight ? "5px" : "0px")};
 `;
 

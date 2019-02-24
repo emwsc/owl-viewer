@@ -1,58 +1,54 @@
-import idb from "idb";
+import idb from 'idb';
 
 function initDBStores(storeName, keyName) {
-  const dbPromise = idb.open(storeName, 1, upgradeDB => {
+  const dbPromise = idb.open(storeName, 1, (upgradeDB) => {
     const dbStore = upgradeDB.createObjectStore(storeName, {
       keyPath: keyName,
-      autoIncrement: false
+      autoIncrement: false,
     });
     dbStore.createIndex(keyName, keyName, { unique: true });
   });
 
   const idbStore = {
     getAll(key) {
-      return dbPromise.then(db => {
-        return db
-          .transaction(storeName)
-          .objectStore(storeName)
-          .getAll();
-      });
+      return dbPromise.then(db => db
+        .transaction(storeName)
+        .objectStore(storeName)
+        .getAll());
     },
     get(key) {
-      return dbPromise.then(db => {
-        return db
-          .transaction(storeName)
-          .objectStore(storeName)
-          .get(key);
-      });
+      return dbPromise.then(db => db
+        .transaction(storeName)
+        .objectStore(storeName)
+        .get(key));
     },
     set(val) {
-      return dbPromise.then(db => {
-        const tx = db.transaction(storeName, "readwrite");
+      return dbPromise.then((db) => {
+        const tx = db.transaction(storeName, 'readwrite');
         tx.objectStore(storeName).put(val);
         return tx.complete;
       });
     },
     delete(key) {
-      return dbPromise.then(db => {
-        const tx = db.transaction(storeName, "readwrite");
+      return dbPromise.then((db) => {
+        const tx = db.transaction(storeName, 'readwrite');
         tx.objectStore(storeName).delete(key);
         return tx.complete;
       });
     },
     clear() {
-      return dbPromise.then(db => {
-        const tx = db.transaction(storeName, "readwrite");
+      return dbPromise.then((db) => {
+        const tx = db.transaction(storeName, 'readwrite');
         tx.objectStore(storeName).clear();
         return tx.complete;
       });
     },
     keys() {
-      return dbPromise.then(db => {
+      return dbPromise.then((db) => {
         const tx = db.transaction(storeName);
         const keys = [];
         const store = tx.objectStore(storeName);
-        (store.iterateKeyCursor || store.iterateCursor).call(store, cursor => {
+        (store.iterateKeyCursor || store.iterateCursor).call(store, (cursor) => {
           if (!cursor) return;
           keys.push(cursor.key);
           cursor.continue();
@@ -60,7 +56,7 @@ function initDBStores(storeName, keyName) {
 
         return tx.complete.then(() => keys);
       });
-    }
+    },
   };
   return idbStore;
 }
@@ -69,8 +65,8 @@ function initDBStores(storeName, keyName) {
 // dbStores.push(initDBStores("teams", "id"));
 
 const dbStores = {
-  schedule: initDBStores("schedule", "year"),
-  teams: initDBStores("teams", "id")
+  schedule: initDBStores('schedule', 'year'),
+  teams: initDBStores('teams', 'id'),
 };
 
 export function getDBStore(storeName) {

@@ -17,6 +17,14 @@ const TopMenu = React.memo(
         <Link to="/">
           <StyledItem>
             <StyledItemIcon>
+              <i className="fas fa-home" />
+            </StyledItemIcon>
+            Main
+          </StyledItem>
+        </Link>
+        <Link to="/schedule">
+          <StyledItem>
+            <StyledItemIcon>
               <i className="far fa-calendar-alt" />
             </StyledItemIcon>
             Full schedule

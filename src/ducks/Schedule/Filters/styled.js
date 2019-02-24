@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { PLUMP_PURPLE } from "../../../utils/constants";
+import styled from 'styled-components';
+import { PLUMP_PURPLE } from '../../../utils/constants';
 
 export const StyledFilters = styled.div`
   width: 100%;
@@ -13,7 +13,7 @@ export const StyledFilters = styled.div`
 
 export const StyledFilterItem = styled.div`
   background: #282829;
-  color: ${props => (props.isSelected ? "white" : "lightgray")};
+  color: ${props => (props.isSelected ? 'white' : 'lightgray')};
   width: fit-content;
   padding: 2px 5px;
   border-radius: 5px;

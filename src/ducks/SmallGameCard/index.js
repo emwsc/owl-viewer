@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import moment from "moment";
 import {
   StyledSmallGameCard,
   StyledTeamLogo,
@@ -12,7 +13,6 @@ import {
 } from "./styled";
 import { datediff, isTeamsVisibleByDefault } from "./utils";
 import { TOTAL_SCORE_LESS_THEN } from "./constants";
-import moment from "moment";
 
 moment().format();
 
@@ -49,27 +49,25 @@ const PastGameButtons = ({
   </StyledButtonsContainer>
 );
 
-const Teams = ({ game, teamOneProps, teamTwoProps }) => {
-  return (
-    <StyledWidth width="180px">
-      <StyledTeamContainer {...teamOneProps}>
-        <StyledTeamLogo logoUrl={game.competitors[0].logo} />
-        <StyledTeamName {...teamOneProps}>
-          {game.competitors[0].name}
-        </StyledTeamName>
-      </StyledTeamContainer>
-      <StyledTeamContainer {...teamTwoProps}>
-        <StyledTeamLogo logoUrl={game.competitors[1].logo} />
-        <StyledTeamName {...teamTwoProps}>
-          {game.competitors[1].name}
-        </StyledTeamName>
-      </StyledTeamContainer>
-    </StyledWidth>
-  );
-};
+const Teams = ({ game, teamOneProps, teamTwoProps }) => (
+  <StyledWidth width="180px">
+    <StyledTeamContainer {...teamOneProps}>
+      <StyledTeamLogo logoUrl={game.competitors[0].logo} />
+      <StyledTeamName {...teamOneProps}>
+        {game.competitors[0].name}
+      </StyledTeamName>
+    </StyledTeamContainer>
+    <StyledTeamContainer {...teamTwoProps}>
+      <StyledTeamLogo logoUrl={game.competitors[1].logo} />
+      <StyledTeamName {...teamTwoProps}>
+        {game.competitors[1].name}
+      </StyledTeamName>
+    </StyledTeamContainer>
+  </StyledWidth>
+);
 
 const SmallGameCard = props => {
-  const { game, isTeamsHidden, selectedTeams, setSelectedGameId } = props;
+  const { game, isTeamsHidden, selectedTeams = [], setSelectedGameId } = props;
   const [isScoreVisible, changeScoreVisibility] = useState(false);
   const [isTeamsVisible, changeTeamsVisibility] = useState(
     isTeamsVisibleByDefault(game.bracket) && !isTeamsHidden
@@ -108,7 +106,11 @@ const SmallGameCard = props => {
   }
 
   function onSelectGameClick() {
-    window.history.pushState(null, null, `/?match=${game.id}`);
+    window.history.pushState(
+      null,
+      null,
+      `${window.location.pathname}?match=${game.id}`
+    );
     setSelectedGameId(game.id);
   }
 

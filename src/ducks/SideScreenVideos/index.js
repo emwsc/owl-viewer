@@ -1,25 +1,28 @@
-import React from "react";
+import React from 'react';
 import {
   StyledVideosSection,
   StyledClose,
   StyledBackground,
-  StyledMatchWindowOpen
-} from "./styled";
-import Videos from "../Videos";
+  StyledMatchWindowOpen,
+  StyledVideosContainer,
+} from './styled';
+import Videos from '../Videos';
 
-const SideScreenVideos = ({ style, vods, clearVods, matchId }) => {
-  return (
-    <React.Fragment>
-      <StyledBackground style={style} onClick={clearVods} />
-      <StyledVideosSection style={style}>
-        <StyledClose onClick={() => clearVods()}>×</StyledClose>
-        <StyledMatchWindowOpen href={"/matches/" + matchId}>
-          <i className="fas fa-external-link-square-alt" />
-        </StyledMatchWindowOpen>
+const SideScreenVideos = ({
+  style, vods, clearVods, matchId,
+}) => (
+  <React.Fragment>
+    <StyledBackground style={style} onClick={clearVods} />
+    <StyledVideosSection style={style}>
+      <StyledClose onClick={() => clearVods()}>×</StyledClose>
+      <StyledMatchWindowOpen href={`/matches/${matchId}`}>
+        <i className="fas fa-external-link-square-alt" />
+      </StyledMatchWindowOpen>
+      <StyledVideosContainer>
         <Videos vods={vods} matchId={matchId} />
-      </StyledVideosSection>
-    </React.Fragment>
-  );
-};
+      </StyledVideosContainer>
+    </StyledVideosSection>
+  </React.Fragment>
+);
 
 export default SideScreenVideos;

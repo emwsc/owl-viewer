@@ -1,42 +1,43 @@
-import { useEffect } from "react";
-import { getDBStore } from "../../utils/db";
-import configuredFirebase from "../../firebase/firebase";
-import { getVodsJson } from "../../utils/owlApi";
-import { LOADING_TEXTS } from "./constants";
-const idbschedule = getDBStore("schedule");
+import { useEffect } from 'react';
+import { getDBStore } from '../../utils/db';
+import configuredFirebase from '../../firebase/firebase';
+import { getVodsJson } from '../../utils/owlApi';
+import { LOADING_TEXTS } from './constants';
+
+const idbschedule = getDBStore('schedule');
 
 export function getSchedule(selectedYear) {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     const firestore = configuredFirebase.firestore();
     firestore
-      .collection("schedule")
+      .collection('schedule')
       .doc(selectedYear.toString())
       .get()
-      .then(doc => {
+      .then((doc) => {
         const schedule = doc.data();
-        //idbschedule.set(schedule);
+        // idbschedule.set(schedule);
         resolve(schedule);
       });
   });
 }
 
 export function getCachedSchedule(selectedYear) {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     resolve(idbschedule.get(selectedYear));
   });
 }
 
-export const areEqualStages = (prevProps, nextProps) => {
-  return (
-    prevProps.selectedStage === nextProps.selectedStage &&
-    prevProps.selectedTeams.length === nextProps.selectedTeams.length
-  );
-};
+export const areEqualStages = (prevProps, nextProps) => (
+  prevProps.selectedStage === nextProps.selectedStage
+    && prevProps.selectedTeams.length === nextProps.selectedTeams.length
+);
 
-export const useOnSelectedYear = props => {
-  const { state, setState, selectedStage, setSelectedStage } = props;
+export const useOnSelectedYear = (props) => {
+  const {
+    state, setState, selectedStage, setSelectedStage,
+  } = props;
   useEffect(() => {
-    let tempSelectedStage = null;
+    const tempSelectedStage = null;
     // getCachedSchedule(state.selectedYear)
     //   .then(cachedSchedule => {
     //     if (cachedSchedule) {
@@ -54,18 +55,17 @@ export const useOnSelectedYear = props => {
     //       : null;
     //   })
     //   .then(() => getSchedule(state.selectedYear))
-    getSchedule(state.selectedYear).then(fetchedSchedule => {
+    getSchedule(state.selectedYear).then((fetchedSchedule) => {
       const fetchedState = {
         ...state,
         isLoading: false,
-        schedule: fetchedSchedule
+        schedule: fetchedSchedule,
       };
       if (
-        state.selectedYear === fetchedSchedule.selectedYear ||
-        !tempSelectedStage
+        state.selectedYear === fetchedSchedule.selectedYear
+        || !tempSelectedStage
       ) {
-        if (!tempSelectedStage && !selectedStage)
-          setSelectedStage(fetchedSchedule.stages[0].name);
+        if (!tempSelectedStage && !selectedStage) { setSelectedStage(fetchedSchedule.stages[0].name); }
         setState(fetchedState);
       }
     });
@@ -76,11 +76,10 @@ export const useOnSelectGame = ({ selectedGameId, setVideoScreenState }) => {
   useEffect(() => {
     if (selectedGameId) {
       setVideoScreenState({ isVideosScreenVisible: true, vods: [] });
-      getVods(selectedGameId).then(vods => {
-        const fullMatch = vods.find(vod => vod.title.includes("Full"));
-        if (fullMatch) document.title = fullMatch.title + " | OWL Viewer";
-        else if (vods && vods.length > 0)
-          document.title = vods[0].title + " | OWL Viewer";
+      getVods(selectedGameId).then((vods) => {
+        const fullMatch = vods.find(vod => vod.title.includes('Full'));
+        if (fullMatch) document.title = `${fullMatch.title} | OWL Viewer`;
+        else if (vods && vods.length > 0) { document.title = `${vods[0].title} | OWL Viewer`; }
         setVideoScreenState({ isVideosScreenVisible: true, vods });
       });
     }
@@ -93,28 +92,20 @@ export function getVods(matchid) {
       resolve([]);
       return;
     }
-    getVodsJson(matchid).then(results => {
+    getVodsJson(matchid).then((results) => {
       if (results.code === 404) {
         resolve([]);
         return;
       }
       resolve(
-        results.data.map(item => {
-          return {
-            id: item.unique_id,
-            thumbnail: item.thumbnail,
-            title: item.title,
-            url: item.embed
-          };
-        })
+        results.data.map(item => ({
+          id: item.unique_id,
+          thumbnail: item.thumbnail,
+          title: item.title,
+          url: item.embed,
+        })),
       );
     });
   });
 }
 
-export function getRandomLoadingPhrase() {
-  const min = 0;
-  const max = LOADING_TEXTS.length - 1;
-  const index = Math.round(Math.random() * (max - min) + min);
-  return LOADING_TEXTS[index];
-}

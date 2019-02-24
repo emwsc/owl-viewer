@@ -1,21 +1,21 @@
-import React, { useState, useEffect } from "react";
-import { checkIsOWLChannelOnline } from "./utils";
-import { OWL_TWICH_CHANNEL_LINK } from "./constants";
-import { StyledTwitchLink, StyledLive, StyledTwichIcon } from "./styled";
+import React, { useState, useEffect } from 'react';
+import { checkIsOWLChannelOnline } from './utils';
+import { OWL_TWICH_CHANNEL_LINK } from './constants';
+import { StyledTwitchLink, StyledLive, StyledTwichIcon } from './styled';
 
 const ChannelIncicator = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isLive, setIsLive] = useState(false);
 
   useEffect(() => {
-    checkIsOWLChannelOnline().then(isChannelLive => {
+    checkIsOWLChannelOnline().then((isChannelLive) => {
       setIsLoading(false);
       setIsLive(isChannelLive);
     });
   }, []);
 
   if (isLoading) return null;
-  if (isLive)
+  if (isLive) {
     return (
       <StyledTwitchLink
         rel="noreferrer"
@@ -23,9 +23,12 @@ const ChannelIncicator = () => {
         target="_blank"
       >
         <StyledLive />
-        <StyledTwichIcon className="fab fa-twitch" /> Overwatch League Twitch
+        <StyledTwichIcon className="fab fa-twitch" />
+        {' '}
+Overwatch League Twitch
       </StyledTwitchLink>
     );
+  }
 
   return (
     <StyledTwitchLink
@@ -33,7 +36,9 @@ const ChannelIncicator = () => {
       href={OWL_TWICH_CHANNEL_LINK}
       target="_blank"
     >
-      <StyledTwichIcon className="fab fa-twitch" /> Overwatch League Twitch
+      <StyledTwichIcon className="fab fa-twitch" />
+      {' '}
+Overwatch League Twitch
     </StyledTwitchLink>
   );
 };

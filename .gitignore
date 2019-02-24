@@ -34,3 +34,5 @@ firebase.json
 /functions/node_modules
 
 doc.md
+
+lintlog.md

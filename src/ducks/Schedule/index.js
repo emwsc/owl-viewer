@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Transition } from "react-spring";
+import query from "query-string";
 import {
   areEqualStages,
   useOnSelectedYear,
@@ -10,8 +12,6 @@ import { StyledSchedule, StyledLoading } from "./styled";
 import Filters from "./Filters";
 import { initialState, NOT_FOUND_SCHEDULE_MSG } from "./constants";
 import SideScreenVideos from "../SideScreenVideos";
-import { Transition } from "react-spring";
-import query from "query-string";
 import OverwatchLoading from "../OverwatchLoading";
 
 const ScheduleLayout = React.memo(props => {
@@ -68,15 +68,16 @@ const Schedule = props => {
     setSelectedStage
   });
 
-  if (!selectedGameId && qsParams && qsParams.match)
+  if (!selectedGameId && qsParams && qsParams.match) {
     setSelectedGameId(qsParams.match);
+  }
   if (selectedGameId && (!qsParams || !qsParams.match)) {
     setSelectedGameId(null);
     setVideoScreenState({ isVideosScreenVisible: false, vods: [] });
   }
 
   useOnSelectGame({
-    selectedGameId: selectedGameId,
+    selectedGameId,
     setVideoScreenState
   });
 
@@ -85,7 +86,7 @@ const Schedule = props => {
   }
 
   function clearVods() {
-    window.history.pushState(null, null, "/");
+    window.history.pushState(null, null, "/schedule");
     document.title = "Full OWL schedule | OWL Viewer";
     setSelectedGameId(null);
     setVideoScreenState({ isVideosScreenVisible: false, vods: [] });
@@ -95,7 +96,7 @@ const Schedule = props => {
     <main>
       {state.isLoading && (
         <StyledLoading>
-          <OverwatchLoading /> <span>{getRandomLoadingPhrase()}</span>
+          <OverwatchLoading />
         </StyledLoading>
       )}
       {!state.isLoading && state.schedule && state.schedule.stages && (
