@@ -1,7 +1,7 @@
-import React from 'react';
-import { StyledStages } from './styled';
-import { StyledFilterItem } from '../styled';
-import { defaultStages } from '../../../../utils/constants';
+import React from "react";
+import { StyledStages } from "./styled";
+import { StyledFilterItem } from "../styled";
+import { defaultStages } from "../../../utils/constants";
 
 const Stages = React.memo(({ selectedStage, setSelectedStage }) => (
   <StyledStages>

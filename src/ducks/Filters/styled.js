@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { PLUMP_PURPLE } from '../../../utils/constants';
+import { PLUMP_PURPLE } from '../../utils/constants';
 
 export const StyledFilters = styled.div`
   width: 100%;

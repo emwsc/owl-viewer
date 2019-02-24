@@ -3,11 +3,22 @@ import { getMatches } from "./utils";
 import { Transition } from "react-spring";
 import SmallGameCard from "../SmallGameCard";
 import moment from "moment";
-import { StyledMainWrapper, StyledColumn } from "./styled";
+import {
+  StyledMainWrapper,
+  StyledColumn,
+  StyledTable,
+  StyledLoaderWrapper,
+  StyledDate,
+  StyledColumnTitle,
+  StyledGamesContainer
+} from "./styled";
 import OverwatchLoading from "../OverwatchLoading";
 import { useOnSelectGame } from "../Schedule/utils";
 import SideScreenVideos from "../SideScreenVideos";
 import query from "query-string";
+import Filters from "../Filters";
+import { checkIsPlayoffStage } from "../../utils/utils";
+import { timeConverter } from "../../utils/dataUtils";
 
 moment().format();
 
@@ -23,6 +34,7 @@ const Main = () => {
     isLoading: true
   });
 
+  const [selectedTeams, setSelectedTeams] = useState([]);
   const [selectedGameId, setSelectedGameId] = useState(
     qsParams ? qsParams.match : null
   );
@@ -36,6 +48,7 @@ const Main = () => {
     getMatches().then(results => {
       const games = results.map(game => ({
         ...game,
+        startDateObj: timeConverter(game.startDate),
         startDateMoment: moment(game.startDate)
       }));
       const now = moment();
@@ -57,7 +70,7 @@ const Main = () => {
           ...new Set(
             lastGames.map(game => game.startDateMoment.format("DD.MM.YYYY"))
           )
-        ],
+        ].reverse(),
         isLoading: false
       });
     });
@@ -84,67 +97,98 @@ const Main = () => {
   }
 
   return (
-    <StyledMainWrapper>
-      {matches.isLoading && <OverwatchLoading />}
-      {!matches.isLoading && (
-        <React.Fragment>
-          <StyledColumn>
-            {matches.futureDates.map(date => (
-              <div key={date}>
-                {date}
-                {matches.future
-                  .filter(
-                    game => game.startDateMoment.format("DD.MM.YYYY") === date
-                  )
-                  .map(game => (
-                    <SmallGameCard
-                      key={`schedule-${game.id}`}
-                      game={game}
-                      setSelectedGameId={setSelectedGameId}
-                    />
-                  ))}
-              </div>
-            ))}
-          </StyledColumn>
-          <StyledColumn>
-            {matches.lastDates.map(date => (
-              <div key={date}>
-                {date}
-                {matches.last
-                  .filter(
-                    game => game.startDateMoment.format("DD.MM.YYYY") === date
-                  )
-                  .map(game => (
-                    <SmallGameCard
-                      key={`schedule-${game.id}`}
-                      game={game}
-                      setSelectedGameId={setSelectedGameId}
-                    />
-                  ))}
-              </div>
-            ))}
-          </StyledColumn>
-          <Transition
-            items={videoScreen.isVideosScreenVisible}
-            from={{ opacity: 0 }}
-            enter={{ opacity: 1 }}
-            leave={{ opacity: 0 }}
-          >
-            {toggle =>
-              toggle &&
-              (props => (
-                <SideScreenVideos
-                  matchId={qsParams.match}
-                  style={props}
-                  vods={videoScreen.vods}
-                  clearVods={clearVods}
-                />
-              ))
-            }
-          </Transition>
-        </React.Fragment>
+    <React.Fragment>
+      {matches.isLoading && (
+        <StyledLoaderWrapper>
+          {" "}
+          <OverwatchLoading />
+        </StyledLoaderWrapper>
       )}
-    </StyledMainWrapper>
+      {!matches.isLoading && (
+        <Filters
+          selectedTeams={selectedTeams}
+          setSelectedTeams={setSelectedTeams}
+        />
+      )}
+      <StyledMainWrapper>
+        {!matches.isLoading && (
+          <React.Fragment>
+            <StyledTable>
+              <div>
+                <StyledColumnTitle>Closest games</StyledColumnTitle>
+                <StyledColumn>
+                  {matches.futureDates.map(date => (
+                    <div key={date}>
+                      <StyledDate>{date}</StyledDate>
+                      <StyledGamesContainer>
+                        {matches.future
+                          .filter(
+                            game =>
+                              game.startDateMoment.format("DD.MM.YYYY") === date
+                          )
+                          .map(game => (
+                            <SmallGameCard
+                              key={`schedule-${game.id}`}
+                              game={game}
+                              setSelectedGameId={setSelectedGameId}
+                              selectedTeams={selectedTeams}
+                              isPlayoffStage={checkIsPlayoffStage(game.bracket)}
+                            />
+                          ))}
+                      </StyledGamesContainer>
+                    </div>
+                  ))}
+                </StyledColumn>
+              </div>
+              <div>
+                <StyledColumnTitle>Last games</StyledColumnTitle>
+                <StyledColumn>
+                  {matches.lastDates.map(date => (
+                    <div key={date}>
+                      <StyledDate>{date}</StyledDate>
+                      <StyledGamesContainer>
+                        {matches.last
+                          .filter(
+                            game =>
+                              game.startDateMoment.format("DD.MM.YYYY") === date
+                          )
+                          .map(game => (
+                            <SmallGameCard
+                              key={`schedule-${game.id}`}
+                              game={game}
+                              setSelectedGameId={setSelectedGameId}
+                              selectedTeams={selectedTeams}
+                              isPlayoffStage={checkIsPlayoffStage(game.bracket)}
+                            />
+                          ))}
+                      </StyledGamesContainer>
+                    </div>
+                  ))}
+                </StyledColumn>
+              </div>
+            </StyledTable>
+            <Transition
+              items={videoScreen.isVideosScreenVisible}
+              from={{ opacity: 0 }}
+              enter={{ opacity: 1 }}
+              leave={{ opacity: 0 }}
+            >
+              {toggle =>
+                toggle &&
+                (props => (
+                  <SideScreenVideos
+                    matchId={qsParams.match}
+                    style={props}
+                    vods={videoScreen.vods}
+                    clearVods={clearVods}
+                  />
+                ))
+              }
+            </Transition>
+          </React.Fragment>
+        )}
+      </StyledMainWrapper>
+    </React.Fragment>
   );
 };
 

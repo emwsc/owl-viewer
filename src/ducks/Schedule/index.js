@@ -4,12 +4,11 @@ import query from "query-string";
 import {
   areEqualStages,
   useOnSelectedYear,
-  useOnSelectGame,
-  getRandomLoadingPhrase
+  useOnSelectGame
 } from "./utils";
 import { Stage } from "./Stage/index";
 import { StyledSchedule, StyledLoading } from "./styled";
-import Filters from "./Filters";
+import Filters from "../Filters";
 import { initialState, NOT_FOUND_SCHEDULE_MSG } from "./constants";
 import SideScreenVideos from "../SideScreenVideos";
 import OverwatchLoading from "../OverwatchLoading";

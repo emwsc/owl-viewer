@@ -62,7 +62,7 @@ export const StyledScore = styled.div`
 export const StyledTeamName = styled.span`
   transition: all 0.25s ease;
   color: ${props => (props.highlight ? "white" : "black")};
-  padding: ${props => (props.highlight ? "0px 5px" : "0px")};
+  padding-left: ${props => (props.highlight ? "2px" : "0px")};
   background: ${props => (props.highlight ? props.primaryColor : "white")};
 `;
 
