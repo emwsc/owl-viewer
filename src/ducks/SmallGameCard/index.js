@@ -13,7 +13,8 @@ import {
   isTeamsVisibleByDefault,
   pushToBrowserHistory
 } from "./utils";
-import { TOTAL_SCORE_LESS_THEN } from "./constants";
+import { TOTAL_SCORE_LESS_THEN, DICTIONARY, WORDS_KEYS } from "./constants";
+import { LanguageConsumer } from "../../common/LanguageContenxt";
 
 moment().format();
 
@@ -63,66 +64,77 @@ const SmallGameCard = props => {
     setSelectedGameId(game.id);
   }
 
-  const cardTitle =
-    totalScores < TOTAL_SCORE_LESS_THEN ? "No scores or vods available" : "";
-
   return (
-    <StyledSmallGameCard
-      showPointer={nowDate > game.startDateObj}
-      highlight={highlight}
-      onClick={handleOnCardClick}
-      title={cardTitle}
-    >
-      <StyledInfoContainer>
-        {!isTeamsVisible && (
-          <StyledTeamContainer>
-            Click to show teams in playoff game
-          </StyledTeamContainer>
-        )}
-        {isTeamsVisible && (
-          <Teams
-            game={game}
-            teamOneProps={teamOneProps}
-            teamTwoProps={teamTwoProps}
-          />
-        )}
-        {nowDate < game.startDateObj && (
-          <div>
-            <div>{getDaysToGame(moment, nowDate, game.startDateObj)}</div>
-            <div>{moment(game.startDateObj).format("HH:mm")}</div>
-          </div>
-        )}
-        {isTeamsVisible &&
-          nowDate >= game.startDateObj &&
-          totalScores >= TOTAL_SCORE_LESS_THEN && (
-            <div>
-              <StyledScore>{isScoreVisible ? game.scores[0] : "-"}</StyledScore>
-              <StyledScore>{isScoreVisible ? game.scores[1] : "-"}</StyledScore>
-            </div>
-          )}
-        {isTeamsVisible &&
-          nowDate >= game.startDateObj &&
-          totalScores >= TOTAL_SCORE_LESS_THEN && (
-            <PastGameButtons
-              changeScoreVisibility={changeScoreVisibility}
-              onSelectGameClick={onSelectGameClick}
-              isScoreVisible={isScoreVisible}
-            />
-          )}
-        {isTeamsVisible &&
-          nowDate >= game.startDateObj &&
-          totalScores < TOTAL_SCORE_LESS_THEN && (
-            <i
-              className="fas fa-video-slash"
-              title={
-                totalScores < TOTAL_SCORE_LESS_THEN
-                  ? "No scores or vods available"
-                  : ""
-              }
-            />
-          )}
-      </StyledInfoContainer>
-    </StyledSmallGameCard>
+    <LanguageConsumer>
+      {lang => (
+        <StyledSmallGameCard
+          showPointer={nowDate > game.startDateObj}
+          highlight={highlight}
+          onClick={handleOnCardClick}
+          title={
+            totalScores < TOTAL_SCORE_LESS_THEN
+              ? DICTIONARY[lang + WORDS_KEYS.NO_DATA]
+              : ""
+          }
+        >
+          <StyledInfoContainer>
+            {!isTeamsVisible && (
+              <StyledTeamContainer>
+                {DICTIONARY[lang + WORDS_KEYS.REVEAL_TEAMS]}
+              </StyledTeamContainer>
+            )}
+            {isTeamsVisible && (
+              <Teams
+                game={game}
+                teamOneProps={teamOneProps}
+                teamTwoProps={teamTwoProps}
+              />
+            )}
+            {nowDate < game.startDateObj && (
+              <div>
+                <div>
+                  {getDaysToGame(moment, nowDate, game.startDateObj, lang)}
+                </div>
+                <div>{moment(game.startDateObj).format("HH:mm")}</div>
+              </div>
+            )}
+            {isTeamsVisible &&
+              nowDate >= game.startDateObj &&
+              totalScores >= TOTAL_SCORE_LESS_THEN && (
+                <div>
+                  <StyledScore>
+                    {isScoreVisible ? game.scores[0] : "-"}
+                  </StyledScore>
+                  <StyledScore>
+                    {isScoreVisible ? game.scores[1] : "-"}
+                  </StyledScore>
+                </div>
+              )}
+            {isTeamsVisible &&
+              nowDate >= game.startDateObj &&
+              totalScores >= TOTAL_SCORE_LESS_THEN && (
+                <PastGameButtons
+                  changeScoreVisibility={changeScoreVisibility}
+                  onSelectGameClick={onSelectGameClick}
+                  isScoreVisible={isScoreVisible}
+                />
+              )}
+            {isTeamsVisible &&
+              nowDate >= game.startDateObj &&
+              totalScores < TOTAL_SCORE_LESS_THEN && (
+                <i
+                  className="fas fa-video-slash"
+                  title={
+                    totalScores < TOTAL_SCORE_LESS_THEN
+                      ? DICTIONARY[lang + WORDS_KEYS.NO_DATA]
+                      : ""
+                  }
+                />
+              )}
+          </StyledInfoContainer>
+        </StyledSmallGameCard>
+      )}
+    </LanguageConsumer>
   );
 };
 

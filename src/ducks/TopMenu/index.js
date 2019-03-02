@@ -10,6 +10,7 @@ import {
 import ChannelIncicator from "../ChannelIncicator";
 import { LanguageConsumer } from "../../common/LanguageContenxt";
 import { MAIN_PAGE_DICTIONARY, WORD_KEYS } from "../../utils/language";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const TopMenu = React.memo(() => (
   <LanguageConsumer>
@@ -37,11 +38,16 @@ const TopMenu = React.memo(() => (
               <ChannelIncicator />
               <StyledAboutLink>
                 <Link to="/about">
-                  <StyledItem>{MAIN_PAGE_DICTIONARY[lang + WORD_KEYS.ABOUT]}</StyledItem>
+                  <StyledItem>
+                    {MAIN_PAGE_DICTIONARY[lang + WORD_KEYS.ABOUT]}
+                  </StyledItem>
                 </Link>
               </StyledAboutLink>
             </React.Fragment>
           )}
+          <StyledItem>
+            <LanguageSwitcher />
+          </StyledItem>
         </StyledTopMenuItemsWrapper>
       </StyledTopMenu>
     )}

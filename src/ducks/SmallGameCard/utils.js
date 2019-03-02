@@ -3,14 +3,16 @@
  * @param {object} moment moment.js object
  * @param {object} first  first date (usially now date)
  * @param {object} second game date
+ * @param {string} lang Language code
  */
-export function getDaysToGame(moment, first, second) {
+export function getDaysToGame(moment, first, second, lang) {
+  const daysName = lang === "eng" ? "d" : "д";
   const m1 = moment(first);
   m1.startOf("day");
   const m2 = moment(second);
   m2.startOf("day");
   const inDays = Math.abs(m1.diff(m2, "days"));
-  if (inDays >= 1) return `${inDays}d`;
+  if (inDays >= 1) return `${inDays}${daysName}`;
   return null;
 }
 
@@ -26,7 +28,7 @@ export function isTeamsVisibleByDefault(bracket) {
 
 /**
  * Push to browser history to set correct url
- * @param {string} matchId 
+ * @param {string} matchId
  */
 export function pushToBrowserHistory(matchId) {
   window.history.pushState(
