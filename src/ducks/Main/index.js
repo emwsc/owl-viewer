@@ -19,8 +19,44 @@ import query from "query-string";
 import Filters from "../Filters";
 import { checkIsPlayoffStage } from "../../utils/utils";
 import { timeConverter } from "../../utils/dataUtils";
+import { LanguageConsumer } from "../../common/LanguageContenxt";
+import { MAIN_PAGE_DICTIONARY, WORD_KEYS } from "../../utils/language";
 
 moment().format();
+
+const Section = ({
+  title,
+  dates,
+  matches,
+  setSelectedGameId,
+  selectedTeams
+}) => (
+  <div>
+    <StyledColumnTitle>{title}</StyledColumnTitle>
+    <StyledColumn>
+      {dates.map(date => (
+        <div key={date}>
+          <StyledDate>{date}</StyledDate>
+          <StyledGamesContainer>
+            {matches
+              .filter(
+                game => game.startDateMoment.format("DD.MM.YYYY") === date
+              )
+              .map(game => (
+                <SmallGameCard
+                  key={`schedule-${game.id}`}
+                  game={game}
+                  setSelectedGameId={setSelectedGameId}
+                  selectedTeams={selectedTeams}
+                  isPlayoffStage={checkIsPlayoffStage(game.bracket)}
+                />
+              ))}
+          </StyledGamesContainer>
+        </div>
+      ))}
+    </StyledColumn>
+  </div>
+);
 
 const Main = () => {
   const { location } = window;
@@ -97,98 +133,63 @@ const Main = () => {
   }
 
   return (
-    <React.Fragment>
-      {matches.isLoading && (
-        <StyledLoaderWrapper>
-          {" "}
-          <OverwatchLoading />
-        </StyledLoaderWrapper>
-      )}
-      {!matches.isLoading && (
-        <Filters
-          selectedTeams={selectedTeams}
-          setSelectedTeams={setSelectedTeams}
-        />
-      )}
-      <StyledMainWrapper>
-        {!matches.isLoading && (
-          <React.Fragment>
-            <StyledTable>
-              <div>
-                <StyledColumnTitle>Closest games</StyledColumnTitle>
-                <StyledColumn>
-                  {matches.futureDates.map(date => (
-                    <div key={date}>
-                      <StyledDate>{date}</StyledDate>
-                      <StyledGamesContainer>
-                        {matches.future
-                          .filter(
-                            game =>
-                              game.startDateMoment.format("DD.MM.YYYY") === date
-                          )
-                          .map(game => (
-                            <SmallGameCard
-                              key={`schedule-${game.id}`}
-                              game={game}
-                              setSelectedGameId={setSelectedGameId}
-                              selectedTeams={selectedTeams}
-                              isPlayoffStage={checkIsPlayoffStage(game.bracket)}
-                            />
-                          ))}
-                      </StyledGamesContainer>
-                    </div>
-                  ))}
-                </StyledColumn>
-              </div>
-              <div>
-                <StyledColumnTitle>Last games</StyledColumnTitle>
-                <StyledColumn>
-                  {matches.lastDates.map(date => (
-                    <div key={date}>
-                      <StyledDate>{date}</StyledDate>
-                      <StyledGamesContainer>
-                        {matches.last
-                          .filter(
-                            game =>
-                              game.startDateMoment.format("DD.MM.YYYY") === date
-                          )
-                          .map(game => (
-                            <SmallGameCard
-                              key={`schedule-${game.id}`}
-                              game={game}
-                              setSelectedGameId={setSelectedGameId}
-                              selectedTeams={selectedTeams}
-                              isPlayoffStage={checkIsPlayoffStage(game.bracket)}
-                            />
-                          ))}
-                      </StyledGamesContainer>
-                    </div>
-                  ))}
-                </StyledColumn>
-              </div>
-            </StyledTable>
-            <Transition
-              items={videoScreen.isVideosScreenVisible}
-              from={{ opacity: 0 }}
-              enter={{ opacity: 1 }}
-              leave={{ opacity: 0 }}
-            >
-              {toggle =>
-                toggle &&
-                (props => (
-                  <SideScreenVideos
-                    matchId={qsParams.match}
-                    style={props}
-                    vods={videoScreen.vods}
-                    clearVods={clearVods}
+    <LanguageConsumer>
+      {lang => (
+        <React.Fragment>
+          {matches.isLoading && (
+            <StyledLoaderWrapper>
+              <OverwatchLoading />
+            </StyledLoaderWrapper>
+          )}
+          {!matches.isLoading && (
+            <Filters
+              selectedTeams={selectedTeams}
+              setSelectedTeams={setSelectedTeams}
+            />
+          )}
+          <StyledMainWrapper>
+            {!matches.isLoading && (
+              <React.Fragment>
+                <StyledTable>
+                  <Section
+                    setSelectedGameId={setSelectedGameId}
+                    selectedTeams={selectedTeams}
+                    matches={matches.future}
+                    dates={matches.futureDates}
+                    title={MAIN_PAGE_DICTIONARY[lang + WORD_KEYS.CLOSEST_GAMES]}
                   />
-                ))
-              }
-            </Transition>
-          </React.Fragment>
-        )}
-      </StyledMainWrapper>
-    </React.Fragment>
+                  <Section
+                    setSelectedGameId={setSelectedGameId}
+                    selectedTeams={selectedTeams}
+                    matches={matches.last}
+                    dates={matches.lastDates}
+                    title={MAIN_PAGE_DICTIONARY[lang + WORD_KEYS.LAST_GAMES]}
+                  />
+                </StyledTable>
+                <Transition
+                  items={videoScreen.isVideosScreenVisible}
+                  from={{ opacity: 0 }}
+                  enter={{ opacity: 1 }}
+                  leave={{ opacity: 0 }}
+                >
+                  {toggle =>
+                    toggle &&
+                    (props => (
+                      <SideScreenVideos
+                        matchId={qsParams.match}
+                        style={props}
+                        vods={videoScreen.vods}
+                        clearVods={clearVods}
+                      />
+                    ))
+                  }
+                </Transition>
+              </React.Fragment>
+            )}
+          </StyledMainWrapper>
+        </React.Fragment>
+      )}
+    </LanguageConsumer>
   );
 };
 

@@ -1,6 +1,6 @@
-import React from 'react';
-import { StyledFilterItem } from '../styled';
-import { StyledSeasons } from './styled';
+import React from "react";
+import { StyledFilterItem } from "../styled";
+import { StyledSeasons } from "./styled";
 
 const Seasons = React.memo(({ selectedYear, setSelectedYear }) => (
   <StyledSeasons>
@@ -10,7 +10,7 @@ const Seasons = React.memo(({ selectedYear, setSelectedYear }) => (
       }}
       isSelected={selectedYear === 2018}
     >
-        Season 1
+      Season 1
     </StyledFilterItem>
     <StyledFilterItem
       onClick={() => {
@@ -18,7 +18,7 @@ const Seasons = React.memo(({ selectedYear, setSelectedYear }) => (
       }}
       isSelected={selectedYear === 2019}
     >
-        Season 2
+      Season 2
     </StyledFilterItem>
   </StyledSeasons>
 ));

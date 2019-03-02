@@ -7,5 +7,5 @@ export const StyledLoaderContainer = styled.div`
   padding: 10px;
   justify-content: space-evenly;
   padding: 10px;
-  width: 250px;
+  width: 300px;
 `;

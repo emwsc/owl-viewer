@@ -2,69 +2,22 @@ import React, { useState } from "react";
 import moment from "moment";
 import {
   StyledSmallGameCard,
-  StyledTeamLogo,
   StyledTeamContainer,
-  StyledButtonsContainer,
-  StyledVODIcon,
   StyledScore,
-  StyledTeamName,
-  StyledInfoContainer,
-  StyledWidth
+  StyledInfoContainer
 } from "./styled";
-import { datediff, isTeamsVisibleByDefault } from "./utils";
+import Teams from "./Teams";
+import PastGameButtons from "./PastGameButtons";
+import {
+  getDaysToGame,
+  isTeamsVisibleByDefault,
+  pushToBrowserHistory
+} from "./utils";
 import { TOTAL_SCORE_LESS_THEN } from "./constants";
 
 moment().format();
 
 const nowDate = new Date();
-
-const PastGameButtons = ({
-  changeScoreVisibility,
-  isScoreVisible,
-  onSelectGameClick
-}) => (
-  <StyledButtonsContainer>
-    <div>
-      <i
-        onClick={event => {
-          event.preventDefault();
-          event.stopPropagation();
-          changeScoreVisibility(!isScoreVisible);
-        }}
-        title={
-          isScoreVisible
-            ? "Click to hide score"
-            : "Click to reaveal score of the game"
-        }
-        className={isScoreVisible ? "fas fa-eye-slash" : "fas fa-eye"}
-      />
-    </div>
-    <div>
-      <StyledVODIcon
-        onClick={onSelectGameClick}
-        title="Open VODs if available"
-        className="fas fa-video"
-      />
-    </div>
-  </StyledButtonsContainer>
-);
-
-const Teams = ({ game, teamOneProps, teamTwoProps }) => (
-  <StyledWidth width="180px">
-    <StyledTeamContainer {...teamOneProps}>
-      <StyledTeamLogo logoUrl={game.competitors[0].logo} />
-      <StyledTeamName {...teamOneProps}>
-        {game.competitors[0].name}
-      </StyledTeamName>
-    </StyledTeamContainer>
-    <StyledTeamContainer {...teamTwoProps}>
-      <StyledTeamLogo logoUrl={game.competitors[1].logo} />
-      <StyledTeamName {...teamTwoProps}>
-        {game.competitors[1].name}
-      </StyledTeamName>
-    </StyledTeamContainer>
-  </StyledWidth>
-);
 
 const SmallGameCard = props => {
   const { game, isTeamsHidden, selectedTeams = [], setSelectedGameId } = props;
@@ -106,22 +59,19 @@ const SmallGameCard = props => {
   }
 
   function onSelectGameClick() {
-    window.history.pushState(
-      null,
-      null,
-      `${window.location.pathname}?match=${game.id}`
-    );
+    pushToBrowserHistory(game.id);
     setSelectedGameId(game.id);
   }
+
+  const cardTitle =
+    totalScores < TOTAL_SCORE_LESS_THEN ? "No scores or vods available" : "";
 
   return (
     <StyledSmallGameCard
       showPointer={nowDate > game.startDateObj}
       highlight={highlight}
       onClick={handleOnCardClick}
-      title={
-        totalScores < TOTAL_SCORE_LESS_THEN ? "No scores or vods available" : ""
-      }
+      title={cardTitle}
     >
       <StyledInfoContainer>
         {!isTeamsVisible && (
@@ -137,8 +87,9 @@ const SmallGameCard = props => {
           />
         )}
         {nowDate < game.startDateObj && (
-          <div title={moment(game.startDateObj).format("HH:mm")}>
-            {datediff(moment, nowDate, game.startDateObj)}
+          <div>
+            <div>{getDaysToGame(moment, nowDate, game.startDateObj)}</div>
+            <div>{moment(game.startDateObj).format("HH:mm")}</div>
           </div>
         )}
         {isTeamsVisible &&

@@ -16,7 +16,7 @@ export const StyledTable = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   @media (max-width: 555px) {
-    grid-template-columns: repeat(auto-fill, 350px);
+    display: block;
   }
 `;
 
