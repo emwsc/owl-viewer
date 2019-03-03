@@ -1,12 +1,17 @@
 import React, { useState } from "react";
-import { areEqualStages, useOnSelectedYear, useOnSelectGame } from "./utils";
-import { Stage } from "./Stage/index";
-import { StyledSchedule, StyledLoading } from "./styled";
-import Filters from "./Filters";
-import { initialState, NOT_FOUND_SCHEDULE_MSG } from "./constants";
-import Videos from "../Videos";
 import { Transition } from "react-spring";
 import query from "query-string";
+import {
+  areEqualStages,
+  useOnSelectedYear,
+  useOnSelectGame
+} from "./utils";
+import { Stage } from "./Stage/index";
+import { StyledSchedule, StyledLoading } from "./styled";
+import Filters from "../Filters";
+import { initialState, NOT_FOUND_SCHEDULE_MSG } from "./constants";
+import SideScreenVideos from "../SideScreenVideos";
+import OverwatchLoading from "../OverwatchLoading";
 
 const ScheduleLayout = React.memo(props => {
   const { selectedStage, stages, selectedTeams, setSelectedGameId } = props;
@@ -62,15 +67,16 @@ const Schedule = props => {
     setSelectedStage
   });
 
-  if (!selectedGameId && qsParams && qsParams.match)
+  if (!selectedGameId && qsParams && qsParams.match) {
     setSelectedGameId(qsParams.match);
+  }
   if (selectedGameId && (!qsParams || !qsParams.match)) {
     setSelectedGameId(null);
     setVideoScreenState({ isVideosScreenVisible: false, vods: [] });
   }
 
   useOnSelectGame({
-    selectedGameId: selectedGameId,
+    selectedGameId,
     setVideoScreenState
   });
 
@@ -79,7 +85,7 @@ const Schedule = props => {
   }
 
   function clearVods() {
-    window.history.pushState(null, null, "/");
+    window.history.pushState(null, null, "/schedule");
     document.title = "Full OWL schedule | OWL Viewer";
     setSelectedGameId(null);
     setVideoScreenState({ isVideosScreenVisible: false, vods: [] });
@@ -87,7 +93,11 @@ const Schedule = props => {
 
   return (
     <main>
-      {state.isLoading && <StyledLoading>Loading...</StyledLoading>}
+      {state.isLoading && (
+        <StyledLoading>
+          <OverwatchLoading />
+        </StyledLoading>
+      )}
       {!state.isLoading && state.schedule && state.schedule.stages && (
         <React.Fragment>
           <Filters {...filterProps} />
@@ -103,7 +113,7 @@ const Schedule = props => {
             {toggle =>
               toggle &&
               (props => (
-                <Videos
+                <SideScreenVideos
                   matchId={qsParams.match}
                   style={props}
                   vods={videoScreen.vods}

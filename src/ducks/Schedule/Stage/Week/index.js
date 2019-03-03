@@ -1,20 +1,22 @@
-import React from "react";
+import React from 'react';
 import {
   StyledWeek,
   StyledGamesInWeek,
   StyledWeekTitle,
   StyledGamesByDate,
-  StyledDate
-} from "./styled";
-import { timeConverter } from "../../../../utils/dataUtils";
-import SmallGameCard from "../../../SmallGameCard";
+  StyledDate,
+} from './styled';
+import { timeConverter } from '../../../../utils/dataUtils';
+import SmallGameCard from '../../../SmallGameCard';
 
-const Week = props => {
-  const { week, isPlayoffStage, selectedTeams, setSelectedGameId } = props;
+const Week = (props) => {
+  const {
+    week, isPlayoffStage, selectedTeams, setSelectedGameId,
+  } = props;
   const games = week.matches.map(game => ({
     ...game,
     startDateObj: timeConverter(game.startDate),
-    startDateLocaleString: timeConverter(game.startDate).toLocaleDateString()
+    startDateLocaleString: timeConverter(game.startDate).toLocaleDateString(),
   }));
   const dates = [...new Set(games.map(game => game.startDateLocaleString))];
   return (
@@ -29,7 +31,7 @@ const Week = props => {
                 .filter(game => game.startDateLocaleString === date)
                 .map(game => (
                   <SmallGameCard
-                    key={"schedule-" + game.id}
+                    key={`schedule-${game.id}`}
                     game={game}
                     selectedTeams={selectedTeams}
                     isTeamsHidden={isPlayoffStage}

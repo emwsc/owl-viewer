@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { getDBStore } from "../../utils/db";
 import configuredFirebase from "../../firebase/firebase";
 import { getVodsJson } from "../../utils/owlApi";
+import { LOADING_TEXTS } from "./constants";
+
 const idbschedule = getDBStore("schedule");
 
 export function getSchedule(selectedYear) {
@@ -13,7 +15,7 @@ export function getSchedule(selectedYear) {
       .get()
       .then(doc => {
         const schedule = doc.data();
-        idbschedule.set(schedule);
+        // idbschedule.set(schedule);
         resolve(schedule);
       });
   });
@@ -25,71 +27,72 @@ export function getCachedSchedule(selectedYear) {
   });
 }
 
-export const areEqualStages = (prevProps, nextProps) => {
-  return (
-    prevProps.selectedStage === nextProps.selectedStage &&
-    prevProps.selectedTeams.length === nextProps.selectedTeams.length
-  );
-};
+export const areEqualStages = (prevProps, nextProps) =>
+  prevProps.selectedStage === nextProps.selectedStage &&
+  prevProps.selectedTeams.length === nextProps.selectedTeams.length;
 
+/**
+ * Hook that allows to fetch schedule for selected year
+ * @param {object} props
+ * @param {object} props.state
+ * @param {object} props.setState
+ * @param {object} props.selectedStage
+ * @param {object} props.setSelectedStage
+ */
 export const useOnSelectedYear = props => {
   const { state, setState, selectedStage, setSelectedStage } = props;
-  useEffect(
-    () => {
-      let tempSelectedStage = null;
-      getCachedSchedule(state.selectedYear)
-        .then(cachedSchedule => {
-          if (cachedSchedule) {
-            setState({
-              ...state,
-              isLoading: false,
-              schedule: cachedSchedule
-            });
-          }
-          setSelectedStage(
-            cachedSchedule ? cachedSchedule.stages[0].name : null
-          );
-          tempSelectedStage = cachedSchedule
-            ? cachedSchedule.stages[0].name
-            : null;
-        })
-        .then(() => getSchedule(state.selectedYear))
-        .then(fetchedSchedule => {
-          const fetchedState = {
-            ...state,
-            isLoading: false,
-            schedule: fetchedSchedule
-          };
-          if (
-            state.selectedYear === fetchedSchedule.selectedYear ||
-            !tempSelectedStage
-          ) {
-            if (!tempSelectedStage && !selectedStage)
-              setSelectedStage(fetchedSchedule.stages[0].name);
-            setState(fetchedState);
-          }
-        });
-    },
-    [state.selectedYear]
-  );
+  useEffect(() => {
+    const tempSelectedStage = null;
+    // getCachedSchedule(state.selectedYear)
+    //   .then(cachedSchedule => {
+    //     if (cachedSchedule) {
+    //       setState({
+    //         ...state,
+    //         isLoading: false,
+    //         schedule: cachedSchedule
+    //       });
+    //     }
+    //     setSelectedStage(
+    //       cachedSchedule ? cachedSchedule.stages[0].name : null
+    //     );
+    //     tempSelectedStage = cachedSchedule
+    //       ? cachedSchedule.stages[0].name
+    //       : null;
+    //   })
+    //   .then(() => getSchedule(state.selectedYear))
+    getSchedule(state.selectedYear).then(fetchedSchedule => {
+      const fetchedState = {
+        ...state,
+        isLoading: false,
+        schedule: fetchedSchedule
+      };
+      if (
+        state.selectedYear === fetchedSchedule.selectedYear ||
+        !tempSelectedStage
+      ) {
+        if (!tempSelectedStage && !selectedStage) {
+          setSelectedStage(fetchedSchedule.stages[0].name);
+        }
+        setState(fetchedState);
+      }
+    });
+  }, [state.selectedYear]);
 };
 
 export const useOnSelectGame = ({ selectedGameId, setVideoScreenState }) => {
-  useEffect(
-    () => {
-      if (selectedGameId) {
-        setVideoScreenState({ isVideosScreenVisible: true, vods: [] });
-        getVods(selectedGameId).then(vods => {
-          const fullMatch = vods.find(vod => vod.title.includes("Full"));
-          if (fullMatch) document.title = fullMatch.title + " | OWL Viewer";
-          else if (vods && vods.length > 0)
-            document.title = vods[0].title + " | OWL Viewer";
-          setVideoScreenState({ isVideosScreenVisible: true, vods });
-        });
-      }
-    },
-    [selectedGameId]
-  );
+  useEffect(() => {
+    if (selectedGameId) {
+      setVideoScreenState({ isVideosScreenVisible: true, vods: [] });
+      getVods(selectedGameId).then(vods => {
+        const fullMatch = vods.find(vod => vod.title.includes("Full"));
+        if (fullMatch) document.title = `${fullMatch.title} | OWL Viewer`;
+        else if (vods && vods.length > 0) {
+          document.title = `${vods[0].title} | OWL Viewer`;
+        }
+        setVideoScreenState({ isVideosScreenVisible: true, vods });
+      });
+    }
+  }, [selectedGameId]);
 };
 
 export function getVods(matchid) {
@@ -104,14 +107,12 @@ export function getVods(matchid) {
         return;
       }
       resolve(
-        results.data.map(item => {
-          return {
-            id: item.unique_id,
-            thumbnail: item.thumbnail,
-            title: item.title,
-            url: item.embed
-          };
-        })
+        results.data.map(item => ({
+          id: item.unique_id,
+          thumbnail: item.thumbnail,
+          title: item.title,
+          url: item.embed
+        }))
       );
     });
   });

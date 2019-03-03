@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const StyledWeek = styled.section`
   margin-bottom: 20px;

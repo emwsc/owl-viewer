@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import { NICE_BLACK, PLUMP_PURPLE } from "../../utils/constants";
-import { StyledContentWrapper } from "../../common/StyledContentWrapper";
+import styled from 'styled-components';
+import { NICE_BLACK, PLUMP_PURPLE } from '../../utils/constants';
+import { StyledContentWrapper } from '../../common/StyledContentWrapper';
 
 export const StyledTopMenu = styled.header`
   width: 100%;
@@ -12,6 +12,7 @@ export const StyledTopMenu = styled.header`
   top: 0;
   @media (max-width: 555px) {
     font-size: 14px;
+    width: 100%;
   }
 `;
 

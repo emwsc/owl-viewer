@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const StyledStagesWrapper = styled.div`
   grid-area: stages;

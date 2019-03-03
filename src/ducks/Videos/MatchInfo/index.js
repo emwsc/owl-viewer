@@ -8,9 +8,7 @@ const MatchInfo = props => {
 
   return (
     <StyledMatchInfo>
-      <div>
-        {teamOne.name} vs {teamTwo.name}
-      </div>
+      <div>{`${teamOne.name} vs ${teamTwo.name}`}</div>
       <div>
         {timeConverter(startDate).toLocaleDateString()} • {bracket}
       </div>

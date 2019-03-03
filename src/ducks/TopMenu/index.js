@@ -7,31 +7,51 @@ import {
   StyledItemIcon,
   StyledAboutLink
 } from "./styling";
-import { areSchedulesEqual } from "../../utils/utils";
 import ChannelIncicator from "../ChannelIncicator";
+import { LanguageConsumer } from "../../common/LanguageContenxt";
+import { MAIN_PAGE_DICTIONARY, WORD_KEYS } from "../../utils/language";
+import LanguageSwitcher from "./LanguageSwitcher";
 
-const TopMenu = React.memo(
-  () => (
-    <StyledTopMenu>
-      <StyledTopMenuItemsWrapper>
-        <Link to="/">
-          <StyledItem>
-            <StyledItemIcon>
-              <i className="far fa-calendar-alt" />
-            </StyledItemIcon>
-            Full schedule
-          </StyledItem>
-        </Link>
-        <ChannelIncicator />
-        <StyledAboutLink>
-          <Link to="/about">
-            <StyledItem>About</StyledItem>
+const TopMenu = React.memo(() => (
+  <LanguageConsumer>
+    {({ lang }) => (
+      <StyledTopMenu>
+        <StyledTopMenuItemsWrapper>
+          <Link to="/">
+            <StyledItem>
+              <StyledItemIcon>
+                <i className="fas fa-home" />
+              </StyledItemIcon>
+              {MAIN_PAGE_DICTIONARY[lang + WORD_KEYS.MAIN]}
+            </StyledItem>
           </Link>
-        </StyledAboutLink>
-      </StyledTopMenuItemsWrapper>
-    </StyledTopMenu>
-  ),
-  areSchedulesEqual
-);
+          <Link to="/schedule">
+            <StyledItem>
+              <StyledItemIcon>
+                <i className="far fa-calendar-alt" />
+              </StyledItemIcon>
+              {MAIN_PAGE_DICTIONARY[lang + WORD_KEYS.FULL_SCHEDULE]}
+            </StyledItem>
+          </Link>
+          {window.innerWidth > 500 && (
+            <React.Fragment>
+              <ChannelIncicator />
+              <StyledAboutLink>
+                <Link to="/about">
+                  <StyledItem>
+                    {MAIN_PAGE_DICTIONARY[lang + WORD_KEYS.ABOUT]}
+                  </StyledItem>
+                </Link>
+              </StyledAboutLink>
+            </React.Fragment>
+          )}
+          <StyledItem>
+            <LanguageSwitcher />
+          </StyledItem>
+        </StyledTopMenuItemsWrapper>
+      </StyledTopMenu>
+    )}
+  </LanguageConsumer>
+));
 
 export { TopMenu };
