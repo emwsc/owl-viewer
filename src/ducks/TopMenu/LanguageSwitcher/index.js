@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { LanguageConsumer } from "../../../common/LanguageContenxt";
 import { StyledContainer, StyledLanguages } from "./styled";
+import { getEmojiForLangCode } from "./utils";
 
 const LanguageSwitcher = () => {
   const [isDropDownVisible, changeDropDownVisiblity] = useState(false);
@@ -19,6 +20,7 @@ const LanguageSwitcher = () => {
             id="switchLangBtn"
             onClick={() => changeDropDownVisiblity(!isDropDownVisible)}
           >
+            {getEmojiForLangCode(lang)}
             {lang}
           </div>
           {isDropDownVisible && (
