@@ -1,7 +1,7 @@
 import React from "react";
 
-export const DEFAULT_LANGUAGE = window.navigator.language
-  ? window.navigator.language
+export const DEFAULT_LANGUAGE = window.localStorage.getItem("owlv-lang")
+  ? window.localStorage.getItem("owlv-lang")
   : "en";
 
 const LanguageContext = React.createContext(DEFAULT_LANGUAGE);

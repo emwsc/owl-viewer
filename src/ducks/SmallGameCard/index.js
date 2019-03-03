@@ -66,7 +66,7 @@ const SmallGameCard = props => {
 
   return (
     <LanguageConsumer>
-      {lang => (
+      {({ lang }) => (
         <StyledSmallGameCard
           showPointer={nowDate > game.startDateObj}
           highlight={highlight}

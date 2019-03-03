@@ -6,7 +6,7 @@ import { LanguageConsumer } from "../../common/LanguageContenxt";
 
 const OverwatchLoading = () => (
   <LanguageConsumer>
-    {lang => (
+    {({ lang }) => (
       <StyledLoaderContainer>
         <svg
           className="hex-loader"

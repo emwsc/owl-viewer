@@ -14,7 +14,7 @@ import LanguageSwitcher from "./LanguageSwitcher";
 
 const TopMenu = React.memo(() => (
   <LanguageConsumer>
-    {lang => (
+    {({ lang }) => (
       <StyledTopMenu>
         <StyledTopMenuItemsWrapper>
           <Link to="/">

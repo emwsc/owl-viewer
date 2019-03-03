@@ -134,7 +134,7 @@ const Main = () => {
 
   return (
     <LanguageConsumer>
-      {lang => (
+      {({ lang }) => (
         <React.Fragment>
           {matches.isLoading && (
             <StyledLoaderWrapper>

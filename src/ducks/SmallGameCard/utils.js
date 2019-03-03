@@ -6,7 +6,7 @@
  * @param {string} lang Language code
  */
 export function getDaysToGame(moment, first, second, lang) {
-  const daysName = lang === "eng" ? "d" : "д";
+  const daysName = lang === "en" ? "d" : "д";
   const m1 = moment(first);
   m1.startOf("day");
   const m2 = moment(second);
