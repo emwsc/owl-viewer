@@ -6,7 +6,7 @@ export const WORDS_KEYS = {
 };
 export const DICTIONARY = {
   ruREVEAL_TEAMS: "Нажмите, чтобы показать команды",
-  engREVEAL_TEAMS: " Click to show teams",
+  enREVEAL_TEAMS: "Click to show teams",
   ruNO_DATA:
     "Результаты еще не известы, либо записи игр не доступны на данный момент",
   enNO_DATA: "No scores or vods available"
