@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import { NICE_BLACK, PLUMP_PURPLE } from '../../utils/constants';
-import { StyledContentWrapper } from '../../common/StyledContentWrapper';
+import styled from "styled-components";
+import { NICE_BLACK, PLUMP_PURPLE } from "../../utils/constants";
+import { StyledContentWrapper } from "../../common/StyledContentWrapper";
 
 export const StyledTopMenu = styled.header`
   width: 100%;
@@ -21,7 +21,14 @@ export const StyledTopMenuItemsWrapper = styled(StyledContentWrapper)`
   display: flex;
   align-items: center;
   height: 100%;
-  /* justify-content: space-between; */
+  @media (max-width: 555px) {
+    margin: 0 auto;
+    width: 95%;
+    justify-content: space-between;
+  }
+  & > a {
+    text-decoration: none;
+  }
 `;
 
 export const StyledItem = styled.div`
