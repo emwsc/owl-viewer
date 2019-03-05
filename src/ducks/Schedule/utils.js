@@ -27,9 +27,14 @@ export function getCachedSchedule(selectedYear) {
   });
 }
 
-export const areEqualStages = (prevProps, nextProps) =>
-  prevProps.selectedStage === nextProps.selectedStage &&
-  prevProps.selectedTeams.length === nextProps.selectedTeams.length;
+export const areEqualStages = (prevProps, nextProps) => {
+  debugger;
+  return (
+    prevProps.selectedYear === nextProps.selectedYear &&
+    prevProps.selectedStage === nextProps.selectedStage &&
+    prevProps.selectedTeams.length === nextProps.selectedTeams.length
+  );
+};
 
 /**
  * Hook that allows to fetch schedule for selected year
@@ -42,6 +47,7 @@ export const areEqualStages = (prevProps, nextProps) =>
 export const useOnSelectedYear = props => {
   const { state, setState, selectedStage, setSelectedStage } = props;
   useEffect(() => {
+    debugger;
     const tempSelectedStage = null;
     // getCachedSchedule(state.selectedYear)
     //   .then(cachedSchedule => {

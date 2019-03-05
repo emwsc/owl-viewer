@@ -1,19 +1,17 @@
 import React, { useState } from "react";
 import { Transition } from "react-spring";
 import query from "query-string";
-import {
-  areEqualStages,
-  useOnSelectedYear,
-  useOnSelectGame
-} from "./utils";
+import { areEqualStages, useOnSelectedYear, useOnSelectGame } from "./utils";
 import { Stage } from "./Stage/index";
 import { StyledSchedule, StyledLoading } from "./styled";
 import Filters from "../Filters";
-import { initialState, NOT_FOUND_SCHEDULE_MSG } from "./constants";
+import { initialState, DICTIONARY, WORD_KEYS } from "./constants";
 import SideScreenVideos from "../SideScreenVideos";
 import OverwatchLoading from "../OverwatchLoading";
+import { LanguageConsumer } from "../../common/LanguageContenxt";
 
 const ScheduleLayout = React.memo(props => {
+  debugger;
   const { selectedStage, stages, selectedTeams, setSelectedGameId } = props;
   const stage = stages.find(stage => stage.name === selectedStage);
   return (
@@ -25,7 +23,13 @@ const ScheduleLayout = React.memo(props => {
           setSelectedGameId={setSelectedGameId}
         />
       )}
-      {!stage && <div>{NOT_FOUND_SCHEDULE_MSG}</div>}
+      {!stage && (
+        <div>
+          <LanguageConsumer>
+            {({ lang }) => DICTIONARY[lang + WORD_KEYS.NOT_FOUND_SCHEDULE_MSG]}
+          </LanguageConsumer>
+        </div>
+      )}
     </React.Fragment>
   );
 }, areEqualStages);
@@ -44,6 +48,18 @@ const Schedule = props => {
   });
   const [state, setState] = useState(initialState);
 
+  useOnSelectedYear({
+    state,
+    setState,
+    selectedStage,
+    setSelectedStage
+  });
+
+  useOnSelectGame({
+    selectedGameId,
+    setVideoScreenState
+  });
+
   const filterProps = {
     selectedYear: state.selectedYear,
     selectedStage,
@@ -54,18 +70,12 @@ const Schedule = props => {
   };
 
   const layoutProps = {
+    selectedYear: state.schedule.year,
     selectedStage,
     selectedTeams,
     stages: state.schedule.stages,
     setSelectedGameId
   };
-
-  useOnSelectedYear({
-    state,
-    setState,
-    selectedStage,
-    setSelectedStage
-  });
 
   if (!selectedGameId && qsParams && qsParams.match) {
     setSelectedGameId(qsParams.match);
@@ -74,11 +84,6 @@ const Schedule = props => {
     setSelectedGameId(null);
     setVideoScreenState({ isVideosScreenVisible: false, vods: [] });
   }
-
-  useOnSelectGame({
-    selectedGameId,
-    setVideoScreenState
-  });
 
   function setSelectedYear(year) {
     setState({ ...state, selectedYear: year });
@@ -90,6 +95,8 @@ const Schedule = props => {
     setSelectedGameId(null);
     setVideoScreenState({ isVideosScreenVisible: false, vods: [] });
   }
+
+  debugger;
 
   return (
     <main>
@@ -125,7 +132,11 @@ const Schedule = props => {
         </React.Fragment>
       )}
       {!state.isLoading && !state.schedule.stages && (
-        <div>{NOT_FOUND_SCHEDULE_MSG}</div>
+        <div>
+          <LanguageConsumer>
+            {({ lang }) => DICTIONARY[lang + WORD_KEYS.NOT_FOUND_SCHEDULE_MSG]}
+          </LanguageConsumer>
+        </div>
       )}
     </main>
   );

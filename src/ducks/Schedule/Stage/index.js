@@ -3,7 +3,7 @@ import { StyledScheduleTitle, StyledStage } from "./styled";
 import { Week } from "./Week/index";
 import { checkIsPlayoffStage } from "../../../utils/utils";
 
-const Stage = React.memo(({ stage, selectedTeams, setSelectedGameId }) => {
+const Stage = ({ stage, selectedTeams, setSelectedGameId }) => {
   const isPlayoffStage = checkIsPlayoffStage(stage.name);
   return (
     <StyledStage>
@@ -19,6 +19,6 @@ const Stage = React.memo(({ stage, selectedTeams, setSelectedGameId }) => {
       ))}
     </StyledStage>
   );
-});
+};
 
 export { Stage };
