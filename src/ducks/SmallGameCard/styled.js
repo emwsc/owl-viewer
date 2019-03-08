@@ -1,5 +1,19 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { PLUMP_PURPLE } from "../../utils/constants";
+
+const cup = css`
+  &:before {
+    position: absolute;
+    top: -3px;
+    left: -8px;
+    background: transparent;
+    font-family: "Font Awesome 5 Free";
+    content: "\f091";
+    font-size: 12px;
+    font-weight: bold;
+    color: ${PLUMP_PURPLE};
+  }
+`;
 
 export const StyledSmallGameCard = styled.div`
   border: 1px solid lightgray;
@@ -17,6 +31,9 @@ export const StyledSmallGameCard = styled.div`
   @media (max-width: 555px) {
     width: 100vw;
   }
+  position: relative;
+  z-index: 0;
+  ${props => props.isTitleMatch && cup}
 `;
 
 export const StyledInfoContainer = styled.div`
@@ -37,4 +54,10 @@ export const StyledTeamContainer = styled.div`
 
 export const StyledScore = styled.div`
   margin: 5px;
+`;
+
+export const StyledHiddenText = styled.div`
+  height: 40px;
+  display: flex;
+  align-items: center;
 `;

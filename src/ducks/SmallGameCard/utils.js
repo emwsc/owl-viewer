@@ -1,3 +1,5 @@
+import { TOTAL_SCORE_LESS_THEN, DICTIONARY, WORDS_KEYS } from "./constants";
+
 /**
  * Get count of days prior to game
  * @param {object} moment moment.js object
@@ -20,9 +22,10 @@ export function getDaysToGame(moment, first, second, lang) {
  * Checking is current bracket not title match (like playoff or something)
  * @param {string} bracket Backet name
  */
-export function isTeamsVisibleByDefault(bracket) {
+export function checkIsNotTitleMatch(bracket) {
   if (!bracket) return true;
-  if (bracket.indexOf("Title") > -1) return false;
+  if (bracket.indexOf("Title") > -1 || bracket.indexOf("PLAYOFF") > -1)
+    return false;
   return true;
 }
 
@@ -36,4 +39,10 @@ export function pushToBrowserHistory(matchId) {
     null,
     `${window.location.pathname}?match=${matchId}`
   );
+}
+
+export function getCardTitle(totalScores, lang) {
+  return totalScores < TOTAL_SCORE_LESS_THEN
+    ? DICTIONARY[lang + WORDS_KEYS.NO_DATA]
+    : "";
 }

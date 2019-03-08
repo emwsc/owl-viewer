@@ -47,7 +47,6 @@ export const areEqualStages = (prevProps, nextProps) => {
 export const useOnSelectedYear = props => {
   const { state, setState, selectedStage, setSelectedStage } = props;
   useEffect(() => {
-    debugger;
     const tempSelectedStage = null;
     // getCachedSchedule(state.selectedYear)
     //   .then(cachedSchedule => {

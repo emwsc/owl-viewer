@@ -11,7 +11,6 @@ import OverwatchLoading from "../OverwatchLoading";
 import { LanguageConsumer } from "../../common/LanguageContenxt";
 
 const ScheduleLayout = React.memo(props => {
-  debugger;
   const { selectedStage, stages, selectedTeams, setSelectedGameId } = props;
   const stage = stages.find(stage => stage.name === selectedStage);
   return (
@@ -95,8 +94,6 @@ const Schedule = props => {
     setSelectedGameId(null);
     setVideoScreenState({ isVideosScreenVisible: false, vods: [] });
   }
-
-  debugger;
 
   return (
     <main>

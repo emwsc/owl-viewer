@@ -6,6 +6,7 @@ export const StyledTopMenu = styled.header`
   width: 100%;
   /* height: 100%; */
   position: fixed;
+  z-index: 100;
   height: 50px;
   background: ${() => NICE_BLACK};
   color: white;
