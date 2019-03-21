@@ -9,7 +9,7 @@ export const StyledVideosSection = styled.div`
   width: 300px;
   background: #f9f9f9;
   padding: 10px;
-  z-index: 10;
+  z-index: 600;
 `;
 
 export const StyledClose = styled.div`
