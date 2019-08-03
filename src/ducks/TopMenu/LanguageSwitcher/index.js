@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { LanguageConsumer } from "../../../common/LanguageContenxt";
+import React, { useState, useEffect, useContext } from "react";
+import { LanguageContext } from "../../../common/LanguageContenxt";
 import { StyledContainer, StyledLanguages } from "./styled";
 import { getEmojiForLangCode } from "./utils";
 
 const LanguageSwitcher = () => {
   const [isDropDownVisible, changeDropDownVisiblity] = useState(false);
+
+  const { lang, setLang } = useContext(LanguageContext);
 
   useEffect(() => {
     document.onclick = event => {
@@ -13,25 +15,31 @@ const LanguageSwitcher = () => {
   }, []);
 
   return (
-    <LanguageConsumer>
-      {({ lang, setLang }) => (
-        <StyledContainer>
-          <div
-            id="switchLangBtn"
-            onClick={() => changeDropDownVisiblity(!isDropDownVisible)}
-          >
-            {getEmojiForLangCode(lang)}
-            {lang}
+    <StyledContainer>
+      <div
+        id="switchLangBtn"
+        onClick={() => changeDropDownVisiblity(!isDropDownVisible)}
+      >
+        {getEmojiForLangCode(lang)}
+        {lang}
+      </div>
+      {isDropDownVisible && (
+        <StyledLanguages>
+          <div onClick={() => setLang("ru")}>
+            <span role="img" area-label="RU">
+              🇷🇺
+            </span>
+            • Русский
           </div>
-          {isDropDownVisible && (
-            <StyledLanguages>
-              <div onClick={() => setLang("ru")}>🇷🇺 • Русский</div>
-              <div onClick={() => setLang("en")}>🇺🇸 • English</div>
-            </StyledLanguages>
-          )}
-        </StyledContainer>
+          <div onClick={() => setLang("en")}>
+            <span role="img" area-label="ENG">
+              🇺🇸
+            </span>{" "}
+            • English
+          </div>
+        </StyledLanguages>
       )}
-    </LanguageConsumer>
+    </StyledContainer>
   );
 };
 

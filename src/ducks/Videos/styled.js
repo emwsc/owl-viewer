@@ -1,6 +1,5 @@
-import styled from 'styled-components';
-import { NICE_BLACK, FONT } from '../../utils/constants';
-
+import styled from "styled-components";
+import { NICE_BLACK, FONT } from "../../utils/constants";
 
 export const StyledReveal = styled.div`
   cursor: pointer;
@@ -34,9 +33,15 @@ export const StyledRevealArrow = styled.span`
   margin-right: 5px;
   transition: all 0.25s ease;
   display: inline-block;
-  transform: ${props => (!props.isExpanded ? 'rotate(-90deg)' : 'rotate(0deg)')};
+  transform: ${props =>
+    !props.isExpanded ? "rotate(-90deg)" : "rotate(0deg)"};
 `;
 
 export const StyledContainer = styled.div`
   margin: 0px 20px;
+`;
+
+export const StyledVodsNotFound = styled.div`
+  margin: 20px;
+  font-weight: bold;
 `;

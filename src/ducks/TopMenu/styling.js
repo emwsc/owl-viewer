@@ -48,4 +48,7 @@ export const StyledAboutLink = styled.span`
   margin-right: 15px;
   flex-grow: 2;
   text-align: right;
+  & > a {
+    text-decoration: none;
+  }
 `;

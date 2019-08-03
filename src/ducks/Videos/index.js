@@ -1,18 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Transition, Spring } from "react-spring";
 import {
   StyledReveal,
   StyledMLG,
   StyledTwichIcon,
   StyledRevealArrow,
-  StyledContainer
+  StyledContainer,
+  StyledVodsNotFound
 } from "./styled";
 import Video from "./Video";
 import BigVideo from "./BigVideo";
 import { getRevealText, getMatchInfo } from "./utils";
 import MatchInfo from "./MatchInfo";
-import { TYPES } from "./constants";
-import { LanguageConsumer } from "../../common/LanguageContenxt";
+import { TYPES, WORD_KEYS, DICTIONARY } from "./constants";
+import {
+  LanguageConsumer,
+  LanguageContext
+} from "../../common/LanguageContenxt";
 
 const OtherVideos = ({ setIsExpanded, isExpanded, vods, fullMatchVideo }) => (
   <StyledContainer>
@@ -76,72 +80,89 @@ const MLGIcon = () => <StyledMLG src="/MLG_2017.svg" alt="MLG" />;
 
 const TwitchIcon = () => <StyledTwichIcon className="fab fa-twitch" />;
 
-const Videos = ({ vods, matchId }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [matchInfo, setMatchInfo] = useState(null);
+const Videos = React.memo(
+  ({ vods, matchId }) => {
+    const [isExpanded, setIsExpanded] = useState(false);
+    const [matchInfo, setMatchInfo] = useState(null);
 
-  const fullMatchVideo = vods.find(video => video.title.includes("Full"));
-  const isExpandable =
-    vods &&
-    vods.length > 1 &&
-    (fullMatchVideo ||
-      (matchInfo &&
-        matchInfo.id &&
-        matchInfo.vods &&
-        matchInfo.vods.length > 0));
+    const fullMatchVideo = vods.find(video => video.title.includes("Full"));
+    const isExpandable =
+      vods &&
+      vods.length > 1 &&
+      (fullMatchVideo ||
+        (matchInfo &&
+          matchInfo.id &&
+          matchInfo.vods &&
+          matchInfo.vods.length > 0));
 
-  useEffect(() => {
-    if (matchId) getMatchInfo(matchId).then(setMatchInfo);
-  }, [matchId]);
+    useEffect(() => {
+      if (matchId) getMatchInfo(matchId).then(setMatchInfo);
+    }, [matchId]);
 
-  return (
-    <React.Fragment>
-      {matchInfo && matchInfo.id && <MatchInfo {...matchInfo} />}
-      {fullMatchVideo && matchInfo && (
-        <FullMatch
-          fullMatchVideo={{
-            ...fullMatchVideo,
-            label: <MLGIcon />,
-            type: TYPES.MLG,
-            thumbnail:
-              matchInfo &&
-              matchInfo.vods &&
-              matchInfo.vods.length > 0 &&
-              matchInfo.vods[0].thumbnails.custom
-                ? matchInfo.vods[0].thumbnails.custom
-                : fullMatchVideo.thumbnail
-          }}
-        />
-      )}
-      {matchInfo &&
-        matchInfo.vods &&
-        matchInfo.vods.length > 0 &&
-        matchInfo.vods.map(vod => (
+    const isVodsNotFound =
+      matchId &&
+      (!vods || vods.length === 0) &&
+      (matchInfo && (!matchInfo.vods || matchInfo.vods.length === 0));
+
+    const { lang } = useContext(LanguageContext);
+
+    return (
+      <React.Fragment>
+        {matchInfo && matchInfo.id && <MatchInfo {...matchInfo} />}
+        {isVodsNotFound && (
+          <StyledVodsNotFound>
+            {DICTIONARY[lang + WORD_KEYS.NO_VODS]}
+          </StyledVodsNotFound>
+        )}
+        {fullMatchVideo && matchInfo && (
           <FullMatch
-            key={vod.id}
             fullMatchVideo={{
-              ...vod,
-              label: <TwitchIcon />,
-              type: TYPES.TWITCH,
-              thumbnail: vod.thumbnails.custom
-                ? vod.thumbnails.custom
-                : vod.thumbnails.generated
+              ...fullMatchVideo,
+              label: <MLGIcon />,
+              type: TYPES.MLG,
+              thumbnail:
+                matchInfo &&
+                matchInfo.vods &&
+                matchInfo.vods.length > 0 &&
+                matchInfo.vods[0].thumbnails.custom
+                  ? matchInfo.vods[0].thumbnails.custom
+                  : fullMatchVideo.thumbnail
             }}
           />
-        ))}
-      {!isExpandable && matchInfo && vods.length > 0 && (
-        <AllVideos vods={vods} fullMatchVideo={fullMatchVideo} />
-      )}
-      {isExpandable && matchInfo && (
-        <OtherVideos
-          setIsExpanded={setIsExpanded}
-          isExpanded={isExpanded}
-          vods={vods}
-          fullMatchVideo={fullMatchVideo}
-        />
-      )}
-    </React.Fragment>
-  );
-};
+        )}
+        {matchInfo &&
+          matchInfo.vods &&
+          matchInfo.vods.length > 0 &&
+          matchInfo.vods.map(vod => (
+            <FullMatch
+              key={vod.id}
+              fullMatchVideo={{
+                ...vod,
+                label: <TwitchIcon />,
+                type: TYPES.TWITCH,
+                thumbnail: vod.thumbnails.custom
+                  ? vod.thumbnails.custom
+                  : vod.thumbnails.generated
+              }}
+            />
+          ))}
+        {!isExpandable && matchInfo && vods.length > 0 && (
+          <AllVideos vods={vods} fullMatchVideo={fullMatchVideo} />
+        )}
+        {isExpandable && matchInfo && (
+          <OtherVideos
+            setIsExpanded={setIsExpanded}
+            isExpanded={isExpanded}
+            vods={vods}
+            fullMatchVideo={fullMatchVideo}
+          />
+        )}
+      </React.Fragment>
+    );
+  },
+  (prevProps, nextProps) =>
+    prevProps.vods.length === nextProps.vods.length &&
+    prevProps.matchId === nextProps.matchId
+);
 
 export default Videos;

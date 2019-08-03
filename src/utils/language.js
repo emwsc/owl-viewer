@@ -1,20 +1,23 @@
 export const WORD_KEYS = {
+  ABOUT: "ABOUT",
   CLOSEST_GAMES: "CLOSEST_GAMES",
+  FULL_SCHEDULE: "FULL_SCHEDULE",
   LAST_GAMES: "LAST_GAMES",
   MAIN: "MAIN",
-  FULL_SCHEDULE: "FULL_SCHEDULE",
-  ABOUT: "ABOUT"
+  NO_GAMES: "NO_GAMES"
 };
 
 export const MAIN_PAGE_DICTIONARY = {
-  ruCLOSEST_GAMES: "Ближайшие игры",
-  ruLAST_GAMES: "Последние игры",
-  ruMAIN: "Главная",
-  ruFULL_SCHEDULE: "Полное расписание",
-  ruABOUT: "О сайте",
+  enABOUT: "About",
   enCLOSEST_GAMES: "Closest games",
+  enFULL_SCHEDULE: "Full schedule",
   enLAST_GAMES: "Last games",
   enMAIN: "Main",
-  enFULL_SCHEDULE: "Full schedule",
-  enABOUT: "About"
+  enNO_GAMES: "No games",
+  ruABOUT: "О сайте",
+  ruCLOSEST_GAMES: "Ближайшие игры",
+  ruFULL_SCHEDULE: "Полное расписание",
+  ruLAST_GAMES: "Последние игры",
+  ruMAIN: "Главная",
+  ruNO_GAMES: "Нет матчей"
 };

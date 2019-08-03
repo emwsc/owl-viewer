@@ -48,23 +48,6 @@ export const useOnSelectedYear = props => {
   const { state, setState, selectedStage, setSelectedStage } = props;
   useEffect(() => {
     const tempSelectedStage = null;
-    // getCachedSchedule(state.selectedYear)
-    //   .then(cachedSchedule => {
-    //     if (cachedSchedule) {
-    //       setState({
-    //         ...state,
-    //         isLoading: false,
-    //         schedule: cachedSchedule
-    //       });
-    //     }
-    //     setSelectedStage(
-    //       cachedSchedule ? cachedSchedule.stages[0].name : null
-    //     );
-    //     tempSelectedStage = cachedSchedule
-    //       ? cachedSchedule.stages[0].name
-    //       : null;
-    //   })
-    //   .then(() => getSchedule(state.selectedYear))
     getSchedule(state.selectedYear).then(fetchedSchedule => {
       const fetchedState = {
         ...state,

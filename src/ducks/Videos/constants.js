@@ -5,12 +5,15 @@ export const TYPES = {
 
 export const WORD_KEYS = {
   SHOW_VIDEOS: "SHOW_VIDEOS",
-  HIDE_VIDEOS: "HIDE_VIDEOS"
+  HIDE_VIDEOS: "HIDE_VIDEOS",
+  NO_VODS: "NO_VODS"
 };
 
 export const DICTIONARY = {
-  ruSHOW_VIDEOS: "Показать другие записи",
-  ruHIDE_VIDEOS: "Скрыть другие записи",
+  enHIDE_VIDEOS: "Hide other videos",
+  enNO_VODS: "VODs not found",
   enSHOW_VIDEOS: "Show other videos",
-  enHIDE_VIDEOS: "Hide other videos"
+  ruHIDE_VIDEOS: "Скрыть другие записи",
+  ruNO_VODS: "Записи игр не найдены",
+  ruSHOW_VIDEOS: "Показать другие записи"
 };
